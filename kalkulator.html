@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator KSeF - PunchlineROI</title>
+    <meta name="description"
+        content="Oblicz ile Twoja firma traci na ręcznym księgowaniu. Narzędzie AI do wyceny automatyzacji.">
+    <link rel="icon" href="assets/favicon.ico">
+    <style>
+        /* --- BRANDING PUNCHLINE --- */
+        :root {
+            --blue-primary: #1E3A8A;
+            --blue-light: #3B82F6;
+            --green-primary: #16A34A;
+            --orange-accent: #F97316;
+            --bg-light: #F1F5F9;
+            --white: #ffffff;
+            --text-main: #0F172A;
+            --text-light: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: white;
+            padding: 15px 5%;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .nav-logo img {
+            height: 60px;
+            /* Zwiększone z 55px */
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            /* Dodaje lekki cień dla kontrastu */
+            transition: transform 0.2s;
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-back {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .nav-back:hover {
+            color: var(--orange-accent);
+        }
+
+        /* GŁÓWNY KONTENER */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .calc-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            border-top: 6px solid var(--orange-accent);
+        }
+
+        .calc-header {
+            background: linear-gradient(135deg, var(--blue-primary), #0f172a);
+            padding: 50px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .calc-header h2 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .calc-header p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        /* SOUND TOGGLE */
+        .sound-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: 0.3s;
+            z-index: 20;
+        }
+
+        .sound-toggle:hover {
+            background: var(--orange-accent);
+            border-color: var(--orange-accent);
+            transform: rotate(15deg);
+        }
+
+        .sound-toggle.muted {
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        /* AI INPUT */
+        .ai-input-wrapper {
+            position: relative;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .ai-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        input#ai-prompt {
+            width: 100%;
+            padding: 18px 18px 18px 50px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input#ai-prompt:focus {
+            background: white;
+            color: var(--text-main);
+            border-color: var(--orange-accent);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+
+        input#ai-prompt::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .ai-badge {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--green-primary);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
+            animation: pulse 2s infinite;
+            transition: 0.2s;
+        }
+
+        .ai-badge:hover {
+            background: #15803d;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .prompt-chips {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .chip:hover {
+            background: var(--orange-accent);
+            border-color: var(--orange-accent);
+            transform: translateY(-2px);
+        }
+
+        /* BODY UKŁAD */
+        .calc-body {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .inputs-section {
+            padding: 50px 40px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .results-section {
+            padding: 50px 40px;
+            background: #F8FAFC;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .results-section::before {
+            content: "ROI";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            font-size: 10rem;
+            font-weight: 900;
+            color: rgba(30, 58, 138, 0.03);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .value-display {
+            color: var(--blue-primary);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--blue-primary);
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 5px;
+        }
+
+        .calc-btn {
+            width: 100%;
+            background: var(--blue-primary);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4);
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-btn:hover {
+            background: #172554;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(30, 58, 138, 0.5);
+        }
+
+        .calc-btn.waiting {
+            animation: pulse 1.5s infinite;
+            background: var(--orange-accent);
+        }
+
+        /* WYNIKI */
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .clickable-box {
+            cursor: pointer;
+        }
+
+        .clickable-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--orange-accent) !important;
+        }
+
+        .clickable-box::after {
+            content: "↗";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0;
+            transition: 0.2s;
+            font-weight: bold;
+            color: var(--orange-accent);
+        }
+
+        .clickable-box:hover::after {
+            opacity: 1;
+            right: 15px;
+        }
+
+        .result-card.main {
+            background: linear-gradient(135deg, var(--green-primary), #15803d);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 30px -5px rgba(22, 163, 74, 0.4);
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .result-sub {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .chart-bar {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: var(--blue-primary);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .plan-info-box {
+            margin-top: 25px;
+            background: rgba(30, 58, 138, 0.03);
+            border: 2px dashed var(--blue-primary);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.2s;
+        }
+
+        .plan-info-box.clickable-box:hover {
+            background: white;
+        }
+
+        /* HISTORIA - PRZYWRÓCONA */
+        .history-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            display: none;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .history-item:hover {
+            border-color: var(--blue-primary);
+            transform: translateX(5px);
+        }
+
+        .restore-btn {
+            background: white;
+            border: 1px solid var(--blue-primary);
+            color: var(--blue-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .restore-btn:hover {
+            background: var(--blue-primary);
+            color: white;
+        }
+
+        /* MODALE */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            position: relative;
+            animation: slideIn 0.3s;
+            border-top: 6px solid var(--green-primary);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        .modal-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .report-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .report-row.total {
+            border-top: 2px solid #e2e8f0;
+            border-bottom: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--green-primary);
+        }
+
+        /* LEAD CAPTURE */
+        .lead-box {
+            margin-top: 30px;
+            padding: 30px;
+            background: white;
+            border: 2px solid var(--orange-accent);
+            border-radius: 16px;
+            text-align: left;
+            display: none;
+            animation: slideIn 0.5s;
+            box-shadow: 0 10px 40px -10px rgba(249, 115, 22, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lead-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .lead-btn {
+            background: var(--orange-accent);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .rodo-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .rodo-wrapper input {
+            margin-top: 4px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--orange-accent);
+        }
+
+        .rodo-wrapper a {
+            color: var(--blue-primary);
+            font-weight: 600;
+        }
+
+        /* EXPERT */
+        .expert-toggle {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #64748b;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .expert-fields {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+
+        .expert-fields.active {
+            display: block;
+            animation: slideIn 0.3s;
+        }
+
+        /* ANIMACJE */
+        @keyframes super-flash {
+            0% {
+                background-color: #fde047;
+                transform: scale(1.02);
+                border-color: #eab308;
+            }
+
+            100% {
+                background-color: transparent;
+                transform: scale(1);
+                border-color: #eee;
+            }
+        }
+
+        .input-changed {
+            animation: super-flash 1.5s ease-out;
+        }
+
+        .flash {
+            animation: highlight 0.5s;
+        }
+
+        @keyframes highlight {
+            0% {
+                background: #fef08a;
+            }
+
+            100% {
+                background: white;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .calc-footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .calc-footer a {
+            color: #94a3b8;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .calc-footer a:hover {
+            color: var(--orange-accent);
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body.printing-modal * {
+                visibility: hidden;
+            }
+
+            body.printing-modal #history-modal,
+            body.printing-modal #history-modal * {
+                visibility: visible;
+            }
+
+            body.printing-modal #history-modal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+                background: white;
+                z-index: 9999;
+            }
+
+            body.printing-modal .modal-close,
+            body.printing-modal .modal-actions {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .calc-body {
+                grid-template-columns: 1fr;
+            }
+
+            .inputs-section {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                padding: 30px 20px;
+            }
+
+            .results-section {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .lead-btn {
+                width: 100%;
+            }
+        }
+
+        /* CHECKLIST WIDGET */
+        .checklist-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--orange-accent), #ea580c);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            animation: widgetPulse 3s infinite;
+            max-width: 280px;
+        }
+
+        .checklist-widget:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.5);
+            animation: none;
+        }
+
+        .checklist-widget-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .checklist-widget-text {
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .checklist-widget-text strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .checklist-widget-arrow {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transition: transform 0.2s;
+        }
+
+        .checklist-widget:hover .checklist-widget-arrow {
+            transform: translateX(5px);
+        }
+
+        @keyframes widgetPulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(249, 115, 22, 0.6);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .checklist-widget {
+                bottom: 80px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="ka-ching-sound" src="assets/audio_logo.mp3" preload="auto"></audio>
+
+    <nav>
+        <a href="index.html" class="nav-logo" title="Strona Główna">
+            <img src="assets/logo.png" alt="PunchlineROI">
+        </a>
+        <a href="index.html" class="nav-back">← Wróć do strony głównej</a>
+    </nav>
+
+    <div class="wrapper">
+        <div class="calc-container">
+            <div class="calc-header">
+                <h2>Kalkulator ROI</h2>
+                <p>Sprawdź, ile oszczędzisz na automatyzacji.</p>
+
+                <div class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Włącz/Wyłącz dźwięk">🔊</div>
+
+                <div class="ai-input-wrapper">
+                    <span class="ai-icon">✨</span>
+                    <input type="text" id="ai-prompt" placeholder="Np. 200 faktur, 15 min, 60 zł">
+                    <span class="ai-badge" onclick="triggerAutoFill()">AI AUTO-FILL 🎲</span>
+                </div>
+
+                <div class="prompt-chips">
+                    <button class="chip" onclick="triggerAutoFill()">🎲 Wylosuj Przykład</button>
+                    <button class="chip" onclick="usePrompt('Mała Firma: 50 faktur, 15 min, 50 zł')">🏢 Mała
+                        Firma</button>
+                    <button class="chip" onclick="usePrompt('Biuro: 500 faktur, 10 min, 60 zł')">🗂️ Biuro</button>
+                </div>
+            </div>
+
+            <div class="calc-body">
+                <div class="inputs-section">
+                    <div class="input-group">
+                        <div class="label-row"><label>Liczba faktur / mc</label><span id="disp-faktury"
+                                class="value-display">150</span></div>
+                        <input type="range" id="in-faktury" min="10" max="2000" value="150" step="10"
+                            oninput="updateLabels()">
+                    </div>
+                    <div class="input-group">
+                        <div class="label-row"><label>Czas na 1 fakturę</label><span id="disp-czas"
+                                class="value-display">15 min</span></div>
+                        <input type="range" id="in-czas" min="2" max="60" value="15" oninput="updateLabels()">
+                    </div>
+                    <div class="input-group">
+                        <div class="label-row"><label>Stawka (brutto/h)</label><span id="disp-stawka"
+                                class="value-display">70 PLN</span></div>
+                        <input type="range" id="in-stawka" min="30" max="300" value="70" step="5"
+                            oninput="updateLabels()">
+                    </div>
+
+                    <div class="expert-toggle"
+                        onclick="document.getElementById('expert-panel').classList.toggle('active')">
+                        ⚙️ Pokaż opcje zaawansowane
+                    </div>
+                    <div class="expert-fields" id="expert-panel">
+                        <div class="input-group">
+                            <div class="label-row"><label>Błędy (%)</label><span id="disp-bledy"
+                                    class="value-display">5%</span></div>
+                            <input type="range" id="in-bledy" min="0" max="20" value="5" oninput="updateLabels()">
+                        </div>
+                        <div class="input-group">
+                            <div class="label-row"><label>Archiwum (PLN)</label><span id="disp-archiwum"
+                                    class="value-display">100</span></div>
+                            <input type="range" id="in-archiwum" min="0" max="500" value="100" step="10"
+                                oninput="updateLabels()">
+                        </div>
+                    </div>
+
+                    <button class="calc-btn" onclick="calculate()">PRZELICZ WYNIK</button>
+                </div>
+
+                <div class="results-section">
+
+                    <div class="result-card clickable-box" id="card-manual" onclick="goToPricing()">
+                        <div class="result-label">Koszt obecny (Manualnie)</div>
+                        <div class="result-value" style="color:#ef4444" id="res-manual">0 PLN</div>
+                        <div class="result-sub"><span id="res-godziny">0</span> h pracy / mc</div>
+                    </div>
+
+                    <div class="result-card clickable-box" id="card-robot" onclick="goToPricing()"
+                        style="border: 2px solid var(--blue-primary); position: relative; overflow: visible;">
+                        <div
+                            style="position: absolute; top: -12px; right: 20px; background: var(--blue-primary); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">
+                            PLAN COMMANDER</div>
+                        <div class="result-label">Koszt z Punchline</div>
+                        <div class="result-value" style="color:var(--blue-primary)" id="res-robot">599 PLN</div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" id="bar-robot" style="width: 20%; background: var(--blue-primary);">
+                            </div>
+                        </div>
+                        <div
+                            style="margin-top: 8px; font-size: 0.8rem; color: var(--blue-primary); font-weight: bold; text-align: right;">
+                            Kliknij, aby zamówić →</div>
+                    </div>
+
+                    <div class="result-card main" id="card-total">
+                        <div class="result-label">Twoja Oszczędność</div>
+                        <div class="result-value" id="res-total">0 PLN</div>
+                        <div class="result-sub">Miesięcznie w kieszeni</div>
+                    </div>
+
+                    <div class="plan-info-box clickable-box" onclick="goToPricing()">
+                        <div>💎</div>
+                        <div>
+                            <strong>Narzędzie Premium</strong><br>
+                            Dostępne w planach <span
+                                style="color:var(--blue-primary); font-weight:800;">Commander</span> i Enterprise.
+                        </div>
+                    </div>
+
+                    <div id="lead-box" class="lead-box">
+                        <div style="font-weight:bold; margin-bottom:10px;">Chcesz wdrożyć te oszczędności?</div>
+                        <div class="form-row">
+                            <input type="email" id="client-email" class="lead-input" placeholder="Twój e-mail firmowy">
+                            <button id="lead-btn" class="lead-btn" onclick="sendReport()">Wyślij Raport PDF</button>
+                        </div>
+                        <div class="rodo-wrapper">
+                            <input type="checkbox" id="rodo-check">
+                            <label for="rodo-check">Akceptuję <a href="polityka-prywatnosci.html"
+                                    target="_blank">Politykę Prywatności</a>.</label>
+                        </div>
+                        <div id="form-feedback" style="margin-top:10px; font-size:0.8rem; font-weight:bold;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-footer">
+                <a href="polityka-prywatnosci.html" target="_blank">Polityka Prywatności</a> •
+                <a href="regulamin.html" target="_blank">Regulamin</a> •
+                <a href="dpa.html" target="_blank">DPA</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="history-container" id="history-panel">
+        <div
+            style="background: white; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: var(--blue-primary); margin: 0;">⏳ Historia Obliczeń</h3>
+                <button onclick="clearHistory()"
+                    style="background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 5px 15px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">Wyczyść</button>
+            </div>
+            <div id="history-list" style="display: grid; gap: 15px;"></div>
+        </div>
+    </div>
+
+    <!-- CHECKLIST WIDGET -->
+    <a href="checklist.html" class="checklist-widget" title="Pobierz darmową checklistę KSeF">
+        <span class="checklist-widget-icon">📋</span>
+        <span class="checklist-widget-text">
+            <strong>Darmowa Checklista KSeF</strong>
+            15 kroków do wdrożenia
+        </span>
+        <span class="checklist-widget-arrow">→</span>
+    </a>
+
+    <div id="history-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeHistoryModal()">&times;</span>
+            <div id="modal-report-body"></div>
+            <div class="modal-actions">
+                <button class="restore-btn" style="background:var(--blue-primary); color:white;"
+                    onclick="printHistoryDetails()">🖨️ Drukuj Raport</button>
+                <button class="restore-btn" style="background:#e2e8f0; color:#333; border:none;"
+                    onclick="closeHistoryModal()">Zamknij</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cookie-banner"
+        style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0f172a; color: white; padding: 20px; z-index: 9999; display: none; box-shadow: 0 -5px 20px rgba(0,0,0,0.2);">
+        <div
+            style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            <div style="font-size: 0.9rem;">🍪 Używamy cookies. <a href="polityka-prywatnosci.html"
+                    style="color: #4ade80;">Więcej</a>.</div>
+            <button onclick="acceptCookies()"
+                style="background: #16A34A; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // KLUCZE
+        const STORAGE_KEY = 'punchline_history';
+        const AUTOSAVE_KEY = 'punchline_autosave';
+
+        // 0. DŹWIĘK I MUTE
+        let isMuted = localStorage.getItem('isMuted') === 'true';
+        const soundToggle = document.getElementById('sound-toggle');
+
+        function updateMuteIcon() {
+            soundToggle.innerText = isMuted ? '🔇' : '🔊';
+            if (isMuted) soundToggle.classList.add('muted');
+            else soundToggle.classList.remove('muted');
+        }
+
+        function toggleSound() {
+            isMuted = !isMuted;
+            localStorage.setItem('isMuted', isMuted);
+            updateMuteIcon();
+        }
+        updateMuteIcon(); // init
+
+        function playKaChing() {
+            console.log("Próba odtworzenia dźwięku, isMuted:", isMuted); // TEST
+            if (isMuted) return;
+            const audio = document.getElementById("ka-ching-sound");
+            console.log("Element audio:", audio); // TEST
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log("Błąd audio:", e)); // TEST
+            }
+        }
+
+        // 1. NAWIGACJA
+        function goToPricing() {
+            console.log("Kliknięto w kartę!"); // TEST
+            playKaChing();
+            window.location.href = "index.html#cennik";
+        }
+
+        // 3. LOGIKA KALKULATORA
+        function updateLabels() {
+            document.getElementById('disp-faktury').innerText = document.getElementById('in-faktury').value;
+            document.getElementById('disp-czas').innerText = document.getElementById('in-czas').value + " min";
+            document.getElementById('disp-stawka').innerText = document.getElementById('in-stawka').value + " PLN";
+            document.getElementById('disp-bledy').innerText = document.getElementById('in-bledy').value + "%";
+            document.getElementById('disp-archiwum').innerText = document.getElementById('in-archiwum').value;
+        }
+
+        function calculate(saveToHistory = true) {
+            // playKaChing(); // USUNIĘTE - brak dźwięku przy obliczaniu
+
+            const btn = document.querySelector('.calc-btn');
+            btn.classList.remove('waiting');
+            btn.innerText = "PRZELICZ WYNIK";
+
+            const f = parseInt(document.getElementById('in-faktury').value);
+            const t = parseInt(document.getElementById('in-czas').value);
+            const s = parseInt(document.getElementById('in-stawka').value);
+            const b = parseInt(document.getElementById('in-bledy').value);
+            const a = parseInt(document.getElementById('in-archiwum').value);
+
+            const kosztCzasu = (f * t / 60) * s;
+            const kosztBledow = (Math.round(f * (b / 100)) * (t * 2) / 60) * s;
+            const manual = kosztCzasu + kosztBledow + a;
+
+            const robotPrice = 599;
+            const totalRobot = robotPrice + (kosztCzasu * 0.1);
+            const save = manual - totalRobot;
+
+            document.getElementById('res-manual').innerText = Math.round(manual).toLocaleString() + " PLN";
+            document.getElementById('res-robot').innerText = "599 PLN";
+            document.getElementById('res-total').innerText = save > 0 ? Math.round(save).toLocaleString() + " PLN" : "0 PLN";
+
+            let percentRobot = (totalRobot / manual) * 100;
+            if (percentRobot > 100) percentRobot = 100;
+            document.getElementById('bar-robot').style.width = percentRobot + "%";
+
+            triggerFlash('card-manual'); triggerFlash('card-total');
+
+            if (save > 0) document.getElementById('lead-box').style.display = "block";
+
+            saveState();
+            if (saveToHistory && save > 0) addToHistory(save);
+        }
+
+        function triggerFlash(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('flash');
+            void el.offsetWidth;
+            el.classList.add('flash');
+        }
+
+        function resetResults() {
+            document.getElementById('res-manual').innerText = "---";
+            document.getElementById('res-robot').innerText = "599 PLN";
+            document.getElementById('res-total').innerText = "???";
+            document.getElementById('bar-robot').style.width = "20%";
+            document.getElementById('lead-box').style.display = "none";
+
+            const btn = document.querySelector('.calc-btn');
+            btn.innerText = "👉 KLIKNIJ, ABY OBLICZYĆ 👈";
+            btn.classList.add('waiting');
+        }
+
+        // 4. AI AUTO-FILL
+        function triggerAutoFill() {
+            const scenarios = [
+                { f: 40, t: 20, s: 60, b: 8, a: 150, txt: "Mała firma budowlana" },
+                { f: 400, t: 8, s: 55, b: 3, a: 300, txt: "Biuro Rachunkowe" },
+                { f: 30, t: 15, s: 120, b: 2, a: 0, txt: "Software House" },
+                { f: 1200, t: 4, s: 45, b: 6, a: 500, txt: "Hurtownia części" },
+                { f: 15, t: 30, s: 100, b: 0, a: 0, txt: "Freelancer IT" },
+                { f: 800, t: 5, s: 50, b: 4, a: 200, txt: "Sklep E-commerce" },
+                { f: 250, t: 12, s: 65, b: 5, a: 100, txt: "Firma Transportowa" },
+                { f: 1800, t: 10, s: 90, b: 2, a: 800, txt: "Korporacja" },
+                { f: 60, t: 25, s: 80, b: 10, a: 50, txt: "Start-up" },
+                { f: 100, t: 15, s: 70, b: 3, a: 50, txt: "Agencja Marketingowa" },
+                { f: 350, t: 18, s: 55, b: 6, a: 250, txt: "Produkcja mebli" },
+                { f: 600, t: 7, s: 50, b: 5, a: 150, txt: "Sieć Gastronomiczna" }
+            ];
+
+            const r = scenarios[Math.floor(Math.random() * scenarios.length)];
+            document.getElementById('ai-prompt').value = `${r.txt}: ${r.f} faktur, ${r.t} min/szt, ${r.s} zł/h`;
+
+            document.getElementById('in-faktury').value = r.f;
+            document.getElementById('in-czas').value = r.t;
+            document.getElementById('in-stawka').value = r.s;
+            document.getElementById('in-bledy').value = r.b;
+            document.getElementById('in-archiwum').value = r.a;
+            updateLabels();
+
+            const groups = document.querySelectorAll('.input-group');
+            groups.forEach(group => {
+                group.classList.remove('input-changed');
+                void group.offsetWidth;
+                group.classList.add('input-changed');
+            });
+
+            const badge = document.querySelector('.ai-badge');
+            badge.innerText = "DANE WYPEŁNIONE!";
+            badge.style.backgroundColor = "#10B981";
+            setTimeout(() => { badge.innerText = "AI AUTO-FILL 🎲"; badge.style.backgroundColor = ""; }, 1500);
+
+            resetResults(); // Zerujemy wynik
+        }
+
+        function usePrompt(txt) {
+            document.getElementById('ai-prompt').value = txt;
+            triggerAutoFill();
+        }
+
+        // 5. HISTORIA
+        function saveState() {
+            const state = {
+                f: document.getElementById('in-faktury').value,
+                t: document.getElementById('in-czas').value,
+                s: document.getElementById('in-stawka').value,
+                b: document.getElementById('in-bledy').value,
+                a: document.getElementById('in-archiwum').value
+            };
+            localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(AUTOSAVE_KEY);
+            if (saved) {
+                const s = JSON.parse(saved);
+                document.getElementById('in-faktury').value = s.f;
+                document.getElementById('in-czas').value = s.t;
+                document.getElementById('in-stawka').value = s.s;
+                document.getElementById('in-bledy').value = s.b || 5;
+                document.getElementById('in-archiwum').value = s.a || 100;
+                updateLabels();
+                calculate(false);
+            }
+            renderHistory();
+        }
+
+        function addToHistory(oszczednosc) {
+            const now = new Date();
+            const item = {
+                id: Date.now(),
+                date: now.toLocaleString(),
+                faktury: document.getElementById('in-faktury').value,
+                czas: document.getElementById('in-czas').value,
+                stawka: document.getElementById('in-stawka').value,
+                save: oszczednosc
+            };
+            let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            history.unshift(item);
+            if (history.length > 5) history.pop(); // Max 5 ostatnich
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const panel = document.getElementById('history-panel');
+            const list = document.getElementById('history-list');
+
+            if (history.length === 0) {
+                panel.style.display = 'none';
+                return;
+            }
+
+            panel.style.display = 'block';
+            list.innerHTML = history.map(item => `
+            <div class="history-item" onclick="openHistoryDetails(${item.id})">
+                <div class="history-info">
+                    <strong style="color:var(--green-primary); font-size:1.1rem;">Oszczędność: ${parseInt(item.save).toLocaleString()} PLN</strong>
+                    <small style="display:block; margin-top:5px; color:#64748b;">${item.date} • ${item.faktury} faktur</small>
+                </div>
+                <button class="restore-btn" onclick="restore(event, ${item.id})">Wczytaj ↺</button>
+            </div>
+        `).join('');
+        }
+
+        function restore(event, id) {
+            event.stopPropagation();
+            const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const item = history.find(i => i.id === id);
+            if (item) {
+                document.getElementById('in-faktury').value = item.faktury;
+                document.getElementById('in-czas').value = item.czas;
+                document.getElementById('in-stawka').value = item.stawka;
+                updateLabels();
+                calculate(false);
+                document.querySelector('.calc-container').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openHistoryDetails(id) {
+            const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const item = history.find(i => i.id === id);
+            if (!item) return;
+
+            const f = parseInt(item.faktury);
+            const t = parseInt(item.czas);
+            const s = parseInt(item.stawka);
+            // Uproszczone obliczenia do raportu (zakładamy standardowe błędy dla historii)
+            const manual = ((f * t / 60) * s) * 1.1;
+            const robot = 599;
+
+            const html = `
+            <div style="text-align:center; margin-bottom:20px;">
+                <h3 style="margin:0; color:var(--blue-primary);">Raport Historyczny</h3>
+                <span style="color:#64748b; font-size:0.8rem;">Data: ${item.date}</span>
+            </div>
+            <div style="background:#f8fafc; padding:15px; border-radius:10px; margin-bottom:20px;">
+                <strong>Dane:</strong> ${f} faktur/mc • ${t} min/szt • ${s} PLN/h
+            </div>
+            <div class="report-row"><span>Koszt manualny:</span><strong>${Math.round(manual).toLocaleString()} PLN</strong></div>
+            <div class="report-row"><span>Koszt PunchlineROI:</span><strong>${Math.round(robot).toLocaleString()} PLN</strong></div>
+            <div class="report-row total"><span>Oszczędność:</span><span>${Math.round(item.save).toLocaleString()} PLN</span></div>
+            <div style="margin-top:20px; text-align:center; font-size:0.8rem; color:#666;">Raport wygenerowany przez PunchlineROI.com</div>
+        `;
+
+            document.getElementById('modal-report-body').innerHTML = html;
+            document.getElementById('history-modal').style.display = 'flex';
+        }
+
+        function closeHistoryModal() {
+            document.getElementById('history-modal').style.display = 'none';
+        }
+
+        function printHistoryDetails() {
+            document.body.classList.add('printing-modal');
+            window.print();
+            setTimeout(() => { document.body.classList.remove('printing-modal'); }, 500);
+        }
+
+        function clearHistory() {
+            localStorage.removeItem(STORAGE_KEY);
+            renderHistory();
+        }
+
+        // 6. LEAD FORM & COOKIES
+        function sendReport() {
+            const emailInput = document.getElementById('client-email');
+            const rodoCheck = document.getElementById('rodo-check');
+            const feedback = document.getElementById('form-feedback');
+            const btn = document.getElementById('lead-btn');
+
+            if (!emailInput.value.includes('@')) {
+                feedback.style.color = 'red'; feedback.innerText = "Podaj poprawny e-mail"; return;
+            }
+            if (!rodoCheck.checked) {
+                feedback.style.color = 'red'; feedback.innerText = "Zaakceptuj Politykę Prywatności"; return;
+            }
+
+            btn.disabled = true; btn.innerText = "Wysyłam...";
+            setTimeout(() => { feedback.style.color = 'green'; feedback.innerText = "Raport wysłany!"; btn.innerText = "Wysłano!"; }, 1500);
+        }
+
+        if (!localStorage.getItem('cookies_accepted')) document.getElementById('cookie-banner').style.display = 'flex';
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        // START
+        loadState();
+        updateLabels();
+        resetResults();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checklist Wdrożenia KSeF | PunchlineROI</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <style>
+    :root {
+      --blue-primary: #1E3A8A;
+      --green-primary: #16A34A;
+      --bg-light: #F8FAFC;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* NAWIGACJA */
+    nav {
+      background: white;
+      padding: 15px 5%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #64748b;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--blue-primary);
+    }
+
+    /* NAGŁÓWEK */
+    .header {
+      background: linear-gradient(135deg, var(--blue-primary), #111827);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 40px;
+    }
+
+    .big-logo {
+      height: 70px;
+      width: auto;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+      cursor: pointer;
+    }
+
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* KONTENER */
+    .container {
+      max-width: 800px;
+      margin: -30px auto 40px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* PROGRESS */
+    .progress-section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-container {
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--green-primary);
+      transition: width 0.5s ease;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--blue-primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-main);
+      border: 1px solid #ccc;
+    }
+
+    /* LISTA */
+    .checklist-section {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .checklist-item:hover {
+      background: #f8fafc;
+    }
+
+    .checkbox-custom {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #cbd5e0;
+      border-radius: 6px;
+      margin-right: 15px;
+      margin-top: 3px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .checklist-item.completed .checkbox-custom {
+      background: var(--green-primary);
+      border-color: var(--green-primary);
+      color: white;
+    }
+
+    .checklist-item.completed .checkbox-custom::after {
+      content: '✓';
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .checklist-item.completed .item-text {
+      text-decoration: line-through;
+      color: #94a3b8;
+    }
+
+    .item-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: var(--text-main);
+    }
+
+    .item-desc {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    /* STOPKA */
+    .resources-section {
+      margin-top: 30px;
+      background: #1a202c;
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    /* --- DRUKOWANIE (JEDNA STRONA) --- */
+    @media print {
+      @page {
+        margin: 1cm;
+        size: A4 portrait;
+      }
+
+      body {
+        background: white;
+        color: black;
+        font-size: 10pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Skalowanie żeby weszło na 1 stronę */
+      html {
+        zoom: 85%;
+      }
+
+      /* Ukryj zbędne */
+      nav,
+      .action-buttons,
+      .resources-section,
+      .progress-bar-container {
+        display: none !important;
+      }
+
+      .container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        box-shadow: none;
+      }
+
+      .header {
+        background: white !important;
+        color: black !important;
+        padding: 0 0 20px 0;
+        border-bottom: 2px solid black;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .header h1 {
+        color: black !important;
+        font-size: 20pt;
+        margin: 0;
+      }
+
+      .header p {
+        color: #555 !important;
+        margin: 5px 0 0 0;
+      }
+
+      /* Logo na druku */
+      .big-logo {
+        height: 40px;
+        margin: 0 0 10px 0;
+        filter: none;
+        float: right;
+      }
+
+      /* Lista */
+      .progress-section {
+        display: none;
+      }
+
+      /* Ukrywamy panel postępu na druku */
+      .checklist-section {
+        box-shadow: none;
+        border: none;
+      }
+
+      .checklist-item {
+        padding: 8px 0;
+        border-bottom: 1px solid #ccc;
+        page-break-inside: avoid;
+      }
+
+      .item-text {
+        font-size: 11pt;
+        margin-bottom: 2px;
+      }
+
+      .item-desc {
+        font-size: 9pt;
+      }
+
+      .checkbox-custom {
+        border: 1px solid black !important;
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+      }
+
+      .checklist-item.completed .checkbox-custom {
+        background: #ddd !important;
+        color: black !important;
+        border-color: black !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-content">
+      <a href="kalkulator.html" class="back-link">← Wróć do Kalkulatora</a>
+
+      <a href="index.html">
+        <img src="assets/logo.png" alt="PunchlineROI" style="height: 30px; width: auto;">
+      </a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <a href="index.html" title="Przejdź do strony głównej">
+      <img src="assets/logo.png" alt="PunchlineROI Logo" class="big-logo">
+    </a>
+    <h1>Checklista Wdrożenia KSeF</h1>
+    <p>15 kroków do pełnej automatyzacji przed 1 lutego 2026</p>
+  </div>
+
+  <main class="container">
+    <div class="progress-section">
+      <div class="progress-header">
+        <h3 style="margin:0; color: var(--blue-primary);">Twój postęp</h3>
+        <span id="progressStats" style="font-weight:bold; color:var(--green-primary);">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar" style="width: 0%;"></div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Drukuj / Zapisz PDF</button>
+        <button class="btn btn-secondary" onclick="exportToTXT()">📥 Pobierz TXT</button>
+        <button class="btn btn-secondary" style="color: #ef4444; border-color: #ef4444;" onclick="resetChecklist()">🔄
+          Resetuj</button>
+      </div>
+    </div>
+
+    <div class="checklist-section" id="checklistContainer"></div>
+
+    <div class="resources-section">
+      <h3>Potrzebujesz pomocy z tymi krokami?</h3>
+      <p style="margin-bottom: 20px; opacity: 0.8;">Nasz Robot-Zwiadowca automatyzuje kroki 4, 9, 10, 11 i 13.</p>
+      <a href="kalkulator.html?tryb=klient" class="btn btn-primary" style="background: var(--green-primary);">Sprawdź
+        Oszczędności</a>
+    </div>
+  </main>
+
+  <script>
+    const checklistItems = [
+      { title: 'Audyt procesów fakturowania', desc: 'Zmierz obecny wolumen faktur, czas obsługi i koszty.' },
+      { title: 'Wybór narzędzia / integratora', desc: 'Wybierz system zgodny z KSeF (np. PunchlineROI, ERP).' },
+      { title: 'Konto w środowisku testowym', desc: 'Utwórz konto w KSeF Sandbox i zweryfikuj dostęp.' },
+      { title: 'Integracja API [🤖 AUTO]', desc: 'Podłącz system do API KSeF. Nasz robot robi to w 3 minuty.' },
+      { title: 'Workflow akceptacji', desc: 'Ustal, kto zatwierdza faktury przed wysyłką.' },
+      { title: 'Szkolenie zespołu', desc: 'Przeszkol pracowników z nowych procedur.' },
+      { title: 'Podpisy kwalifikowane', desc: 'Zakup i konfiguracja certyfikatów lub Profilu Zaufanego.' },
+      { title: 'Testowe faktury FA(3)', desc: 'Wystaw 5-10 faktur próbnych w nowym formacie.' },
+      { title: 'Weryfikacja UPO [🤖 AUTO]', desc: 'Sprawdź, czy Urzędowe Poświadczenie Odbioru wraca poprawnie.' },
+      { title: 'Pobieranie zakupów [🤖 AUTO]', desc: 'Skonfiguruj automatyczny import faktur kosztowych.' },
+      { title: 'Archiwum XML [🤖 AUTO]', desc: 'Ustaw bezpieczne archiwum na 10 lat.' },
+      { title: 'Zgodność z RODO', desc: 'Zaktualizuj klauzule informacyjne o przetwarzaniu w chmurze.' },
+      { title: 'Procedury awaryjne [🤖 AUTO]', desc: 'Plan działania, gdy KSeF lub internet padnie.' },
+      { title: 'Test produkcyjny', desc: 'Wystawienie pierwszej prawdziwej faktury.' },
+      { title: 'Przegląd po 30 dniach', desc: 'Analiza błędów i optymalizacja procesów.' }
+    ];
+
+    let completedItems = JSON.parse(localStorage.getItem('ksefProgress')) || [];
+
+    function init() {
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = '';
+      checklistItems.forEach((item, index) => {
+        const isDone = completedItems.includes(index);
+        const div = document.createElement('div');
+        div.className = `checklist-item ${isDone ? 'completed' : ''}`;
+        div.onclick = () => toggleItem(index);
+        div.innerHTML = `<div class="checkbox-custom"></div><div class="item-content"><div class="item-text">${item.title}</div><div class="item-desc">${item.desc}</div></div>`;
+        container.appendChild(div);
+      });
+      updateStats();
+    }
+
+    function toggleItem(index) {
+      if (completedItems.includes(index)) completedItems = completedItems.filter(i => i !== index);
+      else completedItems.push(index);
+      localStorage.setItem('ksefProgress', JSON.stringify(completedItems));
+      init();
+    }
+
+    function updateStats() {
+      const total = checklistItems.length;
+      const done = completedItems.length;
+      document.getElementById('progressStats').innerText = `${done}/${total} (${Math.round((done / total) * 100)}%)`;
+      document.getElementById('progressBar').style.width = `${Math.round((done / total) * 100)}%`;
+    }
+
+    function resetChecklist() {
+      if (confirm("Czy na pewno zresetować postęp?")) {
+        completedItems = [];
+        localStorage.setItem('ksefProgress', JSON.stringify([]));
+        init();
+      }
+    }
+
+    function exportToTXT() {
+      let content = "CHECKLIST KSEF - PUNCHLINEROI\n\n";
+      checklistItems.forEach((item, index) => {
+        content += `${completedItems.includes(index) ? "[x]" : "[ ]"} ${item.title}\n`;
+      });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([content], { type: "text/plain" }));
+      a.download = "checklist.txt";
+      a.click();
+    }
+    init();
+  </script>
+</body>
+
+</html>
