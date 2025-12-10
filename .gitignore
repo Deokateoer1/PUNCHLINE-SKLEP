@@ -1,0 +1,25 @@
+# System / edytory
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+.history/
+
+# Node / narzędzia (na przyszłość)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build / output (na przyszłość, jeśli dodasz bundler)
+dist/
+build/
+.cache/
+out/
+.tmp/
