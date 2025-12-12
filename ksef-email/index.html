@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PunchlineROI – Wyślij raport</title>
+
+  <style>
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #f7f7f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #1a1a1a;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 160px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: #111827;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 24px;
+      color: #4b5563;
+      text-align: center;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+      color: #374151;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 16px;
+      margin-bottom: 20px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="email"]:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #111827;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    button:hover {
+      background: #000000;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Twoje logo -->
+    <img src="/assets/logo.png" alt="PunchlineROI" class="logo" />
+
+    <h1>Wyślij raport na e‑mail</h1>
+    <p>Podaj swój adres e‑mail, a wyślemy Ci raport gotowości KSeF wraz z instrukcją wdrożenia.</p>
+
+    <form name="ksef-report" method="POST" data-netlify="true" action="/thank-you.html">
+      <label for="email">Twój e‑mail</label>
+      <input type="email" id="email" name="email" placeholder="np. biuro@firma.pl" required />
+
+      <!-- Hidden fields uzupełniane przez JS -->
+      <input type="hidden" name="score" id="scoreField" />
+      <input type="hidden" name="missing" id="missingField" />
+      <input type="hidden" name="source" id="sourceField" />
+
+      <button type="submit">📩 Wyślij raport</button>
+    </form>
+
+    <div class="footer">PunchlineROI – automatyzacje bez konsultacji</div>
+  </div>
+
+  <script>
+    // Pobieranie danych z localStorage (ustawianych w overlay raportu)
+    document.getElementById("scoreField").value = localStorage.getItem("score") || "";
+    document.getElementById("missingField").value = localStorage.getItem("missing") || "";
+    document.getElementById("sourceField").value = localStorage.getItem("source") || "";
+  </script>
+</body>
+
+</html>

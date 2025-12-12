@@ -800,9 +800,12 @@
         }
 
         @keyframes widgetPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
             }
+
             50% {
                 box-shadow: 0 10px 40px rgba(249, 115, 22, 0.6);
             }
@@ -1108,6 +1111,83 @@
         }
 
         // 4. AI AUTO-FILL
+        function parseAIPrompt() {
+            const text = document.getElementById('ai-prompt').value;
+            if (!text || text.trim() === '') return false;
+
+            // Wyciągamy wszystkie liczby z tekstu
+            const numbers = text.match(/\d+/g);
+            if (!numbers || numbers.length < 2) return false;
+
+            // Próbujemy zidentyfikować: faktury, czas, stawka
+            let faktury = null, czas = null, stawka = null;
+
+            // Szukamy wzorców
+            numbers.forEach((num, idx) => {
+                const n = parseInt(num);
+                const context = text.toLowerCase();
+
+                // Faktury - zazwyczaj pierwsza większa liczba lub zawiera "faktur"
+                if ((context.includes('faktur') && idx === 0) || (n >= 10 && n <= 2000 && faktury === null)) {
+                    faktury = n;
+                }
+                // Czas - zazwyczaj mniejsza liczba lub zawiera "min"
+                else if ((context.includes('min') && idx <= 1) || (n >= 2 && n <= 60 && czas === null && n !== faktury)) {
+                    czas = n;
+                }
+                // Stawka - zazwyczaj ostatnia liczba lub zawiera "zł" lub "pln"
+                else if ((context.includes('zł') || context.includes('pln')) && idx === numbers.length - 1 && stawka === null) {
+                    stawka = n;
+                }
+            });
+
+            // Jeśli nie znaleźliśmy wszystkich, próbujemy domyślnej kolejności
+            if (!faktury && numbers.length >= 1) faktury = parseInt(numbers[0]);
+            if (!czas && numbers.length >= 2) czas = parseInt(numbers[1]);
+            if (!stawka && numbers.length >= 3) stawka = parseInt(numbers[2]);
+
+            // Walidacja i ustawienie wartości
+            let changed = false;
+            if (faktury && faktury >= 10 && faktury <= 2000) {
+                document.getElementById('in-faktury').value = faktury;
+                changed = true;
+            }
+            if (czas && czas >= 2 && czas <= 60) {
+                document.getElementById('in-czas').value = czas;
+                changed = true;
+            }
+            if (stawka && stawka >= 30 && stawka <= 300) {
+                document.getElementById('in-stawka').value = stawka;
+                changed = true;
+            }
+
+            if (changed) {
+                updateLabels();
+
+                // Animacja pól
+                const groups = document.querySelectorAll('.input-group');
+                groups.forEach(group => {
+                    group.classList.remove('input-changed');
+                    void group.offsetWidth;
+                    group.classList.add('input-changed');
+                });
+
+                // Feedback w badge
+                const badge = document.querySelector('.ai-badge');
+                badge.innerText = "ROZPOZNANO! ✓";
+                badge.style.backgroundColor = "#10B981";
+                setTimeout(() => {
+                    badge.innerText = "AI AUTO-FILL 🎲";
+                    badge.style.backgroundColor = "";
+                }, 1500);
+
+                resetResults();
+                return true;
+            }
+
+            return false;
+        }
+
         function triggerAutoFill() {
             const scenarios = [
                 { f: 40, t: 20, s: 60, b: 8, a: 150, txt: "Mała firma budowlana" },
@@ -1151,7 +1231,11 @@
 
         function usePrompt(txt) {
             document.getElementById('ai-prompt').value = txt;
-            triggerAutoFill();
+            // Próbujemy najpierw sparsować tekst
+            if (!parseAIPrompt()) {
+                // Jeśli parsowanie nie działa, losujemy
+                triggerAutoFill();
+            }
         }
 
         // 5. HISTORIA
@@ -1302,6 +1386,27 @@
             localStorage.setItem('cookies_accepted', 'true');
             document.getElementById('cookie-banner').style.display = 'none';
         }
+
+        // 7. EVENT LISTENER DLA AI PROMPT
+        const aiPromptInput = document.getElementById('ai-prompt');
+        let typingTimer;
+        const typingDelay = 1000; // 1 sekunda po przestaniu pisać
+
+        // Parsowanie po naciśnięciu Enter
+        aiPromptInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                parseAIPrompt();
+            }
+        });
+
+        // Parsowanie po przestaniu pisać (1 sekunda bezczynności)
+        aiPromptInput.addEventListener('input', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                parseAIPrompt();
+            }, typingDelay);
+        });
 
         // START
         loadState();
