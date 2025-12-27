@@ -23,3 +23,6 @@ build/
 .cache/
 out/
 .tmp/
+
+# Local Netlify folder
+.netlify

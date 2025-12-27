@@ -1,32 +1,82 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Dziękujemy!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dziękujemy – PunchlineROI</title>
+
   <style>
     body {
-      font-family: Inter, sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background: #f7f7f9;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
       color: #111827;
     }
+
     .box {
       text-align: center;
       padding: 40px;
       background: white;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+      max-width: 480px;
+      width: 90%;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
+
 <body>
   <div class="box">
+    <div class="icon">✅</div>
     <h1>Dziękujemy!</h1>
     <p>Raport został wysłany na podany adres e‑mail.</p>
-    <p>PunchlineROI – automatyzacje bez konsultacji</p>
+    <p class="footer">PunchlineROI – automatyzacje bez konsultacji</p>
   </div>
 </body>
+
 </html>

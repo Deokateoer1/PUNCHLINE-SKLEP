@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>PUNCHLINE ROI – Zwiększ zwrot z kampanii</title>
+
+<meta name="description" content="PUNCHLINE ROI pomaga maksymalizować zwrot z kampanii marketingowych dzięki klarownej ofercie i konkretnym narzędziom." />
+
+<link rel="icon" type="image/png" href="aktywa/favicon.png" />
+
+<meta property="og:title" content="PUNCHLINE ROI – Zwiększ zwrot z kampanii" />
+<meta property="og:description" content="Klarowna oferta, narzędzia i struktura, które pomagają zarabiać więcej na tych samych kampaniach." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://punchlineroi.com/" />
+<meta property="og:image" content="https://punchlineroi.com/aktywa/og-image.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PunchlineROI - Automatyzacja KSeF z Uśmiechem</title>
+    <meta name="description" content="Twój asystent AI do KSeF. Oszczędź 40h miesięcznie na fakturach.">
+    <link rel="icon" href="assets/favicon.ico">
+
+    <style>
+        /* --- KONFIGURACJA KOLORÓW --- */
+        :root {
+            --blue-primary: #1D4ED8;
+            --green-primary: #10B981;
+            --orange-accent: #F97316;
+            --dark-bg: #0B1120;
+            --light-bg: #F7FAFC;
+            --text-main: #1a1f3a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background-color: var(--dark-bg);
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            filter: brightness(0.4);
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .video-bg.fade-out {
+            opacity: 0.95;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--orange-accent), #ea580c);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(249, 115, 22, 0.5);
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(249, 115, 22, 0.7);
+        }
+
+        /* NAV */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-logo img {
+            height: 45px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-primary);
+        }
+
+        /* --- CTA SECTION (zamiast kalkulatora) --- */
+        .cta-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-main);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            color: var(--blue-primary);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .calc-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--blue-primary), #1e40af);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(29, 78, 216, 0.4);
+        }
+
+        .cta-section .calc-link:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(29, 78, 216, 0.5);
+        }
+
+        .cta-section .calc-link span {
+            margin-right: 10px;
+        }
+
+        .cta-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cta-badge {
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* INNE SEKCJE */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .features-grid,
+        .pricing-grid {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .feature-card,
+        .plan {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h3 {
+            color: var(--blue-primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .plan.featured {
+            border: 2px solid var(--blue-primary);
+            transform: scale(1.05);
+        }
+
+        .plan h3 {
+            color: var(--blue-primary);
+            margin-bottom: 10px;
+        }
+
+        .plan .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .plan .price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: var(--text-light);
+        }
+
+        .plan ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .plan ul li {
+            padding: 8px 0;
+            color: var(--text-light);
+        }
+
+        .plan ul li::before {
+            content: "✓";
+            color: var(--green-primary);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .plan-btn {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--blue-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--blue-primary);
+            color: white;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            margin-top: 15px;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* KONTAKT */
+        #kontakt {
+            background: var(--dark-bg);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        #kontakt h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #kontakt p {
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        #kontakt a {
+            color: var(--green-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: var(--dark-bg);
+            color: #94a3b8;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .plan.featured {
+                transform: none;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 25px rgba(249, 115, 22, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 4px 35px rgba(249, 115, 22, 0.8);
+            }
+        }
+
+        /* MODALE */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo"><a href="index.html"><img src="assets/logo.png" alt="Punchline"></a></div>
+        <div class="nav-links">
+            <a href="#dlaczego">Dlaczego my?</a>
+            <a href="checklist.html" style="color: var(--orange-accent); font-weight: bold;">🎁 Darmowa Checklista</a>
+            <a href="kalkulator.html">Kalkulator ROI</a>
+            <a href="#cennik">Cennik</a>
+            <a href="#kontakt">Kontakt</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <video class="video-bg" autoplay loop muted playsinline preload="auto" id="heroVideo">
+            <source src="assets/loop.mp4" type="video/mp4">
+            <source src="assets/loop.webm" type="video/webm">
+        </video>
+        <div class="hero-content">
+            <h1>Faktury bez stresu.<br>Automatyzacja z uśmiechem.</h1>
+            <p>KSeF nadchodzi. Nasz robot sprawdzi błędy, wyśle faktury i zadba o Twój spokój 24/7.</p>
+            <a href="kalkulator.html" class="cta-button">Sprawdź ile zaoszczędzisz</a>
+        </div>
+    </header>
+
+    <!-- SEKCJA CTA (zamiast kalkulatora) -->
+    <div style="position: relative; margin-top: -100px; padding: 0 20px; z-index: 10;">
+        <div class="cta-section">
+            <h2>💰 Ile Twoja firma traci na ręcznym KSeF?</h2>
+            <p>Nasz inteligentny kalkulator AI przeliczy Twoje oszczędności w 30 sekund.</p>
+
+            <a href="kalkulator.html" class="calc-link">
+                <span>📊</span> Oblicz swoje oszczędności →
+            </a>
+
+            <div class="cta-badges">
+                <div class="cta-badge">✨ AI Auto-Fill</div>
+                <div class="cta-badge">📈 Raport PDF</div>
+                <div class="cta-badge">🔒 RODO Compliant</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DLACZEGO MY -->
+    <section id="dlaczego" class="container">
+        <div class="section-title">
+            <h2>Dlaczego PunchlineROI?</h2>
+            <p>Bo KSeF to nie tylko obowiązek — to szansa na oszczędności.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Robot-Zwiadowca 24/7</h3>
+                <p>Automatycznie pobiera faktury z KSeF, wykrywa błędy i wysyła alerty. Ty śpisz, on pracuje.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Oszczędność 40h/mc</h3>
+                <p>Koniec z ręcznym sprawdzaniem. Robot robi w 3 minuty to, co Tobie zajmuje godziny.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Compliance Ready</h3>
+                <p>Gotowy na deadline Luty 2026. Archiwum 10 lat, audyt trail, RODO + DPA w pakiecie.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CENNIK -->
+    <section id="cennik" class="container">
+        <div class="section-title">
+            <h2>Prosty cennik, bez niespodzianek</h2>
+            <p>Wybierz plan dopasowany do Twojej firmy.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="plan">
+                <h3>Starter</h3>
+                <div class="price">99 PLN <span>/mc</span></div>
+                <ul>
+                    <li>Do 50 faktur/mc</li>
+                    <li>Podstawowe alerty email</li>
+                    <li>Dashboard online</li>
+                    <li>Wsparcie email</li>
+                </ul>
+                <a href="#kontakt" class="plan-btn btn-outline">Zacznij za darmo</a>
+            </div>
+
+            <div class="plan featured">
+                <h3>Commander ⭐</h3>
+                <div class="price">890 PLN <span>/mc</span></div>
+                <ul>
+                    <li>Do 500 faktur/mc</li>
+                    <li>Robot-Zwiadowca 24/7</li>
+                    <li>Integracja ERP/API</li>
+                    <li>Wsparcie priorytetowe</li>
+                    <li>Archiwum 10 lat</li>
+                </ul>
+                <a href="#kontakt" class="plan-btn btn-primary">Wybierz Commander</a>
+            </div>
+
+            <div class="plan">
+                <h3>Enterprise</h3>
+                <div class="price">1990 PLN <span>/mc</span></div>
+                <ul>
+                    <li>Bez limitu faktur</li>
+                    <li>Multi-firma dashboard</li>
+                    <li>Dedykowany opiekun</li>
+                    <li>SLA 99.9%</li>
+                    <li>Custom integrations</li>
+                </ul>
+                <a href="#kontakt" class="plan-btn btn-outline">Umów demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="container">
+        <div class="section-title">
+            <h2>Najczęstsze pytania</h2>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Co jeśli KSeF padnie?
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Robot automatycznie przechodzi w tryb offline i kolejkuje faktury. Gdy system wróci, wszystko się
+                zsynchronizuje.
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Czy moje dane są bezpieczne?
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Tak. Szyfrowanie end-to-end, serwery w EU, pełna zgodność z RODO. Podpisujemy DPA.
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Ile trwa wdrożenie?
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Plan Starter: 5 minut (self-service). Commander: 1-2 dni z naszym wsparciem. Enterprise: do 2 tygodni z
+                pełną integracją.
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">
+                Czy mogę przetestować za darmo?
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                Tak! 14 dni darmowego trial dla każdego planu. Bez karty kredytowej.
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+        <h2>Gotowy na spokojne faktury?</h2>
+        <p>Napisz do nas lub umów demo. Odpowiadamy w 24h.</p>
+        <a href="mailto:kontakt@punchlineroi.com">kontakt@punchlineroi.com</a>
+    </section>
+
+    <footer>
+        <p style="margin-bottom: 20px;">
+            <a href="#" onclick="openModal('privacyModal'); return false;">Polityka Prywatności</a> |
+            <a href="#" onclick="openModal('termsModal'); return false;">Regulamin</a> |
+            <a href="checklist.html">Darmowa Checklista</a>
+        </p>
+        <p>© 2025 PunchlineROI. Automatyzacja KSeF z uśmiechem.</p>
+    </footer>
+
+    <!-- MODALE -->
+    <div id="privacyModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('privacyModal')">&times;</span>
+            <h3
+                style="color:var(--blue-primary); border-bottom:2px solid #eee; padding-bottom:10px; margin-bottom:20px;">
+                Polityka Prywatności</h3>
+
+            <div
+                style="text-align:left; font-size:0.85rem; line-height:1.6; color:var(--text-main); max-height: 60vh; overflow-y: auto;">
+                <p><strong>1. Administrator Danych</strong><br>
+                    Administratorem Twoich danych jest PunchlineROI (kontakt@punchlineroi.com).</p>
+
+                <p><strong>2. Zakres Danych</strong><br>
+                    Przetwarzamy: adres e-mail, dane z kalkulatora (liczba faktur, czas), dane z KSeF (NIP kontrahentów,
+                    numery faktur).</p>
+
+                <p><strong>3. Podmioty Przetwarzające</strong><br>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Google Cloud Platform (EU):</strong> Hosting aplikacji.</li>
+                    <li><strong>Netlify Inc. (USA):</strong> Hosting strony internetowej.</li>
+                    <li><strong>Stripe Payments Europe Ltd.:</strong> Obsługa bezpiecznych płatności.</li>
+                    <li><strong>Twilio SendGrid (USA):</strong> Wysyłka wiadomości e-mail.</li>
+                </ul>
+                W przypadku transferu danych do USA, opieramy się na Standardowych Klauzulach Umownych (SCC) lub ramach
+                Data Privacy Framework.</p>
+
+                <p><strong>4. Twoje Prawa</strong><br>
+                    Masz prawo do: dostępu, sprostowania, usunięcia danych ("prawo do bycia zapomnianym"), oraz
+                    przenoszenia danych.</p>
+            </div>
+
+            <div style="margin-top: 20px; text-align: right;">
+                <button onclick="closeModal('privacyModal')"
+                    style="background:#ccc; color:#333; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">Zamknij</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('termsModal')">&times;</span>
+            <h3
+                style="color:var(--blue-primary); border-bottom:2px solid #eee; padding-bottom:10px; margin-bottom:20px;">
+                Regulamin Serwisu</h3>
+
+            <div
+                style="text-align:left; font-size:0.85rem; line-height:1.6; color:var(--text-main); max-height: 60vh; overflow-y: auto;">
+                <p><strong>1. Usługa</strong><br>
+                    Serwis PunchlineROI oferuje narzędzia do automatyzacji procesów księgowych (KSeF) oraz kalkulatory
+                    biznesowe.</p>
+
+                <p><strong>2. Powierzenie Przetwarzania Danych (KSeF)</strong><br>
+                    W zakresie, w jakim Usługodawca (PunchlineROI) uzyskuje dostęp do danych kontrahentów Użytkownika
+                    (np. pobierając faktury z KSeF), Usługodawca działa jako <strong>Podmiot Przetwarzający
+                        (Procesor)</strong>, a Użytkownik jako Administrator.</p>
+
+                <p><strong>3. Płatności</strong><br>
+                    Subskrypcje (Starter, Commander, Enterprise) są obsługiwane przez operatora Stripe. Faktury VAT są
+                    wystawiane automatycznie.</p>
+
+                <p><strong>4. Odpowiedzialność</strong><br>
+                    Kalkulator ROI służy do celów symulacyjnych. Administrator nie ponosi odpowiedzialności za decyzje
+                    biznesowe podjęte na podstawie wyników.</p>
+
+                <p><strong>5. Reklamacje</strong><br>
+                    Reklamacje można zgłaszać na adres e-mail: kontakt@punchlineroi.com. Termin rozpatrzenia: 14 dni.
+                </p>
+            </div>
+
+            <div style="margin-top: 20px; text-align: right;">
+                <button onclick="closeModal('termsModal')"
+                    style="background:#ccc; color:#333; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">Zamknij</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookie-banner"
+        style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0f172a; color: white; padding: 20px; z-index: 9999; display: none; box-shadow: 0 -5px 20px rgba(0,0,0,0.2);">
+        <div
+            style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+            <div style="flex: 1; min-width: 280px; font-size: 0.9rem;">
+                <strong>🍪 Szanujemy Twoją prywatność.</strong> Używamy cookies, aby robot KSeF działał poprawnie i do
+                analityki.
+                <a href="#" onclick="openModal('privacyModal'); return false;"
+                    style="color: #4ade80; text-decoration: underline;">Czytaj więcej</a>.
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="acceptCookies()"
+                    style="background: #16A34A; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">Akceptuję</button>
+                <button onclick="rejectCookies()"
+                    style="background: transparent; border: 1px solid #94a3b8; color: #94a3b8; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Tylko
+                    niezbędne</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PŁYNNY LOOP WIDEO
+        const video = document.getElementById('heroVideo');
+
+        if (video) {
+            // Wymuszenie pełnego załadowania
+            video.load();
+
+            // Obsługa końca wideo dla płynnego przejścia
+            video.addEventListener('ended', function () {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+
+            // Zapobieganie przerwom w loopie
+            video.addEventListener('timeupdate', function () {
+                // Gdy pozostało mniej niż 0.1s do końca, zresetuj
+                if (this.currentTime >= this.duration - 0.1) {
+                    this.currentTime = 0;
+                }
+            });
+
+            // Wymuszenie autoplay na urządzeniach mobilnych
+            video.addEventListener('canplaythrough', function () {
+                this.play().catch(e => console.log('Autoplay blocked:', e));
+            });
+        }
+
+        // MODALE
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // COOKIES
+        function checkCookies() {
+            if (!localStorage.getItem('cookies_accepted')) {
+                document.getElementById('cookie-banner').style.display = 'block';
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookies_accepted', 'essential');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        checkCookies();
+    </script>
+</body>
+
+</html>
