@@ -141,29 +141,8 @@
       Bez zobowiązań. Bez karty.
     </p>
 
-    <form netlify data-netlify="true" action="/ksef-email/thank-you.html" method="POST">
 
-      <label>Imię i nazwisko</label>
-      <input type="text" name="name" placeholder="Jan Kowalski" required>
-
-      <label>Adres e‑mail</label>
-      <input type="email" name="email" placeholder="biuro@firma.pl" required>
-
-      <label>Liczba faktur miesięcznie</label>
-      <select name="volume" required>
-        <option value="">Wybierz zakres</option>
-        <option value="0-100">0–100</option>
-        <option value="100-500">100–500</option>
-        <option value="500-2000">500–2000</option>
-        <option value="2000+">2000+</option>
-      </select>
-
-      <button type="submit">Zaproś mnie do pilotażu</button>
-
-      <div class="microcopy">
-        Bez spamu • Bez sprzedaży • Tylko raport i instrukcja wdrożenia
-      </div>
-
+    <form name="pilot-ksef" method="POST" data-netlify="true" netlify action="/ksef-email/thank-you.html">
     </form>
 
     <div class="footer">
