@@ -143,6 +143,16 @@
 
 
     <form name="pilot-ksef" method="POST" data-netlify="true" netlify action="/ksef-email/thank-you.html">
+      <input type="text" name="name" required>
+      <input type="email" name="email" required>
+      <select name="invoices" required>
+        <option value="">Wybierz liczbę faktur</option>
+        <option value="0-100">0–100</option>
+        <option value="100-500">100–500</option>
+        <option value="500-2000">500–2000</option>
+        <option value="2000+">2000+</option>
+      </select>
+      <button type="submit">Wyślij</button>
     </form>
 
     <div class="footer">
