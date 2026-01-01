@@ -1,44 +1,179 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regulamin Serwisu - PunchlineROI</title>
-    <link rel="icon" href="assets/favicon.ico">
+    <title>Regulamin – PunchlineROI – Robot KSeF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
-        :root { --blue-primary: #1E3A8A; --text-main: #1e293b; --bg-light: #F8FAFC; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-light); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; }
-        nav { background: white; padding: 15px 5%; border-bottom: 1px solid #e2e8f0; }
-        .nav-back { color: #64748b; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px; }
-        .container { max-width: 900px; margin: 40px auto; background: white; padding: 50px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
-        h1 { color: var(--blue-primary); border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 30px; }
-        h2 { color: var(--blue-primary); margin-top: 30px; font-size: 1.4rem; }
-        .alert { background: #fff7ed; border-left: 4px solid #f97316; padding: 15px; margin: 20px 0; font-size: 0.9rem; }
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E3A8A, #16A34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 40px;
+            color: #1E3A8A;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #0F172A;
+        }
+
+        p,
+        li {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        a {
+            color: #1E3A8A;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #475569;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-    <nav><a href="index.html" class="nav-back">← Wróć do strony głównej</a></nav>
-    <div class="container">
-        <h1>REGULAMIN SERWISU PUNCHLINEROI</h1>
-        
-        <h2>1. Postanowienia Ogólne</h2>
-        <p>Właścicielem serwisu jest PunchlineROI, Lachezar Mihaylov, NIP: 7011287658. Serwis świadczy usługi automatyzacji KSeF w modelu SaaS.</p>
-
-        <h2>2. Odpowiedzialność</h2>
-        <div class="alert">
-            <strong>Ważne:</strong> Kalkulator ROI jest narzędziem symulacyjnym. Usługodawca nie odpowiada za decyzje biznesowe podjęte na jego podstawie, ani za przerwy w działaniu rządowego systemu KSeF.
-        </div>
-
-        <h2>3. Płatności i Subskrypcja</h2>
-        <p>Płatności obsługuje Stripe. Dostępne plany: Starter (99 PLN), Commander (599 PLN), Enterprise. Faktury VAT wystawiane są automatycznie.</p>
-
-        <h2>4. Reklamacje i Zwroty</h2>
-        <p>Konsument ma prawo do odstąpienia od umowy w terminie 14 dni. Reklamacje rozpatrywane są w ciągu 14 dni. Kontakt: Impact@punchlineroi.com.</p>
-
-        <h2>5. Powierzenie Danych (DPA)</h2>
-        <p>Akceptując ten regulamin, zawierasz Umowę Powierzenia Przetwarzania Danych (zgodnie z art. 28 RODO) w zakresie niezbędnym do realizacji usługi KSeF.</p>
-
-        <p style="margin-top:40px; font-size:0.8rem; color:#64748b;">Data wejścia w życie: 8 grudnia 2025</p>
+    <div class="back-link" style="max-width:900px;margin:0 auto 20px auto;font-size:16px;">
+        <a href="/index.html" style="color:#1E3A8A;text-decoration:none;font-weight:500;">← Wróć do strony głównej</a>
     </div>
+
+    <main>
+        <h1>Regulamin Usługi PunchlineROI – Robot KSeF</h1>
+
+        <p><strong>Wersja:</strong> 1.0 • <strong>Data obowiązywania:</strong> 1 stycznia 2026 r.</p>
+
+        <h2>1. Postanowienia ogólne</h2>
+        <p>
+            1.1. Niniejszy Regulamin określa zasady korzystania z usługi PunchlineROI – Robot KSeF (dalej:
+            „Usługa”).<br>
+            1.2. Usługa świadczona jest przez:
+        </p>
+
+        <p>
+            <strong>PunchlineROI – Lachezar Mihaylov</strong><br>
+            Rivierdijk 3372BV, Hardinxveld‑Giessendam, Holandia<br>
+            NIP: 7011287658<br>
+            Email: <a href="mailto:impact@punchlineroi.com">impact@punchlineroi.com</a><br>
+            Strona: https://punchlineroi.com
+        </p>
+
+        <h2>2. Definicje</h2>
+        <ul>
+            <li><strong>Usługa</strong> – automatyzacja obsługi KSeF (Robot KSeF).</li>
+            <li><strong>Użytkownik</strong> – osoba fizyczna lub firma korzystająca z Usługi.</li>
+            <li><strong>Dashboard</strong> – panel prezentujący dane, statusy i alerty.</li>
+            <li><strong>Administrator</strong> – PunchlineROI – Lachezar Mihaylov.</li>
+        </ul>
+
+        <h2>3. Zakres Usługi</h2>
+        <p>Usługa obejmuje w szczególności:</p>
+        <ul>
+            <li>automatyczne pobieranie faktur z KSeF,</li>
+            <li>walidację dokumentów (w tym wykrywanie duplikatów),</li>
+            <li>powiadomienia o błędach, duplikatach i zdarzeniach,</li>
+            <li>dostęp do Dashboardu z KPI i listą dokumentów,</li>
+            <li>tworzenie logów i historii operacji.</li>
+        </ul>
+
+        <h2>4. Warunki techniczne</h2>
+        <p>Do korzystania z Usługi wymagane jest:</p>
+        <ul>
+            <li>dostęp do Internetu,</li>
+            <li>aktualna przeglądarka internetowa,</li>
+            <li>aktywny identyfikator / token do KSeF po stronie Użytkownika.</li>
+        </ul>
+
+        <p>Użytkownik odpowiada za konfigurację i bezpieczeństwo swoich urządzeń oraz dostępu do KSeF.</p>
+
+        <h2>5. Odpowiedzialność</h2>
+        <ul>
+            <li>Administrator zapewnia działanie Usługi zgodnie z dokumentacją KSeF.</li>
+            <li>Administrator nie ponosi odpowiedzialności za:
+                <ul>
+                    <li>błędne dane wprowadzone przez Użytkownika,</li>
+                    <li>przerwy i błędy po stronie KSeF (MF),</li>
+                    <li>brak dostępu do KSeF z przyczyn niezależnych od Administratora.</li>
+                </ul>
+            </li>
+            <li>Użytkownik odpowiada za poprawność danych przekazywanych do KSeF.</li>
+        </ul>
+
+        <h2>6. Płatności</h2>
+        <ul>
+            <li>Usługa jest rozliczana w modelu subskrypcyjnym (miesięcznym lub rocznym).</li>
+            <li>Wysokość opłat określona jest w cenniku lub indywidualnej ofercie.</li>
+        </ul>
+
+        <h2>7. Reklamacje</h2>
+        <p>
+            Reklamacje dotyczące działania Usługi można zgłaszać na adres:
+            <a href="mailto:impact@punchlineroi.com">impact@punchlineroi.com</a>.
+            Administrator odpowie w terminie do 14 dni roboczych.
+        </p>
+
+        <h2>8. Wypowiedzenie umowy</h2>
+        <ul>
+            <li>Użytkownik może wypowiedzieć umowę w dowolnym momencie ze skutkiem na koniec okresu rozliczeniowego.
+            </li>
+            <li>Po zakończeniu świadczenia Usługi dostęp do Dashboardu może zostać ograniczony lub wyłączony.</li>
+        </ul>
+
+        <h2>9. Zmiany Regulaminu</h2>
+        <ul>
+            <li>Administrator może wprowadzać zmiany Regulaminu.</li>
+            <li>Użytkownicy zostaną poinformowani o zmianach z 14‑dniowym wyprzedzeniem.</li>
+        </ul>
+
+        <h2>10. Postanowienia końcowe</h2>
+        <ul>
+            <li>W sprawach nieuregulowanych zastosowanie mają przepisy prawa.</li>
+            <li>Regulamin obowiązuje od dnia publikacji na stronie Administratora.</li>
+        </ul>
+
+        <footer>
+            © 2026 PunchlineROI – Lachezar Mihaylov, NIP: 7011287658<br>
+            <a href="/regulamin.html">Regulamin</a> ·
+            <a href="/polityka-prywatnosci.html">Polityka Prywatności</a> ·
+            <a href="/dpa.html">DPA</a>
+        </footer>
+    </main>
 </body>
+
 </html>

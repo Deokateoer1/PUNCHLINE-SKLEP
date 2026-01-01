@@ -1,0 +1,36 @@
+Folder PATH listing
+Volume serial number is 2C52-5DA2
+C:.
+|   .gitignore
+|   checklist.html
+|   DEPLOY-TO-NETLIFY.bat
+|   dpa.html
+|   index-OLD.html.html
+|   index.html
+|   kalkulator.html
+|   polityka-prywatnosci.html
+|   project-structure.txt
+|   README.md
+|   regulamin.html
+|   thank-you.html
+|   
++---.netlify
+|   |   netlify.toml
+|   |   state.json
+|   |   
+|   +---functions-internal
+|   \---v1
+|       \---functions
++---assets
+|       audio_logo.mp3
+|       favicon.ico
+|       logo.png
+|       loop.mp4
+|       poster.jpg
+|       
+\---ksef-email
+    |   index.html
+    |   
+    \---assets
+            logo.png
+            

@@ -1,33 +1,192 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umowa Powierzenia (DPA) - PunchlineROI</title>
-    <link rel="icon" href="assets/favicon.ico">
+    <title>DPA – Umowa Powierzenia – PunchlineROI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
-        :root { --green-primary: #16A34A; --text-main: #1e293b; --bg-light: #F8FAFC; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-light); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; }
-        nav { background: white; padding: 15px 5%; border-bottom: 1px solid #e2e8f0; }
-        .nav-back { color: #64748b; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px; }
-        .container { max-width: 900px; margin: 40px auto; background: white; padding: 50px; border-radius: 20px; border-top: 5px solid var(--green-primary); }
-        h1 { margin-bottom: 20px; }
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #F8FAFC;
+            color: #0F172A;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            font-size: 16px;
+        }
+
+        .back-link a {
+            color: #1E3A8A;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E3A8A, #16A34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 40px;
+            color: #1E3A8A;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #0F172A;
+        }
+
+        p,
+        li {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        a {
+            color: #1E3A8A;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #475569;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-    <nav><a href="index.html" class="nav-back">← Wróć do strony głównej</a></nav>
-    <div class="container">
-        <h1>UMOWA POWIERZENIA PRZETWARZANIA DANYCH (DPA)</h1>
-        <p>Zgodna z Art. 28 RODO. Dokument stanowi integralną część Regulaminu Serwisu dla klientów biznesowych.</p>
-        <p><strong>Procesor:</strong> PunchlineROI<br><strong>Administrator:</strong> Klient (Użytkownik)</p>
-        
-        <h3>§ 1. Przedmiot</h3>
-        <p>Przetwarzanie danych z faktur (KSeF) w celu realizacji usługi automatyzacji.</p>
-        
-        <h3>§ 2. Bezpieczeństwo</h3>
-        <p>Stosujemy szyfrowanie AES-256, TLS 1.2+ oraz codzienne backupy. Hosting danych w Google Cloud (EU/USA z DPF).</p>
-        
-        <p><a href="regulamin.html">Wróć do Regulaminu</a></p>
+
+    <!-- STRZAŁKA POWROTU -->
+    <div class="back-link">
+        <a href="/index.html">← Wróć do strony głównej</a>
     </div>
+
+    <main>
+        <h1>Umowa Powierzenia Przetwarzania Danych (DPA)</h1>
+
+        <p><strong>Wersja:</strong> 1.0 • <strong>Data obowiązywania:</strong> 1 stycznia 2026 r.</p>
+
+        <h2>1. Strony umowy</h2>
+        <p>
+            <strong>Administrator danych:</strong> Użytkownik usługi PunchlineROI<br>
+            <strong>Podmiot przetwarzający:</strong><br>
+            PunchlineROI – Lachezar Mihaylov<br>
+            Rivierdijk 3372BV, Hardinxveld‑Giessendam, Holandia<br>
+            NIP: 7011287658<br>
+            Email: <a href="mailto:impact@punchlineroi.com">impact@punchlineroi.com</a><br>
+            Strona: https://punchlineroi.com
+        </p>
+
+        <h2>2. Przedmiot powierzenia</h2>
+        <p>
+            Przedmiotem niniejszej Umowy jest powierzenie Podmiotowi przetwarzającemu danych osobowych
+            w związku ze świadczeniem usługi PunchlineROI – Robot KSeF.
+        </p>
+
+        <h2>3. Zakres i cel przetwarzania</h2>
+
+        <h3>3.1 Zakres danych</h3>
+        <ul>
+            <li>dane identyfikacyjne kontrahentów (NIP, nazwa, adres),</li>
+            <li>dane zawarte na fakturach i dokumentach księgowych,</li>
+            <li>dane użytkowników systemu (imię, nazwisko, email).</li>
+        </ul>
+
+        <h3>3.2 Cel przetwarzania</h3>
+        <ul>
+            <li>automatyczne pobieranie faktur z KSeF,</li>
+            <li>walidacja dokumentów,</li>
+            <li>wykrywanie duplikatów i błędów,</li>
+            <li>generowanie powiadomień,</li>
+            <li>prezentacja danych w Dashboardzie,</li>
+            <li>tworzenie logów i historii operacji.</li>
+        </ul>
+
+        <h2>4. Obowiązki Podmiotu przetwarzającego</h2>
+        <ul>
+            <li>przetwarzanie danych wyłącznie na polecenie Administratora,</li>
+            <li>zapewnienie poufności danych,</li>
+            <li>stosowanie odpowiednich środków technicznych i organizacyjnych,</li>
+            <li>wspieranie Administratora w realizacji praw osób, których dane dotyczą,</li>
+            <li>pomoc w obsłudze naruszeń ochrony danych.</li>
+        </ul>
+
+        <h2>5. Środki bezpieczeństwa</h2>
+        <ul>
+            <li>szyfrowanie transmisji danych (HTTPS),</li>
+            <li>kontrola dostępu,</li>
+            <li>logowanie zdarzeń,</li>
+            <li>regularne kopie zapasowe,</li>
+            <li>separacja środowisk (produkcyjne / testowe).</li>
+        </ul>
+
+        <h2>6. Podpowierzenie danych</h2>
+        <p>
+            Podpowierzenie danych innym podmiotom może nastąpić wyłącznie za zgodą Administratora
+            lub w ramach jasno określonej listy podwykonawców (np. dostawca hostingu).
+        </p>
+
+        <h2>7. Czas trwania umowy</h2>
+        <p>
+            Umowa obowiązuje przez cały okres świadczenia usługi PunchlineROI – Robot KSeF.
+        </p>
+
+        <h2>8. Zakończenie przetwarzania</h2>
+        <p>
+            Po zakończeniu świadczenia Usługi Podmiot przetwarzający:
+        </p>
+        <ul>
+            <li>usuwa dane osobowe lub</li>
+            <li>zwraca je Administratorowi – na jego żądanie,</li>
+        </ul>
+        <p>
+            z wyjątkiem danych, które muszą być przechowywane zgodnie z przepisami prawa.
+        </p>
+
+        <h2>9. Postanowienia końcowe</h2>
+        <p>
+            Niniejsza Umowa stanowi załącznik do Regulaminu lub odrębnej umowy głównej.
+        </p>
+
+        <footer>
+            © 2026 PunchlineROI – Lachezar Mihaylov, NIP: 7011287658<br>
+            <a href="/regulamin.html">Regulamin</a> ·
+            <a href="/polityka-prywatnosci.html">Polityka Prywatności</a> ·
+            <a href="/dpa.html">DPA</a>
+        </footer>
+
+    </main>
 </body>
+
 </html>

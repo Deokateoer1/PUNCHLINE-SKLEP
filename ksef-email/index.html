@@ -2,31 +2,38 @@
 <html lang="pl">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PunchlineROI – Wyślij raport</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PunchlineROI – Zgłoszenie do pilotażu KSeF</title>
 
   <style>
-    body {
-      font-family: Inter, Arial, sans-serif;
-      background: #f7f7f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #1a1a1a;
+    :root {
+      --blue: #1D4ED8;
+      --green: #10B981;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --border: #e2e8f0;
     }
 
-    .container {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      max-width: 480px;
-      width: 90%;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e5e7eb;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8fafc, #eef2ff);
+      font-family: Inter, system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+    }
+
+    .form-wrapper {
+      background: white;
+      max-width: 520px;
+      width: 92%;
+      padding: 48px;
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border);
       animation: fadeIn 0.6s ease-out;
     }
 
@@ -44,120 +51,127 @@
 
     .logo {
       display: block;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 24px;
       width: 160px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.05);
-      }
-
-      100% {
-        transform: scale(1);
-      }
     }
 
     h1 {
-      font-size: 26px;
-      margin-bottom: 10px;
-      font-weight: 700;
-      color: #111827;
+      font-size: 28px;
+      font-weight: 800;
       text-align: center;
+      margin-bottom: 12px;
     }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 24px;
-      color: #4b5563;
+    .subtitle {
       text-align: center;
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 36px;
     }
 
     label {
+      display: block;
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 6px;
-      display: block;
-      color: #374151;
     }
 
-    input[type="email"] {
+    input,
+    select {
       width: 100%;
       padding: 14px;
-      border-radius: 10px;
-      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      border: 1px solid #cbd5f5;
       font-size: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       transition: border 0.2s, box-shadow 0.2s;
     }
 
-    input[type="email"]:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    input:focus,
+    select:focus {
       outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
     }
 
     button {
       width: 100%;
-      padding: 14px;
-      background: #111827;
-      color: white;
+      padding: 16px;
+      border-radius: 14px;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     button:hover {
-      background: #000000;
       transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.35);
+    }
+
+    .microcopy {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #94a3b8;
+      text-align: center;
+      line-height: 1.6;
     }
 
     .footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #9ca3af;
+      margin-top: 28px;
       text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <!-- Twoje logo -->
-    <img src="/assets/logo.png" alt="PunchlineROI" class="logo" />
 
-    <h1>Wyślij raport na e‑mail</h1>
-    <p>Podaj swój adres e‑mail, a wyślemy Ci raport gotowości KSeF wraz z instrukcją wdrożenia.</p>
+  <div class="form-wrapper">
 
-    <form name="ksef-report" method="POST" data-netlify="true" action="/thank-you.html">
-      <label for="email">Twój e‑mail</label>
-      <input type="email" id="email" name="email" placeholder="np. biuro@firma.pl" required />
+    <img src="assets/logo.png" alt="PunchlineROI" class="logo">
 
-      <!-- Hidden fields uzupełniane przez JS -->
-      <input type="hidden" name="score" id="scoreField" />
-      <input type="hidden" name="missing" id="missingField" />
-      <input type="hidden" name="source" id="sourceField" />
+    <h1>Zgłoszenie do pilotażu KSeF</h1>
+    <p class="subtitle">
+      Odbierz raport gotowości FA(3) i dostęp do pilotażu Robota KSeF.
+      Bez zobowiązań. Bez karty.
+    </p>
 
-      <button type="submit">📩 Wyślij raport</button>
+    <form name="pilot-ksef" method="POST" data-netlify="true" action="/thank-you.html">
+
+      <label>Imię i nazwisko</label>
+      <input type="text" name="name" placeholder="Jan Kowalski" required>
+
+      <label>Adres e‑mail</label>
+      <input type="email" name="email" placeholder="biuro@firma.pl" required>
+
+      <label>Liczba faktur miesięcznie</label>
+      <select name="volume" required>
+        <option value="">Wybierz zakres</option>
+        <option value="0-100">0–100</option>
+        <option value="100-500">100–500</option>
+        <option value="500-2000">500–2000</option>
+        <option value="2000+">2000+</option>
+      </select>
+
+      <button type="submit">Zaproś mnie do pilotażu</button>
+
+      <div class="microcopy">
+        Bez spamu • Bez sprzedaży • Tylko raport i instrukcja wdrożenia
+      </div>
+
     </form>
 
-    <div class="footer">PunchlineROI – automatyzacje bez konsultacji</div>
+    <div class="footer">
+      PunchlineROI — bezpieczna automatyzacja KSeF
+    </div>
+
   </div>
 
-  <script>
-    // Pobieranie danych z localStorage (ustawianych w overlay raportu)
-    document.getElementById("scoreField").value = localStorage.getItem("score") || "";
-    document.getElementById("missingField").value = localStorage.getItem("missing") || "";
-    document.getElementById("sourceField").value = localStorage.getItem("source") || "";
-  </script>
 </body>
 
 </html>

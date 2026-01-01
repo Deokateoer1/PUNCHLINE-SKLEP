@@ -5,67 +5,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dziękujemy – PunchlineROI</title>
-
+  <link rel="icon" href="assets/favicon.ico">
   <style>
+    :root {
+      --blue-primary: #1E3A8A;
+      --green-primary: #16A34A;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Inter, Arial, sans-serif;
-      background: #f7f7f9;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d4ed8 0, #020617 45%, #000 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: 0;
-      color: #111827;
+      padding: 16px;
+      color: var(--text-main);
     }
 
     .box {
       text-align: center;
-      padding: 40px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e5e7eb;
+      padding: 36px 30px 30px;
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 22px;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
       max-width: 480px;
-      width: 90%;
-      animation: fadeIn 0.6s ease-out;
+      width: 100%;
+      animation: fadeIn 0.7s ease-out;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(24px) scale(0.98);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+      display: inline-flex;
+      width: 64px;
+      height: 64px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+      animation: pulse 1.6s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+      }
+
+      60% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
       }
     }
 
     h1 {
-      font-size: 26px;
-      margin-bottom: 16px;
+      font-size: 24px;
+      margin-bottom: 10px;
       font-weight: 700;
-      color: #111827;
+      color: #e5e7eb;
     }
 
     p {
-      font-size: 16px;
-      margin-bottom: 16px;
-      color: #4b5563;
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: #cbd5f5;
       line-height: 1.5;
     }
 
-    .footer {
-      margin-top: 20px;
+    .tagline {
       font-size: 13px;
-      color: #9ca3af;
+      color: var(--text-muted);
+      margin-top: 10px;
     }
 
-    .icon {
-      font-size: 48px;
-      margin-bottom: 20px;
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 11px 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue-primary), var(--green-primary));
+      color: #f9fafb;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        padding: 28px 18px 24px;
+        border-radius: 18px;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
     }
   </style>
 </head>
@@ -75,7 +148,11 @@
     <div class="icon">✅</div>
     <h1>Dziękujemy!</h1>
     <p>Raport został wysłany na podany adres e‑mail.</p>
-    <p class="footer">PunchlineROI – automatyzacje bez konsultacji</p>
+    <p class="tagline">PunchlineROI – automatyzacje bez konsultacji, liczby zamiast obietnic.</p>
+    <a href="index.html" class="btn">Wróć na stronę główną</a>
+    <div class="footer">
+      © 2025 PunchlineROI
+    </div>
   </div>
 </body>
 
