@@ -37,3 +37,53 @@ Jej celem jest pokazanie oferty, edukacja użytkownika i kierowanie go do zakupu
 ## 👨‍💻 Autor
 
 Projekt tworzony przez Lachezara – z myślą o prostocie, automatyzacji i realnej wartości dla księgowych.
+
+---
+
+# 🚀 PunchlineROI - Landing Page
+
+> **Domena:** www.punchlineroi.com  
+> **Dashboard:** app.punchlineroi.com
+
+## 📁 Struktura
+
+```
+PUNCHLINE-SKLEP/
+├── index.html              # Główna strona
+├── kalkulator.html         # Kalkulator ROI
+├── regulamin.html          # Regulamin
+├── polityka-prywatnosci.html
+├── dpa.html                # Umowa Powierzenia Danych
+└── assets/
+    ├── logo.png
+    ├── loop.mp4
+    └── favicon.png
+```
+
+## 🎨 Brand Colors
+
+| Kolor | HEX | Użycie |
+|-------|-----|--------|
+| 🔵 Blue | `#1D4ED8` | Autorytet, CTA secondary |
+| 🟢 Green | `#10B981` | Sukces, ROI |
+| 🟠 Orange | `#F97316` | Akcja, CTA primary |
+
+## 🌐 Architektura Domen
+
+```
+punchlineroi.com          → Landing Page (Netlify)
+app.punchlineroi.com      → Dashboard (Cloud Run)
+api.punchlineroi.com      → Backend API (FastAPI)
+```
+
+## 🚀 Deployment
+
+```bash
+# Netlify CLI
+netlify deploy --prod
+```
+
+## 📞 Kontakt
+
+- **Email:** impact@punchlineroi.com
+- **Founder:** Lachezar Mihaylov
