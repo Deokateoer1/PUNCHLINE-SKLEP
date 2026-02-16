@@ -1,710 +1,716 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>PunchlineROI – Kalkulator ROI dla biur rachunkowych</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Kalkulator ROI dla biur rachunkowych – policz, ile zyskasz automatyzując KSeF z PunchlineROI." />
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXX');</script>
+    <!-- End Google Tag Manager -->
 
-  <style>
-    :root {
-      --bg-main: #111827;
-      --bg-panel: #1f2933;
-      --bg-panel-soft: #111827;
-      --border-soft: #374151;
-      --accent-blue: #1D4ED8;
-      --accent-green: #10B981;
-      --accent-orange: #F97316;
-      --text-main: #E5E7EB;
-      --text-muted: #9CA3AF;
-      --input-bg: #111827;
-      --input-border: #4B5563;
-      --input-focus: #2563EB;
-      --danger: #F97373;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator KSeF ROI - PunchlineROI</title>
+    <style>
+        :root {
+            --blue-primary: #1E3A8A;
+            --blue-light: #3B82F6;
+            --green-primary: #16A34A;
+            --orange-accent: #F97316;
+            --bg-light: #F1F5F9;
+            --white: #ffffff;
+            --text-main: #0F172A;
+            --text-light: #64748b;
+            --error: #ef4444;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #020617 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 16px 48px;
-    }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 20px;
+        }
 
-    .page {
-      width: 100%;
-      max-width: 1120px;
-    }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
 
-    header {
-      margin-bottom: 32px;
-      text-align: center;
-    }
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+        }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(156, 163, 175, 0.4);
-      background: rgba(15, 23, 42, 0.8);
-      color: var(--text-muted);
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
+        /* --- SEKCJA LEWA --- */
+        .inputs-section {
+            flex: 1;
+            padding: 30px;
+            border-right: 1px solid #e2e8f0;
+        }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent-green);
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
-    }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--blue-primary);
+        }
 
-    h1 {
-      font-size: clamp(26px, 3vw, 32px);
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #F9FAFB;
-    }
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
 
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 640px;
-      margin: 0 auto;
-    }
+        .btn-preset {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            background: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 24px;
-      align-items: flex-start;
-    }
+        .btn-preset:hover {
+            border-color: var(--blue-light);
+        }
 
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
+        .btn-preset.active {
+            border-color: var(--blue-light);
+            background-color: #eff6ff;
+            color: var(--blue-light);
+        }
 
-    .panel {
-      background: radial-gradient(circle at top left, #111827 0, #020617 55%);
-      border-radius: 18px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 20px 20px 18px;
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.65),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    }
+        .input-group {
+            margin-bottom: 20px;
+        }
 
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      gap: 12px;
-    }
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
 
-    .panel-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #F9FAFB;
-    }
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
 
-    .panel-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+        input:focus {
+            outline: none;
+            border-color: var(--blue-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
 
-    .pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
+        input.invalid {
+            border-color: var(--error);
+            background-color: #fef2f2;
+        }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 14px 16px;
-      margin-bottom: 18px;
-    }
+        .error-msg {
+            color: var(--error);
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: none;
+        }
 
-    @media (max-width: 700px) {
-      .form-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
+        /* --- SEKCJA PRAWA --- */
+        .results-section {
+            flex: 1;
+            padding: 30px;
+            background-color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+        .result-card {
+            background: var(--blue-primary);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.15s ease-out;
+        }
 
-    .field-label-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 10px 0;
+            color: #4ade80;
+        }
 
-    label {
-      font-size: 12px;
-      color: var(--text-main);
-    }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-    .hint {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
 
-    input[type="number"] {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--text-main);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
 
-    input[type="number"]:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6);
-      background: #020617;
-    }
+        .stat-val {
+            font-weight: 700;
+            color: var(--blue-primary);
+        }
 
-    input[type="number"]::placeholder {
-      color: #6B7280;
-    }
+        /* --- HISTORIA --- */
+        .history-section {
+            margin-bottom: 20px;
+        }
 
-    .inline-suffix {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .history-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
 
-    .suffix {
-      font-size: 11px;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
+        .history-list {
+            list-style: none;
+            font-size: 0.8rem;
+        }
 
-    .error {
-      font-size: 11px;
-      color: var(--danger);
-      margin-top: 2px;
-      display: none;
-    }
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            color: #475569;
+        }
 
-    .panel-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 4px;
-      flex-wrap: wrap;
-    }
+        /* --- CTA --- */
+        .cta-box {
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
 
-    .btn-primary {
-      border: none;
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #F9FAFB;
-      background-image: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-      box-shadow:
-        0 10px 25px rgba(37, 99, 235, 0.45),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-    }
+        .privacy-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 14px 30px rgba(37, 99, 235, 0.6),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-      opacity: 0.98;
-    }
+        .privacy-container:hover {
+            border-color: var(--blue-light);
+        }
 
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow:
-        0 8px 18px rgba(15, 23, 42, 0.9),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-      opacity: 0.95;
-    }
+        .btn-main {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 10px;
+            text-align: center;
+        }
 
-    .btn-secondary {
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
-    }
+        .btn-pdf {
+            background-color: var(--blue-light);
+            color: white;
+        }
 
-    .btn-secondary:hover {
-      background: rgba(31, 41, 55, 0.95);
-      border-color: rgba(75, 85, 99, 0.9);
-      color: #E5E7EB;
-    }
+        .btn-pdf:hover {
+            background-color: #2563eb;
+            transform: translateY(-1px);
+        }
 
-    .results-panel {
-      background: radial-gradient(circle at top right, #111827 0, #020617 55%);
-      border-radius: 18px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 18px 18px 16px;
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.65),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    }
+        .btn-order {
+            background-color: var(--green-primary);
+            color: white;
+        }
 
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
+        .btn-order:hover {
+            background-color: #15803d;
+            transform: translateY(-1px);
+        }
 
-    .results-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #F9FAFB;
-    }
+        .btn-main:active {
+            transform: translateY(0) scale(0.98);
+        }
 
-    .results-subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+        #feedback-msg {
+            text-align: center;
+            font-size: 0.85rem;
+            min-height: 1.2rem;
+            margin-top: 5px;
+        }
 
-    .results-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 12px;
-    }
+        /* --- KONTAKT SECTION --- */
+        #kontakt-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #eff6ff;
+        }
 
-    @media (max-width: 700px) {
-      .results-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
+        .kontakt-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-    .result-card {
-      border-radius: 14px;
-      padding: 12px 12px 10px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-    }
+        /* --- FOOTER BRANDING --- */
+        footer {
+            max-width: 1000px;
+            margin: 20px auto 40px;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+        }
 
-    .result-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
+        .footer-brand {
+            color: var(--blue-primary);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
 
-    .result-main {
-      font-size: 20px;
-      font-weight: 700;
-      color: #F9FAFB;
-      margin-bottom: 4px;
-    }
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    .result-tagline {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+        .modal-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
 
-    .result-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .result-pill {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-    }
-
-    .result-highlight {
-      color: var(--accent-green);
-      font-weight: 600;
-    }
-
-    .result-negative {
-      color: var(--danger);
-      font-weight: 600;
-    }
-
-    .footnote {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .footnote strong {
-      color: #E5E7EB;
-      font-weight: 500;
-    }
-
-    .small-link {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-size: 11px;
-    }
-
-    .small-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #64748b;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <div class="badge">
-        <span class="badge-dot"></span>
-        <span>Robot KSeF · Kalkulator ROI dla biur rachunkowych</span>
-      </div>
-      <h1>Kalkulator ROI PunchlineROI</h1>
-      <p class="subtitle">
-        Wpisz kilka liczb o swoim biurze rachunkowym i zobacz, ile możesz zyskać automatyzując KSeF
-        z <strong>PunchlineROI</strong>. Bez logowania, bez podawania danych klienta – tylko liczby.
-      </p>
-    </header>
+    <div class="back-link" style="max-width:900px;margin:0 auto 20px auto;font-size:16px;">
+        <a href="/index.html" style="color:#1E3A8A;text-decoration:none;font-weight:500;">← Wróć do strony głównej</a>
+    </div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-    <main class="layout">
-      <!-- PANEL WEJŚCIOWY -->
-      <section class="panel" aria-label="Dane wejściowe do kalkulatora ROI">
-        <div class="panel-header">
-          <div>
-            <div class="panel-title">Dane o Twoim biurze</div>
-            <div class="panel-subtitle">Wypełnij pola szacunkowo – nie musisz znać dokładnych liczb.</div>
-          </div>
-          <div class="pill">Tryb: <strong>Przybliżone wyliczenia</strong></div>
+    <div class="container">
+        <!-- LEWA STRONA: INPUTY -->
+        <div class="inputs-section">
+            <h1>📊 Kalkulator ROI KSeF</h1>
+            <div class="preset-buttons">
+                <button type="button" class="btn-preset active" onclick="setPreset('small')" id="btn-small">Mała
+                    Firma</button>
+                <button type="button" class="btn-preset" onclick="setPreset('corp')" id="btn-corp">Biuro /
+                    Korpo</button>
+            </div>
+
+            <div class="input-group">
+                <label for="invoices">Liczba faktur miesięcznie</label>
+                <input type="number" id="invoices" value="150" min="1" max="10000" oninput="calculate()">
+                <div id="error-invoices" class="error-msg">Wprowadź od 1 do 10 000</div>
+            </div>
+
+            <div class="input-group">
+                <label for="cost-per-hour">Koszt roboczogodziny (PLN)</label>
+                <input type="number" id="cost-per-hour" value="80" min="30" max="500" oninput="calculate()">
+                <div id="error-cost-per-hour" class="error-msg">Wprowadź od 30 do 500 PLN</div>
+            </div>
+
+            <div class="input-group">
+                <label for="manual-time">Czas na 1 fakturę (minuty)</label>
+                <input type="number" id="manual-time" value="12" min="1" max="60" oninput="calculate()">
+                <div id="error-manual-time" class="error-msg">Wprowadź od 1 do 60 min</div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 15px; background: #f1f5f9; border-radius: 8px;">
+                <p style="font-size: 0.75rem; color: var(--text-light);">
+                    💡 Automatyzacja KSeF redukuje czas procesowania o ok. 90% i eliminuje błędy w 99%.
+                </p>
+            </div>
         </div>
 
-        <div class="form-grid">
-          <div class="field">
-            <div class="field-label-row">
-              <label for="clientsCount">Liczba obsługiwanych firm (klientów)</label>
-              <span class="hint">np. 40</span>
+        <!-- PRAWA STRONA: WYNIKI -->
+        <div class="results-section">
+            <div class="result-card" id="main-result-card">
+                <p>Oszczędności miesięczne</p>
+                <div class="result-value" id="res-monthly-savings">0 PLN</div>
+                <p id="res-yearly-savings" style="font-size: 0.9rem; opacity: 0.9;">Rocznie: 0 PLN</p>
             </div>
-            <input type="number" id="clientsCount" min="0" step="1" placeholder="Wpisz liczbę klientów" />
-            <div class="error" id="errClients">Podaj liczbę klientów &gt; 0.</div>
-          </div>
 
-          <div class="field">
-            <div class="field-label-row">
-              <label for="invoicesPerClient">Średnia liczba faktur / klient / miesiąc</label>
-              <span class="hint">np. 50</span>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p class="stat-label">Odzyskany czas</p>
+                    <p class="stat-val" id="res-time-saved">0h</p>
+                </div>
+                <div class="stat-box">
+                    <p class="stat-label">Efektywność</p>
+                    <p class="stat-val">+85%</p>
+                </div>
             </div>
-            <input type="number" id="invoicesPerClient" min="0" step="1" placeholder="Wpisz liczbę faktur" />
-            <div class="error" id="errInvoices">Podaj liczbę faktur &gt; 0.</div>
-          </div>
 
-          <div class="field">
-            <div class="field-label-row">
-              <label for="minutesPerInvoice">Czas obsługi 1 faktury (minuty)</label>
-              <span class="hint">np. 3–7 min</span>
+            <!-- HISTORIA -->
+            <div class="history-section" id="history-container" style="display:none;">
+                <div class="history-title">
+                    <span>Ostatnie obliczenia</span>
+                    <a href="javascript:void(0)" onclick="clearHistory()"
+                        style="color: var(--error); text-decoration: none;">wyczyść</a>
+                </div>
+                <ul class="history-list" id="history-list"></ul>
             </div>
-            <div class="inline-suffix">
-              <input type="number" id="minutesPerInvoice" min="0" step="0.1" placeholder="np. 5" />
-              <span class="suffix">min / faktura</span>
-            </div>
-            <div class="error" id="errMinutes">Podaj czas &gt; 0 minut.</div>
-          </div>
 
-          <div class="field">
-            <div class="field-label-row">
-              <label for="hourlyRate">Średnia stawka godzinowa pracy księgowego (PLN)</label>
-              <span class="hint">np. 80–150 zł</span>
-            </div>
-            <div class="inline-suffix">
-              <input type="number" id="hourlyRate" min="0" step="1" placeholder="np. 100" />
-              <span class="suffix">zł / godz.</span>
-            </div>
-            <div class="error" id="errRate">Podaj stawkę &gt; 0 zł.</div>
-          </div>
+            <!-- FORMULARZ NETLIFY -->
+            <form name="kalkulator-roi-v2" method="POST" data-netlify="true" id="roi-form" class="cta-box">
+                <input type="hidden" name="form-name" value="kalkulator-roi-v2" />
+                <input type="hidden" name="lead_oszczednosci_miesieczne" id="hidden-monthly">
+                <input type="hidden" name="lead_oszczednosci_roczne" id="hidden-yearly">
+                <input type="hidden" name="lead_odzyskany_czas" id="hidden-time">
+                <input type="hidden" name="input_faktury" id="hidden-input-invoices">
 
-          <div class="field">
-            <div class="field-label-row">
-              <label for="automationPercent">Poziom automatyzacji z PunchlineROI</label>
-              <span class="hint">np. 60–85%</span>
-            </div>
-            <div class="inline-suffix">
-              <input type="number" id="automationPercent" min="0" max="100" step="1" placeholder="np. 70" />
-              <span class="suffix">% faktur przejmie robot</span>
-            </div>
-            <div class="error" id="errAutomation">Podaj wartość 0–100%.</div>
-          </div>
+                <div class="input-group">
+                    <label for="email">Twój E-mail</label>
+                    <input type="email" name="email" id="email" placeholder="email@firma.pl" required>
+                </div>
 
-          <div class="field">
-            <div class="field-label-row">
-              <label for="subscriptionCost">Miesięczny koszt PunchlineROI (PLN)</label>
-              <span class="hint">szacunkowo</span>
-            </div>
-            <div class="inline-suffix">
-              <input type="number" id="subscriptionCost" min="0" step="1" placeholder="np. 800" />
-              <span class="suffix">zł / miesiąc</span>
-            </div>
-            <div class="error" id="errSubscription">Podaj koszt ≥ 0 zł.</div>
-          </div>
+                <label class="privacy-container" for="privacy">
+                    <input type="checkbox" name="zgoda_marketingowa" id="privacy" required>
+                    <span class="privacy-text">
+                        Akceptuję <a href="javascript:void(0)" onclick="openModal()"
+                            style="color: var(--blue-light); text-decoration: underline;">politykę prywatności</a> i
+                        chcę otrzymać pełną analizę.
+                    </span>
+                </label>
+
+                <button type="submit" class="btn-main btn-pdf" id="btn-pdf">📩 Wyślij Pełny Raport PDF</button>
+                <button type="button" class="btn-main btn-order" onclick="handleOrder()">🚀 Zamów wdrożenie
+                    KSeF</button>
+
+                <div id="feedback-msg"></div>
+            </form>
         </div>
+    </div>
 
-        <div class="panel-footer">
-          <button class="btn-primary" id="calculateBtn" type="button">
-            <span>Przelicz ROI</span>
-            <span>→</span>
-          </button>
+    <!-- SEKCJA KONTAKT -->
+    <section id="kontakt-section">
+        <div class="kontakt-badge">Wdrożenie KSeF Automation</div>
+        <h2 style="color: var(--blue-primary); margin-bottom: 10px;">Gotów na realne oszczędności?</h2>
+        <p style="color: var(--text-light); margin-bottom: 30px;">Umów się na bezpłatną konsultację techniczną, na
+            której pomożemy Ci zaplanować pełną automatyzację obiegu faktur w Twojej firmie.</p>
+        <button class="btn-main btn-order" style="max-width: 300px; margin: 0 auto;"
+            onclick="window.open('https://calendly.com/punchlineroi', '_blank')">📅 Zarezerwuj termin calla</button>
+    </section>
 
-          <button class="btn-secondary" id="fillExampleBtn" type="button">
-            <span>Wypełnij przykładowymi danymi</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- PANEL WYNIKÓW -->
-      <section class="results-panel" aria-label="Wyniki kalkulatora ROI">
-        <div class="results-header">
-          <div>
-            <div class="results-title">Wyniki dla Twojego biura</div>
-            <div class="results-subtitle">
-              Szacunkowe wartości przy założeniu, że robot przejmuje część pracy z fakturami KSeF.
-            </div>
-          </div>
-          <div class="pill">Tryb: <strong>Symulacja miesięczna</strong></div>
-        </div>
-
-        <div class="results-grid">
-          <div class="result-card">
-            <div class="result-label">Miesięczna oszczędność czasu</div>
-            <div class="result-main" id="timeSavedText">–</div>
-            <div class="result-tagline" id="timeSavedTagline">
-              Wpisz dane po lewej, aby zobaczyć, ile godzin odzyskasz.
-            </div>
-            <div class="result-pill-row">
-              <div class="result-pill" id="invoicesTotalInfo">– faktur / miesiąc</div>
-              <div class="result-pill" id="hoursManualInfo">– godzin ręcznej pracy</div>
-            </div>
-          </div>
-
-          <div class="result-card">
-            <div class="result-label">Miesięczny efekt finansowy</div>
-            <div class="result-main" id="moneySavedText">–</div>
-            <div class="result-tagline" id="moneySavedTagline">
-              Tu zobaczysz, ile złotych miesięcznie odzyskujesz w czasie pracy zespołu.
-            </div>
-            <div class="result-pill-row">
-              <div class="result-pill" id="subscriptionInfo">Koszt PunchlineROI: – zł / mies.</div>
-              <div class="result-pill" id="roiInfo">ROI: –</div>
-            </div>
-          </div>
-        </div>
-
-        <p class="footnote">
-          <strong>Uwaga:</strong> To są szacunki. Nie uwzględniają wszystkich niuansów Twojego biura (np. sezonowości,
-          specyficznych klientów, dodatkowych usług). Mają pokazać rząd wielkości – czy mówimy o kilkuset, kilku
-          tysiącach czy kilkunastu tysiącach złotych miesięcznie.
-          <br />
-          Jeśli chcesz policzyć to dokładniej pod swoje biuro, napisz na
-          <a class="small-link" href="mailto:hello@punchlineroi.com">hello@punchlineroi.com</a>.
+    <!-- FOOTER Z MARKĄ -->
+    <footer>
+        <p>Built with ❤️ by <a href="https://punchlineroi.com" class="footer-brand" target="_blank">PunchlineROI</a></p>
+        <p style="margin-top: 10px; opacity: 0.6;">&copy; 2026 PunchlineROI. Building automation that actually works.
         </p>
-      </section>
-    </main>
-  </div>
+    </footer>
 
-  <script>
-    function formatNumber(num) {
-      if (!isFinite(num)) return "–";
-      return num.toLocaleString("pl-PL", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      });
-    }
+    <!-- MODAL RODO -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h1>Polityka Prywatności</h1>
+            <p>Szanujemy Twoje dane. Informacje z kalkulatora są przetwarzane wyłącznie w celu przygotowania
+                spersonalizowanej oferty ROI.</p>
+            <p>Pełną treść polityki znajdziesz na stronie: <a href="/polityka-prywatnosci.html" target="_blank"
+                    style="color: var(--blue-light);">Polityka Prywatności</a></p>
 
-    function formatMoney(num) {
-      if (!isFinite(num)) return "–";
-      return num.toLocaleString("pl-PL", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }) + " zł";
-    }
+            <h2 style="margin-top:20px;">Kluczowe informacje:</h2>
+            <ul style="margin-left: 20px; font-size: 0.9rem;">
+                <li>Administratorem danych jest PunchlineROI z siedzibą w Holandii.</li>
+                <li>Używamy Netlify Forms do bezpiecznego przesyłania Twojego zapytania.</li>
+                <li>Masz prawo do wglądu i usunięcia swoich danych w każdym momencie.</li>
+            </ul>
 
-    function formatHours(num) {
-      if (!isFinite(num)) return "–";
-      return num.toLocaleString("pl-PL", {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1
-      }) + " h";
-    }
+            <button class="btn-main btn-pdf" onclick="closeModal()" style="margin-top: 30px;">Wróć do
+                kalkulatora</button>
+        </div>
+    </div>
 
-    function clearErrors() {
-      [
-        "errClients",
-        "errInvoices",
-        "errMinutes",
-        "errRate",
-        "errAutomation",
-        "errSubscription"
-      ].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el) el.style.display = "none";
-      });
-    }
+    <script>
+        const CONFIG = {
+            automationEfficiency: 0.9,
+            historyLimit: 3
+        };
 
-    function showError(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.display = "block";
-    }
+        // --- TRACKING ENGINE ---
+        function trackEvent(eventName, params = {}) {
+            console.log(`[GA4 Event] ${eventName}`, params);
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: eventName,
+                event_params: params
+            });
+        }
 
-    function calculateROI() {
-      clearErrors();
+        // --- SAFE STORAGE WRAPPER ---
+        const storage = {
+            set: (key, val) => {
+                try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { console.warn('Storage unavailable'); }
+            },
+            get: (key) => {
+                try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; }
+            },
+            remove: (key) => {
+                try { localStorage.removeItem(key); } catch (e) { }
+            }
+        };
 
-      var clients = parseFloat(document.getElementById("clientsCount").value.replace(",", "."));
-      var invoicesPerClient = parseFloat(document.getElementById("invoicesPerClient").value.replace(",", "."));
-      var minutesPerInvoice = parseFloat(document.getElementById("minutesPerInvoice").value.replace(",", "."));
-      var hourlyRate = parseFloat(document.getElementById("hourlyRate").value.replace(",", "."));
-      var automationPercent = parseFloat(document.getElementById("automationPercent").value.replace(",", "."));
-      var subscriptionCost = parseFloat(document.getElementById("subscriptionCost").value.replace(",", "."));
+        // --- LOGIKA KALKULATORA ---
+        function calculate() {
+            const invCount = parseFloat(document.getElementById('invoices').value) || 0;
+            const costHour = parseFloat(document.getElementById('cost-per-hour').value) || 0;
+            const timeManual = parseFloat(document.getElementById('manual-time').value) || 0;
 
-      var valid = true;
+            const isInvValid = invCount > 0 && invCount <= 10000;
+            const isCostValid = costHour >= 30 && costHour <= 500;
+            const isTimeValid = timeManual > 0 && timeManual <= 60;
 
-      if (!(clients > 0)) {
-        showError("errClients");
-        valid = false;
-      }
-      if (!(invoicesPerClient > 0)) {
-        showError("errInvoices");
-        valid = false;
-      }
-      if (!(minutesPerInvoice > 0)) {
-        showError("errMinutes");
-        valid = false;
-      }
-      if (!(hourlyRate > 0)) {
-        showError("errRate");
-        valid = false;
-      }
-      if (!(automationPercent >= 0 && automationPercent <= 100)) {
-        showError("errAutomation");
-        valid = false;
-      }
-      if (!(subscriptionCost >= 0)) {
-        showError("errSubscription");
-        valid = false;
-      }
+            toggleError('invoices', isInvValid);
+            toggleError('cost-per-hour', isCostValid);
+            toggleError('manual-time', isTimeValid);
 
-      if (!valid) {
-        return;
-      }
+            if (!isInvValid || !isCostValid || !isTimeValid) return;
 
-      var invoicesTotal = clients * invoicesPerClient;
-      var hoursManual = (invoicesTotal * minutesPerInvoice) / 60;
-      var hoursAutomated = hoursManual * (automationPercent / 100);
-      var hoursSaved = hoursAutomated;
-      var moneySaved = hoursSaved * hourlyRate;
-      var netEffect = moneySaved - subscriptionCost;
+            const currentMonthlyCost = (invCount * (timeManual / 60)) * costHour;
+            const timeSavedHours = (invCount * (timeManual / 60)) * CONFIG.automationEfficiency;
+            const moneySavedMonthly = currentMonthlyCost * CONFIG.automationEfficiency;
 
-      var roi = null;
-      if (subscriptionCost > 0) {
-        roi = (netEffect / subscriptionCost) * 100;
-      }
+            const monthlyStr = Math.round(moneySavedMonthly).toLocaleString() + ' PLN';
+            const yearlyStr = Math.round(moneySavedMonthly * 12).toLocaleString() + ' PLN';
+            const timeStr = Math.round(timeSavedHours) + 'h';
 
-      document.getElementById("timeSavedText").textContent = formatHours(hoursSaved);
-      document.getElementById("invoicesTotalInfo").textContent =
-        formatNumber(invoicesTotal) + " faktur / miesiąc";
-      document.getElementById("hoursManualInfo").textContent =
-        formatHours(hoursManual) + " ręcznej pracy";
+            // UI
+            document.getElementById('res-monthly-savings').innerText = monthlyStr;
+            document.getElementById('res-yearly-savings').innerText = 'Rocznie: ' + yearlyStr;
+            document.getElementById('res-time-saved').innerText = timeStr;
 
-      if (hoursSaved <= 0) {
-        document.getElementById("timeSavedTagline").innerHTML =
-          "Przy tych parametrach robot nie przejmuje istotnej części pracy. Spróbuj zwiększyć liczbę faktur lub poziom automatyzacji.";
-      } else {
-        document.getElementById("timeSavedTagline").innerHTML =
-          "To czas, który możesz odzyskać dla zespołu – na pracę z klientem, rozwój biura albo po prostu mniej nadgodzin.";
-      }
+            // Netlify Hidden Fields
+            document.getElementById('hidden-monthly').value = monthlyStr;
+            document.getElementById('hidden-yearly').value = yearlyStr;
+            document.getElementById('hidden-time').value = timeStr;
+            document.getElementById('hidden-input-invoices').value = invCount;
 
-      document.getElementById("moneySavedText").textContent = formatMoney(netEffect);
-      document.getElementById("subscriptionInfo").textContent =
-        "Koszt PunchlineROI: " + formatMoney(subscriptionCost) + " / mies.";
+            // PULSE ANIMATION
+            const card = document.getElementById('main-result-card');
+            card.style.transform = "scale(1.03)";
+            setTimeout(() => card.style.transform = "scale(1)", 150);
 
-      if (roi === null || !isFinite(roi)) {
-        document.getElementById("roiInfo").textContent = "ROI: –";
-      } else {
-        var roiText = "ROI: " + roi.toFixed(0) + " %";
-        document.getElementById("roiInfo").textContent = roiText;
-      }
+            saveToHistory(invCount, monthlyStr);
+        }
 
-      if (netEffect <= 0) {
-        document.getElementById("moneySavedText").classList.add("result-negative");
-        document.getElementById("moneySavedText").classList.remove("result-highlight");
-        document.getElementById("moneySavedTagline").innerHTML =
-          "Przy tych parametrach koszt subskrypcji zjada większość efektu. To może oznaczać, że PunchlineROI jest bardziej opłacalny dla większej liczby klientów lub większej liczby faktur.";
-      } else {
-        document.getElementById("moneySavedText").classList.add("result-highlight");
-        document.getElementById("moneySavedText").classList.remove("result-negative");
-        document.getElementById("moneySavedTagline").innerHTML =
-          "To szacunkowy, miesięczny efekt finansowy po odjęciu kosztu subskrypcji. Nie jest to \"zysk księgowy\", ale odzyskana wartość czasu pracy zespołu.";
-      }
-    }
+        function toggleError(id, isValid) {
+            const input = document.getElementById(id);
+            const err = document.getElementById('error-' + id);
+            if (!isValid && input.value !== "") {
+                input.classList.add('invalid');
+                if (err) err.style.display = 'block';
+            } else {
+                input.classList.remove('invalid');
+                if (err) err.style.display = 'none';
+            }
+        }
 
-    function fillExample() {
-      document.getElementById("clientsCount").value = 40;
-      document.getElementById("invoicesPerClient").value = 50;
-      document.getElementById("minutesPerInvoice").value = 5;
-      document.getElementById("hourlyRate").value = 110;
-      document.getElementById("automationPercent").value = 70;
-      document.getElementById("subscriptionCost").value = 900;
-      clearErrors();
-      calculateROI();
-    }
+        // --- HISTORY LOGIC ---
+        function saveToHistory(inv, savings) {
+            let history = storage.get('ksef_roi_history') || [];
+            if (history.length > 0 && history[0].inv === inv) return;
 
-    document.getElementById("calculateBtn").addEventListener("click", calculateROI);
-    document.getElementById("fillExampleBtn").addEventListener("click", fillExample);
+            const entry = {
+                inv,
+                savings,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
 
-    ["clientsCount", "invoicesPerClient", "minutesPerInvoice", "hourlyRate", "automationPercent", "subscriptionCost"]
-      .forEach(function (id) {
-        var el = document.getElementById(id);
-        el.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") {
+            history.unshift(entry);
+            history = history.slice(0, CONFIG.historyLimit);
+            storage.set('ksef_roi_history', history);
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = storage.get('ksef_roi_history') || [];
+            const container = document.getElementById('history-container');
+            const list = document.getElementById('history-list');
+
+            if (history.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            list.innerHTML = history.map(h => `
+                <li class="history-item">
+                    <span>${h.inv} faktur (${h.time})</span>
+                    <strong>${h.savings}</strong>
+                </li>
+            `).join('');
+        }
+
+        function clearHistory() {
+            storage.remove('ksef_roi_history');
+            renderHistory();
+            trackEvent('history_cleared');
+        }
+
+        // --- UI ACTIONS ---
+        function setPreset(type) {
+            const sBtn = document.getElementById('btn-small');
+            const cBtn = document.getElementById('btn-corp');
+
+            if (type === 'small') {
+                document.getElementById('invoices').value = 150;
+                document.getElementById('cost-per-hour').value = 80;
+                document.getElementById('manual-time').value = 12;
+                sBtn.classList.add('active');
+                cBtn.classList.remove('active');
+            } else {
+                document.getElementById('invoices').value = 1200;
+                document.getElementById('cost-per-hour').value = 120;
+                document.getElementById('manual-time').value = 15;
+                cBtn.classList.add('active');
+                sBtn.classList.remove('active');
+            }
+            calculate();
+            trackEvent('preset_changed', { type });
+        }
+
+        const modal = document.getElementById("privacyModal");
+        function openModal() { modal.style.display = "flex"; trackEvent('privacy_view'); }
+        function closeModal() { modal.style.display = "none"; }
+        window.onclick = (e) => { if (e.target == modal) closeModal(); }
+
+        const roiForm = document.getElementById('roi-form');
+        roiForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            calculateROI();
-          }
+            const btn = document.getElementById('btn-pdf');
+            const formData = new FormData(roiForm);
+
+            btn.disabled = true;
+            btn.innerText = "Trwa wysyłka...";
+            showFeedback("Generujemy Twój raport...", "blue");
+
+            try {
+                const response = await fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString(),
+                });
+                if (response.ok) {
+                    showFeedback("✅ Sukces! Sprawdź swój e-mail.", "green");
+                    btn.innerText = "Wysłano pomyślnie";
+                    trackEvent('form_lead_success');
+                } else { throw new Error(); }
+            } catch (err) {
+                showFeedback("❌ Błąd wysyłki. Spróbuj za chwilę.", "red");
+                btn.disabled = false;
+                btn.innerText = "Spróbuj ponownie";
+                trackEvent('form_lead_error');
+            }
         });
-      });
-  </script>
+
+        function handleOrder() {
+            trackEvent('cta_order_clicked');
+            document.getElementById('kontakt-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showFeedback(msg, color) {
+            const f = document.getElementById('feedback-msg');
+            f.innerText = msg;
+            f.style.color = color === 'red' ? 'var(--error)' : color === 'green' ? 'var(--green-primary)' : 'var(--blue-light)';
+        }
+
+        window.onload = () => {
+            setPreset('small');
+            renderHistory();
+            trackEvent('app_loaded');
+        };
+    </script>
 </body>
+
 </html>
