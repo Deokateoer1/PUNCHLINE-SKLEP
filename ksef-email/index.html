@@ -143,9 +143,12 @@
 
 
     <form name="pilot-ksef" method="POST" data-netlify="true" netlify action="/ksef-email/thank-you.html">
-      <input type="text" name="name" required>
-      <input type="email" name="email" required>
-      <select name="invoices" required>
+      <label for="name">Imie i nazwisko</label>
+      <input type="text" name="name" id="name" placeholder="Jan Kowalski" required>
+      <label for="email">Email firmowy</label>
+      <input type="email" name="email" id="email" placeholder="jan@firma.pl" required>
+      <label for="invoices">Liczba faktur miesiecznie</label>
+      <select name="invoices" id="invoices" required>
         <option value="">Wybierz liczbę faktur</option>
         <option value="0-100">0–100</option>
         <option value="100-500">100–500</option>

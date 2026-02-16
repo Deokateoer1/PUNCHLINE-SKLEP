@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PunchlineROI – Robot KSeF. Zgodność FA(3), Tryb Offline24</title>
+    <meta name="description" content="Autonomiczny Robot KSeF dla biur rachunkowych. Walidacja FA(3), Tryb Offline24, gwarancja ciągłości pracy. Gotowość na 1 lutego 2026." />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PunchlineROI – Robot KSeF. Zgodność FA(3), Tryb Offline24" />
+    <meta property="og:description" content="Pierwsz\e w Polsce narzędzie klasy RPA dla biur rachunkowych. Automatyczna walidacja, offline24, dashboard ROI." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://punchlineroi.com/assets/og-image.png" />
+
+    <style>
+        /* === BRAND COLORS (z PDF) === */
+        :root {
+            --blue-primary: #1D4ED8;      /* Royal Blue - Autorytet */
+            --green-primary: #10B981;     /* Emerald Green - Wynik */
+            --orange-accent: #F97316;     /* Vibrant Orange - Akcja */
+            --dark-bg: #0B1120;
+            --light-bg: #F7FAFC;
+            --text-main: #1a1f3a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === HERO SECTION (NIE RUSZAM - KOPIUJĘ Z ORYGINAŁU) === */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background-color: var(--dark-bg);
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            filter: brightness(0.4);
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-top: 30px;
+            opacity: 0.8;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* NAV */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-primary);
+        }
+
+        /* CTA BUTTON (Orange - Akcja) */
+        .cta-button {
+            background: linear-gradient(135deg, var(--orange-accent), #ea580c);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(249, 115, 22, 0.5);
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(249, 115, 22, 0.7);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            border: 2px solid white;
+            padding: 16px 40px;
+            margin-left: 15px;
+        }
+
+        .cta-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === VALUE PROPOSITION (3 Bullety) === */
+        .value-props {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .props-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .prop-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .prop-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .prop-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .prop-icon.green {
+            background: linear-gradient(135deg, var(--green-primary), #059669);
+            color: white;
+        }
+
+        .prop-icon.blue {
+            background: linear-gradient(135deg, var(--blue-primary), #1e40af);
+            color: white;
+        }
+
+        .prop-icon.orange {
+            background: linear-gradient(135deg, var(--orange-accent), #ea580c);
+            color: white;
+        }
+
+        .prop-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .prop-card h4 {
+            font-size: 1.1rem;
+            color: var(--blue-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .prop-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* === SECTION TITLES === */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* === DLACZEGO PUNCHLINE (3 punkty) === */
+        .why-section {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 80px 20px;
+        }
+
+        .why-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .why-item {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .why-item h3 {
+            font-size: 1.6rem;
+            color: var(--blue-primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .why-item p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* === JAK DZIAŁA ROBOT (4 kroki) === */
+        .how-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .steps-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: linear-gradient(to right, #ffffff, #f8fafc);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 5px solid var(--blue-primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--blue-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            margin-left: 70px;
+            font-weight: 700;
+        }
+
+        .step-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* === DASHBOARD ROI === */
+        .roi-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .roi-metric {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .roi-metric h4 {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .roi-metric p {
+            font-size: 1.1rem;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .roi-metric .icon {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* === FINAL CTA === */
+        .final-cta {
+            background: linear-gradient(135deg, var(--blue-primary), #1e40af);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .microcopy {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0f172a;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--green-primary);
+            text-decoration: none;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-header h2 { font-size: 2rem; }
+            .props-grid, .why-grid, .steps-grid, .roi-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-button-secondary {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === HERO SECTION (ZACHOWANE Z ORYGINAŁU - NIE RUSZAM) === -->
+    <section class="hero">
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-logo">
+                <img src="assets/logo.png" alt="PunchlineROI Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#funkcje">Funkcje</a>
+                <a href="#ceny">Cennik</a>
+                <a href="kalkulator.html">Kalkulator ROI</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+        </nav>
+
+        <!-- Video Background (NIE RUSZAM) -->
+        <video class="video-bg" autoplay muted loop playsinline id="heroVideo">
+            <source src="assets/loop.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Hero Content (ZAKTUALIZOWANE według PDF) -->
+        <div class="hero-content">
+            <h1>Twój autonomiczny Robot KSeF.<br>Zgodność z FA(3), Tryb Offline24<br>i gwarancja ciągłości pracy.</h1>
+            <p>Pierwsze w Polsce narzędzie klasy RPA dla biur rachunkowych, które zmienia obowiązek w zysk. Automatyczna walidacja, hybrydowa autoryzacja certyfikatami i dashboard ROI, który pokazuje realną oszczędność czasu.</p>
+            
+            <div>
+                <a href="#demo" class="cta-button">Uruchom Robota KSeF →</a>
+                <a href="#dashboard" class="cta-button cta-button-secondary">Zobacz Dashboard ROI</a>
+            </div>
+
+            <p class="subtitle">Pełna integracja z API MF • Szyfrowanie AES-256 • Gotowość na 1 lutego 2026</p>
+        </div>
+    </section>
+
+    <!-- === VALUE PROPOSITION (3 Bullety według PDF) === -->
+    <section class="value-props" id="funkcje">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Ciągłość pracy. Zawsze.</h2>
+                <p>Robot KSeF eliminuje 3 największe obawy księgowych: awarie systemu, błędy w fakturach i utratę czasu na ręczne procesy.</p>
+            </div>
+
+            <div class="props-grid">
+                <!-- 1. Offline24 -->
+                <div class="prop-card animate-on-scroll">
+                    <div class="prop-icon green">🛡️</div>
+                    <h3>Niezniszczalny Tryb Offline24</h3>
+                    <h4>Ciągłość fakturowania mimo awarii MF</h4>
+                    <p>Gdy bramka Ministerstwa milczy, PunchlineROI działa. Robot buforuje faktury w bezpiecznym środowisku lokalnym i automatycznie wysyła je w momencie powrotu połączenia – z zachowaniem ustawowego okna 24h. <strong>Twoi klienci nawet nie zauważą awarii.</strong></p>
+                </div>
+
+                <!-- 2. Walidacja FA(3) -->
+                <div class="prop-card animate-on-scroll">
+                    <div class="prop-icon blue">⚙️</div>
+                    <h3>Walidacja FA(3) w Czasie Rzeczywistym</h3>
+                    <h4>Eliminacja błędów przed wysyłką</h4>
+                    <p>Nasz silnik analizuje strukturę logiczną każdego pliku XML pod kątem <strong>140+ reguł walidacyjnych</strong>. Błędy w polach obowiązkowych, pomyłki w NIP czy błędne stawki VAT są wyłapywane i blokowane zanim trafią do systemu KSeF, chroniąc Cię przed karami.</p>
+                </div>
+
+                <!-- 3. Dashboard ROI -->
+                <div class="prop-card animate-on-scroll">
+                    <div class="prop-icon orange">📊</div>
+                    <h3>Analityczny Dashboard ROI</h3>
+                    <h4>Widoczny zwrot z inwestycji</h4>
+                    <p>Zamień koszty wdrożenia na mierzalną oszczędność. Dashboard pokazuje w czasie rzeczywistym, ile godzin pracy zaoszczędził Robot, ile faktur przetworzył automatycznie i jaki jest status zwrotów VAT (skrócony termin 40 dni).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === DLACZEGO PUNCHLINE ROI === -->
+    <section class="why-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>To nie jest kolejna nakładka na Excela.<br>To technologiczna tarcza dla Twojego biura.</h2>
+                <p>Większość narzędzi jedynie "umożliwia wysyłkę". PunchlineROI bierze odpowiedzialność za proces, bezpieczeństwo i zgodność z ciągle zmieniającym się prawem.</p>
+            </div>
+
+            <div class="why-grid">
+                <!-- 1. Certyfikaty -->
+                <div class="why-item animate-on-scroll">
+                    <h3>1. Gotowość na erę Certyfikatów KSeF</h3>
+                    <p>Tokeny autoryzacyjne to przeszłość. Od 2025 r. standardem stają się certyfikaty. <strong>PunchlineROI jako pierwszy na rynku</strong> oferuje hybrydowy model autoryzacji – obsługujemy zarówno tokeny (do końca okresu przejściowego), jak i nowe certyfikaty wystawcy faktur. Zarządzaj uprawnieniami setek klientów z jednego panelu Module Certyfikatów i Uprawnień (MCU).</p>
+                </div>
+
+                <!-- 2. Security-First -->
+                <div class="why-item animate-on-scroll">
+                    <h3>2. Architektura "Security-First" i Kody QR</h3>
+                    <p>Każda faktura w trybie offline musi posiadać unikalny kod QR. Nasz Robot generuje je automatycznie, zapewniając weryfikowalność dokumentu nawet poza siecią. Twoje dane są chronione <strong>szyfrowaniem AES-256</strong>, a dostęp do nich masz tylko Ty i wskazani pracownicy. Spełniamy rygorystyczne normy RODO w kontekście faktur ustrukturyzowanych.</p>
+                </div>
+
+                <!-- 3. Skalowalność -->
+                <div class="why-item animate-on-scroll">
+                    <h3>3. Skalowalność bez dopłat za "sukces"</h3>
+                    <p>Obsługujesz 50 czy 5000 faktur miesięcznie? Infrastruktura PunchlineROI oparta na chmurze skaluje się dynamicznie. <strong>Nie karzemy Cię za rozwój</strong> – nasz silnik przetwarza tysiące plików XML w sekundy, gwarantując płynność pracy nawet 1. dnia miesiąca, gdy serwery rządowe są najbardziej obciążone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === JAK DZIAŁA ROBOT === -->
+    <section class="how-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Zero magii. Czysta inżynieria procesowa.</h2>
+            </div>
+
+            <div class="steps-grid">
+                <!-- Krok 1 -->
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3>Bezpieczna Integracja (API)</h3>
+                    <p>Robot łączy się z Twoim obecnym systemem ERP (Symfonia, Optima, Enova) poprzez bezpieczny most API. <strong>Nie musisz zmieniać oprogramowania księgowego</strong> – PunchlineROI działa w tle, niewidoczny dla użytkownika, pobierając dane do faktur sprzedażowych i kosztowych.</p>
+                </div>
+
+                <!-- Krok 2 -->
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3>Konwersja i Walidacja FA(3)</h3>
+                    <p>Surowe dane są konwertowane do formatu XML zgodnego z najnowszą schemą FA(3). Na tym etapie Robot weryfikuje poprawność pól obowiązkowych, spójność danych kontrahenta z bazą VIES/GUS oraz poprawność obliczeń matematycznych.</p>
+                </div>
+
+                <!-- Krok 3 -->
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3>Transmisja i UPO</h3>
+                    <p>Zweryfikowana paczka trafia na bramkę KSeF. Po nadaniu numeru referencyjnego, Robot natychmiast pobiera <strong>Urzędowe Poświadczenie Odbioru (UPO)</strong> i łączy je z fakturą w Twoim systemie. Dokumenty są trwale zarchiwizowane przez wymagane 10 lat.</p>
+                </div>
+
+                <!-- Krok 4 -->
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <h3>Dystrybucja i Wizualizacja</h3>
+                    <p>Dla kontrahentów niekorzystających jeszcze z KSeF (np. zagranicznych), Robot generuje wizualizację PDF z kodem QR i wysyła ją uzgodnionym kanałem komunikacji. Ty masz pewność, że obowiązek dostarczenia faktury został spełniony.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === DASHBOARD ROI === -->
+    <section class="roi-section" id="dashboard">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Widzisz więcej niż tylko faktury.<br>Widzisz rentowność swojego biura.</h2>
+                <p style="color: rgba(255,255,255,0.8);">Tradycyjne systemy pokazują listę dokumentów. Dashboard PunchlineROI pokazuje kondycję Twojego biznesu. Dzięki zaawansowanej analityce wiesz dokładnie, ile czasu Twój zespół zaoszczędził na ręcznym wprowadzaniu danych i walidacji błędów.</p>
+            </div>
+
+            <div class="roi-grid">
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">💰</div>
+                    <h4>Licznik Oszczędności</h4>
+                    <p>Estymowana kwota (PLN) zaoszczędzona w tym miesiącu dzięki automatyzacji procesów powtarzalnych.</p>
+                </div>
+
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">🟢</div>
+                    <h4>Status Bramki MF (Live)</h4>
+                    <p>Podgląd na żywo stabilności systemu ministerialnego – wiesz o awarii, zanim wpłynie na Twoją pracę.</p>
+                </div>
+
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">📦</div>
+                    <h4>Kolejka Offline24</h4>
+                    <p>Liczba faktur oczekujących na synchronizację w bezpiecznym buforze.</p>
+                </div>
+
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">⚡</div>
+                    <h4>Efektywność Zespołu</h4>
+                    <p>Raport pokazujący, ile faktur zostało przetworzonych bezdotykowo (Touchless Invoice Processing).</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <blockquote style="font-size: 1.2rem; font-style: italic; max-width: 700px; margin: 0 auto; padding: 30px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--green-primary); border-radius: 10px;">
+                    "Dzięki automatyzacji KSeF z PunchlineROI zredukowaliśmy czas obsługi faktur o 60%, co pozwoliło nam przyjąć 20 nowych klientów bez zwiększania zatrudnienia."
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- === FINAL CTA === -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Nie czekaj na ostatni dzwonek w 2026 roku.<br>Bądź gotowy już dziś.</h2>
+            <p>Dołącz do elitarnego grona biur rachunkowych, które zamieniły stres związany z KSeF na przewagę konkurencyjną. Przetestuj Robota w swoim środowisku, na realnych danych, bez ryzyka.</p>
+
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">Rozpocznij darmowy okres próbny (14 dni)</a>
+            </div>
+
+            <p class="microcopy">Wdrożenie zajmuje mniej niż 15 minut • Nie wymagamy karty kredytowej • Rezygnacja w dowolnym momencie</p>
+        </div>
+    </section>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PunchlineROI. Wszystkie prawa zastrzeżone.</p>
+            <p style="margin-top: 10px;">
+                <a href="polityka-prywatnosci.html">Polityka Prywatności</a> | 
+                <a href="regulamin.html">Regulamin</a> | 
+                <a href="mailto:kontakt@punchlineroi.com">kontakt@punchlineroi.com</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // PŁYNNY LOOP WIDEO (NIE RUSZAM)
+        const video = document.getElementById('heroVideo');
+        if (video) {
+            video.load();
+            video.addEventListener('ended', function () {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+            video.addEventListener('timeupdate', function () {
+                if (this.currentTime >= this.duration - 0.1) {
+                    this.currentTime = 0;
+                }
+            });
+            video.addEventListener('canplaythrough', function () {
+                this.play().catch(e => console.log('Autoplay blocked:', e));
+            });
+        }
+
+        // SCROLL ANIMATIONS
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
