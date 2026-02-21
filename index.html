@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PunchlineROI – Robot KSeF. Zgodność FA(3), Tryb Offline24</title>
+    <title>Robot‑KSeF – autonomiczna automatyzacja KSeF z AI, Offline24 i Compliance Center dla biur rachunkowych</title>
     <meta name="description"
-        content="Autonomiczny Robot KSeF dla biur rachunkowych. Walidacja FA(3), Tryb Offline24, gwarancja ciągłości pracy. Gotowość na 1 lutego 2026." />
+        content="Autonomiczny Robot‑KSeF dla biur rachunkowych. AI‑kategoryzacja, detekcja anomalii, Compliance Center, tryb Offline24. Automatyzacja KSeF bez zmiany ERP Twoich klientów." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Open Graph -->
-    <meta property="og:title" content="PunchlineROI – Robot KSeF. Zgodność FA(3), Tryb Offline24" />
+    <meta property="og:title" content="Robot‑KSeF – autonomiczna automatyzacja KSeF z AI, Offline24 i Compliance Center dla biur rachunkowych" />
     <meta property="og:description"
-        content="Pierwsze w Polsce narzędzie klasy RPA dla biur rachunkowych. Automatyczna walidacja, offline24, dashboard ROI." />
+        content="Autonomiczny Robot‑KSeF dla biur rachunkowych. AI‑kategoryzacja, detekcja anomalii, Compliance Center, tryb Offline24. Automatyzacja KSeF bez zmiany ERP Twoich klientów." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://punchlineroi.com/assets/og-image.png" />
 
@@ -129,9 +129,9 @@
         }
 
         .hero .subtitle {
-            font-size: 1.1rem;
-            margin-top: 30px;
-            opacity: 0.8;
+            font-size: 1rem;
+            margin-top: 20px;
+            opacity: 0.75;
             font-weight: 400;
             letter-spacing: 0.5px;
         }
@@ -207,6 +207,59 @@
 
         .cta-button-secondary:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === SOCIAL PROOF BAR === */
+        .social-proof-bar {
+            background: var(--section-bg);
+            border-bottom: 1px solid var(--card-border);
+            padding: 22px 20px;
+        }
+
+        .social-proof-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-proof-text {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        :root[data-theme="dark"] .social-proof-text {
+            color: #9ca3af;
+        }
+
+        .erp-logos {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .erp-logo-chip {
+            background: var(--section-alt-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+        }
+
+        :root[data-theme="dark"] .erp-logo-chip {
+            background: #0f172a;
+            color: #e5e7eb;
+            border-color: #1f2937;
         }
 
         /* === VALUE PROPOSITION (3 Bullety) === */
@@ -465,6 +518,62 @@
             margin-bottom: 15px;
         }
 
+        /* === SECURITY SECTION === */
+        .security-section {
+            background: var(--section-alt-bg);
+            padding: 80px 20px;
+        }
+
+        :root[data-theme="dark"] .security-section {
+            background: radial-gradient(circle at bottom right, rgba(30, 64, 175, 0.3), #020617);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .security-item {
+            background: var(--section-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        :root[data-theme="dark"] .security-item {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: #1f2937;
+        }
+
+        .security-item .sec-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .security-item h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--body-text);
+            margin-bottom: 6px;
+        }
+
+        .security-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        :root[data-theme="dark"] .security-item p {
+            color: #9ca3af;
+        }
+
         /* === CENNIK === */
         .pricing-section {
             background: var(--section-bg);
@@ -670,6 +779,188 @@
         .contact-button:hover {
             transform: translateY(-4px) scale(1.03);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* === MODAL === */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 17, 32, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 24px;
+            padding: 50px 45px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            position: relative;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        :root[data-theme="dark"] .modal-box {
+            background: #0f172a;
+            border: 1px solid #1f2937;
+            color: #e5e7eb;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--blue-primary);
+        }
+
+        .modal-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--body-text);
+        }
+
+        :root[data-theme="dark"] .modal-box h3 {
+            color: #f1f5f9;
+        }
+
+        .modal-box .modal-sub {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        :root[data-theme="dark"] .modal-box .modal-sub {
+            color: #9ca3af;
+        }
+
+        .modal-form label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--body-text);
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        :root[data-theme="dark"] .modal-form label {
+            color: #e5e7eb;
+        }
+
+        .modal-form input,
+        .modal-form select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--body-bg);
+            color: var(--body-text);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        :root[data-theme="dark"] .modal-form input,
+        :root[data-theme="dark"] .modal-form select {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e5e7eb;
+        }
+
+        .modal-form input:focus,
+        .modal-form select:focus {
+            border-color: var(--blue-primary);
+        }
+
+        .modal-form .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .modal-form .checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .modal-form .checkbox-row span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        :root[data-theme="dark"] .modal-form .checkbox-row span {
+            color: #9ca3af;
+        }
+
+        .modal-submit {
+            width: 100%;
+            margin-top: 24px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--orange-accent), #ea580c);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .modal-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.6);
+        }
+
+        .modal-success {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .modal-success .success-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+
+        .modal-success h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--green-primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-success p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        :root[data-theme="dark"] .modal-success p {
+            color: #9ca3af;
         }
 
         /* === FOOTER === */
@@ -880,7 +1171,8 @@
             .why-grid,
             .steps-grid,
             .roi-grid,
-            .faq-grid {
+            .faq-grid,
+            .security-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -917,6 +1209,15 @@
                 width: 20px;
                 height: 20px;
             }
+
+            .modal-box {
+                padding: 36px 24px;
+            }
+
+            .social-proof-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -934,7 +1235,6 @@
                 <a href="#ceny">Cennik</a>
                 <a href="kalkulator.html">Kalkulator ROI</a>
                 <a href="#kontakt">Kontakt</a>
-                <!-- Dodaj przycisk "Zaloguj się" / "Dashboard" -->
                 <a href="https://app.punchlineroi.com" class="cta-button" id="dashboard-link">
                     🔐 Panel Klienta
                 </a>
@@ -949,56 +1249,85 @@
 
         <!-- Hero Content -->
         <div class="hero-content">
-            <h1>Twój autonomiczny Robot KSeF.<br>Zgodność z FA(3), Tryb Offline24<br>i gwarancja ciągłości pracy.</h1>
-            <p>Pierwsze w Polsce narzędzie klasy RPA dla biur rachunkowych, które zmienia obowiązek w zysk. Automatyczna
-                walidacja, hybrydowa autoryzacja certyfikatami i dashboard ROI, który pokazuje realną oszczędność czasu.
-            </p>
+            <h1>Autonomiczny Robot‑KSeF<br>dla biur rachunkowych</h1>
+            <p>Pełna automatyzacja obiegu faktur bez zmiany systemów ERP Twoich klientów. Nasze AI pobiera, kategoryzuje i monitoruje dokumenty 24/7. Wbudowany Compliance Center i inteligentny tryb Offline24 chronią Cię przed błędami i awariami bramki MF.</p>
 
             <div>
-                <a href="/ksef-email/" class="cta-button">Sprawdź gotowość KSeF →</a>
-                <a href="#dashboard" class="cta-button cta-button-secondary">Zobacz Dashboard ROI</a>
+                <button class="cta-button" id="heroCta" onclick="openModal('hero_cta_click')">Otrzymaj demo na maila</button>
+                <button class="cta-button cta-button-secondary" onclick="openModal('hero_beta_click')">Dołącz do programu beta <span style="font-size:0.85em; opacity:0.85;">(zostały 3 miejsca)</span></button>
             </div>
 
-            <p class="subtitle">Pełna integracja z API MF • Szyfrowanie AES-256 • Gotowość na 1 lutego 2026</p>
-        </div>
-
-        <!-- CTA -->
-        <div class="hero-cta">
-            <a href="#pricing" class="btn-primary">Kup teraz</a>
-            <a href="https://app.punchlineroi.com" class="btn-secondary">
-                Mam już konto →
-            </a>
+            <p class="subtitle">14 dni za darmo, bez karty.</p>
         </div>
     </section>
 
-    <!-- === VALUE PROPOSITION === -->
-    <section class="value-props" id="funkcje">
+    <!-- === SOCIAL PROOF BAR === -->
+    <div class="social-proof-bar">
+        <div class="social-proof-inner">
+            <p class="social-proof-text">Stworzone dla nowoczesnych biur rachunkowych (5–20 osób) i firm o wysokim wolumenie faktur. Działa obok Twoich istniejących systemów – bez wymiany:</p>
+            <div class="erp-logos">
+                <span class="erp-logo-chip">Comarch</span>
+                <span class="erp-logo-chip">Symfonia</span>
+                <span class="erp-logo-chip">enova365</span>
+                <span class="erp-logo-chip">InsERT</span>
+                <span class="erp-logo-chip">SaldeoSMART</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- === DLACZEGO ROBOT-KSEF, A NIE MODUŁ ERP === -->
+    <section class="why-section" id="funkcje">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Dlaczego Robot‑KSeF,<br>a nie kolejny moduł ERP?</h2>
+                <p>To nie jest nakładka na Excel ani plugin do Twojego programu. Robot‑KSeF bierze pełną odpowiedzialność za proces, bezpieczeństwo i zgodność z ciągle zmieniającym się prawem.</p>
+            </div>
+
+            <div class="why-grid">
+                <!-- 1. RPA -->
+                <div class="why-item animate-on-scroll">
+                    <h3>1. Robotic Process Automation (RPA) – zero ręcznej pracy</h3>
+                    <p>Robot automatycznie pobiera faktury ze skrzynek mailowych, folderów sieciowych i systemów ERP. Klasyfikuje je, weryfikuje i wysyła do KSeF bez udziału człowieka. <strong>Twój zespół skupia się na klientach, nie na klikaniu.</strong></p>
+                </div>
+
+                <!-- 2. AI ds. ryzyka -->
+                <div class="why-item animate-on-scroll">
+                    <h3>2. AI ds. ryzyka – detekcja anomalii przed wysyłką</h3>
+                    <p>Silnik AI analizuje wzorce w danych i wyłapuje anomalie: duplikaty, podejrzane kwoty, niezgodności kontrahenta z bazą VIES/GUS. Dostajesz alert, zanim błąd trafi do systemu KSeF i zanim wygeneruje karę.</p>
+                </div>
+
+                <!-- 3. Compliance Center -->
+                <div class="why-item animate-on-scroll">
+                    <h3>3. Compliance Center – pełna ścieżka audytowa</h3>
+                    <p>Każda operacja jest logowana. Compliance Center generuje raporty należytej staranności, logi błędów i eksporty audytowe gotowe na kontrolę skarbową. <strong>Dokumentujesz wszystko automatycznie.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === VALUE PROPOSITION (3 Kafle) === -->
+    <section class="value-props">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2>Ciągłość pracy. Zawsze.</h2>
-                <p>Robot KSeF eliminuje 3 największe obawy księgowych: awarie systemu, błędy w fakturach i utratę czasu
-                    na ręczne procesy.</p>
+                <p>Robot‑KSeF eliminuje 3 największe obawy biur rachunkowych: awarie systemu, błędy w fakturach i utratę czasu na ręczne procesy.</p>
             </div>
 
             <div class="props-grid">
                 <!-- 1. Offline24 -->
                 <div class="prop-card animate-on-scroll">
                     <div class="prop-icon green">🛡️</div>
-                    <h3>Niezniszczalny Tryb Offline24</h3>
-                    <h4>Ciężkości fakturowania mimo awarii MF</h4>
-                    <p>Gdy bramka Ministerstwa milczy, PunchlineROI działa. Robot buforuje faktury w bezpiecznym
-                        środowisku lokalnym i automatycznie wysyła je w momencie powrotu połączenia – z zachowaniem
-                        ustawowego okna 24h. <strong>Twoi klienci nawet nie zauważą awarii.</strong></p>
+                    <h3>Inteligentny Tryb Offline24</h3>
+                    <h4>Fakturowanie mimo awarii bramki MF</h4>
+                    <p>Gdy system ministerialny milczy, Robot działa dalej. Automatycznie buforuje faktury lokalnie i wysyła je w momencie powrotu połączenia – z zachowaniem ustawowego okna 24h. <strong>Twoi klienci nawet nie zauważą awarii.</strong></p>
                 </div>
 
-                <!-- 2. Walidacja FA(3) -->
+                <!-- 2. Walidacja -->
                 <div class="prop-card animate-on-scroll">
                     <div class="prop-icon blue">⚙️</div>
                     <h3>Walidacja FA(3) w Czasie Rzeczywistym</h3>
                     <h4>Eliminacja błędów przed wysyłką</h4>
-                    <p>Nasz silnik analizuje strukturę logiczną każdego pliku XML pod kątem <strong>140+ reguł
-                            walidacyjnych</strong>. Błędy w polach obowiązkowych, pomyłki w NIP czy błędne stawki VAT są
-                        wyłapywane i blokowane zanim trafią do systemu KSeF, chroniąc Cię przed karami.</p>
+                    <p>Silnik AI analizuje strukturę każdego pliku XML pod kątem <strong>140+ reguł walidacyjnych</strong>. Błędne pola, pomyłki w NIP czy złe stawki VAT są blokowane zanim trafią do KSeF – chroniąc Cię przed karami finansowymi.</p>
                 </div>
 
                 <!-- 3. Dashboard ROI -->
@@ -1006,52 +1335,7 @@
                     <div class="prop-icon orange">📊</div>
                     <h3>Analityczny Dashboard ROI</h3>
                     <h4>Widoczny zwrot z inwestycji</h4>
-                    <p>Zamień koszty wdrożenia na mierzalną oszczędność. Dashboard pokazuje w czasie rzeczywistym, ile
-                        godzin pracy zaoszczędził Robot, ile faktur przetworzył automatycznie i jaki jest status zwrotów
-                        VAT (skrócony termin 40 dni).</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- === DLACZEGO PUNCHLINE ROI === -->
-    <section class="why-section">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2>To nie jest kolejna nakładka na Excela.<br>To technologiczna tarcza dla Twojego biura.</h2>
-                <p>Większość narzędzi jedynie "umożliwia wysyłkę". PunchlineROI bierze odpowiedzialność za proces,
-                    bezpieczeństwo i zgodność z ciągle zmieniającym się prawem.</p>
-            </div>
-
-            <div class="why-grid">
-                <!-- 1. Certyfikaty -->
-                <div class="why-item animate-on-scroll">
-                    <h3>1. Gotowość na erę Certyfikatów KSeF</h3>
-                    <p>Tokeny autoryzacyjne to przeszłość. Od 2025 r. standardem stają się certyfikaty.
-                        <strong>PunchlineROI jako pierwszy na rynku</strong> oferuje hybrydowy model autoryzacji –
-                        obsługujemy zarówno tokeny (do końca okresu przejściowego), jak i nowe certyfikaty wystawcy
-                        faktur. Zarządzaj uprawnieniami setek klientów z jednego panelu Module Certyfikatów i Uprawnień
-                        (MCU).
-                    </p>
-                </div>
-
-                <!-- 2. Security-First -->
-                <div class="why-item animate-on-scroll">
-                    <h3>2. Architektura "Security-First" i Kody QR</h3>
-                    <p>Każda faktura w trybie offline musi posiadać unikalny kod QR. Nasz Robot generuje je
-                        automatycznie, zapewniając weryfikowalność dokumentu nawet poza siecią. Twoje dane są chronione
-                        <strong>szyfrowaniem AES-256</strong>, a dostęp do nich masz tylko Ty i wskazani pracownicy.
-                        Spełniamy rygorystyczne normy RODO w kontekście faktur ustrukturyzowanych.
-                    </p>
-                </div>
-
-                <!-- 3. Skalowalność -->
-                <div class="why-item animate-on-scroll">
-                    <h3>3. Skalowalność bez dopłat za "sukces"</h3>
-                    <p>Obsługujesz 50 czy 5000 faktur miesięcznie? Infrastruktura PunchlineROI oparta na chmurze skaluje
-                        się dynamicznie. <strong>Nie karzemy Cię za rozwój</strong> – nasz silnik przetwarza tysiące
-                        plików XML w sekundy, gwarantując płynność pracy nawet 1. dnia miesiąca, gdy serwery rządowe są
-                        najbardziej obciążone.</p>
+                    <p>Dashboard pokazuje ile godzin zaoszczędził Robot, ile faktur przetworzył automatycznie i jaki jest status zwrotów VAT (skrócony termin 40 dni). Zamień koszty wdrożenia na mierzalną oszczędność.</p>
                 </div>
             </div>
         </div>
@@ -1061,7 +1345,8 @@
     <section class="how-section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2>Zero magii. Czysta inżynieria procesowa.</h2>
+                <h2>Jak to działa? Zero magii. Czysta inżynieria.</h2>
+                <p>Cztery kroki od podłączenia do pełnej automatyzacji KSeF.</p>
             </div>
 
             <div class="steps-grid">
@@ -1069,77 +1354,76 @@
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">1</div>
                     <h3>Bezpieczna Integracja (API)</h3>
-                    <p>Robot łączy się z Twoim obecnym systemem ERP (Symfonia, Optima, Enova) poprzez bezpieczny most
-                        API. <strong>Nie musisz zmieniać oprogramowania księgowego</strong> – PunchlineROI działa w tle,
-                        niewidoczny dla użytkownika, pobierając dane do faktur sprzedażowych i kosztowych.</p>
+                    <p>Robot łączy się z Twoim obecnym systemem ERP (Comarch, Symfonia, enova365, InsERT) przez bezpieczny most API. <strong>Nie musisz zmieniać oprogramowania księgowego</strong> – Robot działa w tle, niewidoczny dla użytkownika.</p>
                 </div>
 
                 <!-- Krok 2 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">2</div>
-                    <h3>Konwersja i Walidacja FA(3)</h3>
-                    <p>Surowe dane są konwertowane do formatu XML zgodnego z najnowszą schemą FA(3). Na tym etapie Robot
-                        weryfikuje poprawność pól obowiązkowych, spójność danych kontrahenta z bazą VIES/GUS oraz
-                        poprawność obliczeń matematycznych.</p>
+                    <h3>AI‑kategoryzacja i detekcja anomalii</h3>
+                    <p>Surowe dane są automatycznie kategoryzowane, a silnik AI weryfikuje spójność danych kontrahenta z bazą VIES/GUS, wykrywa duplikaty i sprawdza poprawność obliczeń matematycznych. Błędy są flagowane przed wysyłką.</p>
                 </div>
 
                 <!-- Krok 3 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">3</div>
-                    <h3>Transmisja i UPO</h3>
-                    <p>Zweryfikowana paczka trafia na bramkę KSeF. Po nadaniu numeru referencyjnego, Robot natychmiast
-                        pobiera <strong>Urzędowe Poświadczenie Odbioru (UPO)</strong> i łączy je z fakturą w Twoim
-                        systemie. Dokumenty są trwale zarchiwizowane przez wymagane 10 lat.</p>
+                    <h3>Transmisja do KSeF i UPO</h3>
+                    <p>Zweryfikowana paczka trafia na bramkę KSeF. Po nadaniu numeru referencyjnego Robot natychmiast pobiera <strong>Urzędowe Poświadczenie Odbioru (UPO)</strong> i łączy je z fakturą. Dokumenty są archiwizowane przez wymagane 10 lat.</p>
                 </div>
 
                 <!-- Krok 4 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">4</div>
-                    <h3>Dystrybucja i Wizualizacja</h3>
-                    <p>Dla kontrahentów niekorzystających jeszcze z KSeF (np. zagranicznych), Robot generuje
-                        wizualizację PDF z kodem QR i wysyła ją uzgodnionym kanałem komunikacji. Ty masz pewność, że
-                        obowiązek dostarczenia faktury został spełniony.</p>
+                    <h3>Dystrybucja i Compliance</h3>
+                    <p>Dla kontrahentów spoza KSeF Robot generuje PDF z kodem QR i wysyła uzgodnionym kanałem. Compliance Center loguje każdą operację i tworzy gotowe raporty audytowe. <strong>Twoja odpowiedzialność jest udokumentowana.</strong></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- === DASHBOARD ROI === -->
+    <!-- === CO ZYSKUJESZ (ROI) === -->
     <section class="roi-section" id="dashboard">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2>Widzisz więcej niż tylko faktury.<br>Widzisz rentowność swojego biura.</h2>
-                <p style="color: rgba(255,255,255,0.8);">Tradycyjne systemy pokazują listę dokumentów. Dashboard
-                    PunchlineROI pokazuje kondycję Twojego biznesu. Dzięki zaawansowanej analityce wiesz dokładnie, ile
-                    czasu Twój zespół zaoszczędził na ręcznym wprowadzaniu danych i walidacji błędów.</p>
+                <h2>Co zyskujesz?<br>Widzisz rentowność swojego biura.</h2>
+                <p style="color: rgba(255,255,255,0.8);">Dashboard ROI pokazuje kondycję Twojego biznesu w czasie rzeczywistym. Wiesz dokładnie, ile zaoszczędziłeś i co Robot zrobił za Ciebie.</p>
             </div>
 
             <div class="roi-grid">
                 <div class="roi-metric animate-on-scroll">
-                    <div class="icon">💰</div>
-                    <h4>Licznik Oszczędności</h4>
-                    <p>Estymowana kwota (PLN) zaoszczędzona w tym miesiącu dzięki automatyzacji procesów powtarzalnych.
-                    </p>
+                    <div class="icon">⏱️</div>
+                    <h4>Zaoszczędzony Czas</h4>
+                    <p>Liczba roboczogodzin odzyskanych dzięki automatyzacji powtarzalnych czynności w tym miesiącu.</p>
+                </div>
+
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">🛡️</div>
+                    <h4>Uniknięte Kary</h4>
+                    <p>Szacowana wartość potencjalnych kar za błędy i opóźnienia, których Robot Ci oszczędził.</p>
                 </div>
 
                 <div class="roi-metric animate-on-scroll">
                     <div class="icon">🟢</div>
                     <h4>Status Bramki MF (Live)</h4>
-                    <p>Podgląd na żywo stabilności systemu ministerialnego – wiesz o awarii, zanim wpłynie na Twoją
-                        pracę.</p>
+                    <p>Podgląd na żywo stabilności systemu ministerialnego – wiesz o awarii zanim wpłynie na Twoją pracę.</p>
                 </div>
 
                 <div class="roi-metric animate-on-scroll">
                     <div class="icon">📦</div>
                     <h4>Kolejka Offline24</h4>
-                    <p>Liczba faktur oczekujących na synchronizację w bezpiecznym buforze.</p>
+                    <p>Liczba faktur oczekujących na synchronizację w bezpiecznym buforze – bez utraty żadnego dokumentu.</p>
                 </div>
 
                 <div class="roi-metric animate-on-scroll">
                     <div class="icon">⚡</div>
-                    <h4>Efektywność Zespołu</h4>
-                    <p>Raport pokazujący, ile faktur zostało przetworzonych bezdotykowo (Touchless Invoice Processing).
-                    </p>
+                    <h4>Efektywność Bezdotykowa</h4>
+                    <p>Ile faktur zostało przetworzonych bez ingerencji człowieka (Touchless Invoice Processing).</p>
+                </div>
+
+                <div class="roi-metric animate-on-scroll">
+                    <div class="icon">📋</div>
+                    <h4>Raporty Compliance</h4>
+                    <p>Gotowe eksporty audytowe i logi operacji – zawsze dostępne na wypadek kontroli skarbowej.</p>
                 </div>
             </div>
 
@@ -1153,12 +1437,72 @@
         </div>
     </section>
 
+    <!-- === BEZPIECZEŃSTWO === -->
+    <section class="security-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Architektura Security‑First</h2>
+                <p>Dane Twoich klientów są chronione na każdym etapie. Spełniamy najwyższe standardy bezpieczeństwa i RODO.</p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">🔒</span>
+                    <div>
+                        <h4>Szyfrowanie end‑to‑end</h4>
+                        <p>Wszystkie dane szyfrowane AES‑256 w spoczynku i TLS 1.3 w transmisji. Żaden dokument nie przemieszcza się niezaszyfrowany.</p>
+                    </div>
+                </div>
+
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">🗝️</span>
+                    <div>
+                        <h4>Klucze KSeF poza repozytorium</h4>
+                        <p>Certyfikaty i tokeny autoryzacyjne przechowywane są w izolowanym vault – poza kodem źródłowym i środowiskiem aplikacji. Rotacja certyfikatów automatyczna.</p>
+                    </div>
+                </div>
+
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">🐳</span>
+                    <div>
+                        <h4>Kontenery jako non‑root user</h4>
+                        <p>Każdy kontener Docker uruchamiany jest z minimalnym zestawem uprawnień (non-root), ograniczając powierzchnię ataku do minimum.</p>
+                    </div>
+                </div>
+
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">👁️</span>
+                    <div>
+                        <h4>Watchdog 24/7</h4>
+                        <p>Automatyczny monitoring bazy danych, Redis i bramki KSeF co kilka minut. Każda anomalia generuje natychmiastowy alert dla administratora.</p>
+                    </div>
+                </div>
+
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">📜</span>
+                    <div>
+                        <h4>Zgodność z RODO</h4>
+                        <p>Dane klientów przetwarzane wyłącznie na potrzeby świadczenia usługi. Dokumentacja DPA gotowa do podpisania. Pełny rejestr czynności przetwarzania.</p>
+                    </div>
+                </div>
+
+                <div class="security-item animate-on-scroll">
+                    <span class="sec-icon">📄</span>
+                    <div>
+                        <h4>Kody QR i weryfikowalność offline</h4>
+                        <p>Każda faktura wystawiona w trybie offline posiada unikalny kod QR zgodny z wymogami MF – dokument jest weryfikowalny nawet poza siecią.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- === CENNIK === -->
     <section class="pricing-section" id="ceny">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2>Prosty i przewidywalny cennik</h2>
-                <p>Wybierz plan dopasowany do liczby faktur i wielkości Twojego biura rachunkowego.</p>
+                <p>Wybierz plan dopasowany do liczby faktur i wielkości Twojego biura. Przy każdym planie – zacznij od bezpłatnego demo.</p>
             </div>
 
             <div class="pricing-grid" style="
@@ -1177,14 +1521,14 @@
                     box-shadow:0 10px 30px rgba(0,0,0,0.06);
                 ">
                     <h3 style="font-size:1.6rem; margin-bottom:10px;">Starter</h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#1D4ED8;">79 PLN / mies.</p>
-                    <ul style="margin:20px 0; color:#64748b; line-height:1.7;">
-                        <li>Do 50 faktur dziennie</li>
-                        <li>Wysyłka do KSeF</li>
-                        <li>Offline backup</li>
-                        <li>Dashboard status</li>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#1D4ED8;">199 PLN / mies.</p>
+                    <ul style="margin:20px 0; color:#64748b; line-height:2;">
+                        <li>Podstawowa AI‑kategoryzacja faktur</li>
+                        <li>Wysyłka i odbiór faktur z KSeF</li>
+                        <li>Podstawowy tryb Offline24</li>
+                        <li>Dashboard z podstawowymi statystykami</li>
                     </ul>
-                    <a href="https://app.punchlineroi.com/buy?plan=starter" class="cta-button">Wybierz Starter</a>
+                    <button class="cta-button" onclick="openModal('pricing_cta_starter')">Otrzymaj demo na maila</button>
                 </div>
 
                 <!-- Pro -->
@@ -1206,15 +1550,15 @@
                             margin-left:5px;
                         ">Najczęściej wybierany</span>
                     </h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#10B981;">249 PLN / mies.</p>
-                    <ul style="margin:20px 0; color:#64748b; line-height:1.7;">
-                        <li>Do 200 faktur dziennie</li>
-                        <li>Offline24 + UPO tracking</li>
-                        <li>Raporty email</li>
-                        <li>API access</li>
-                        <li>Support 24/7</li>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#10B981;">490 PLN / mies.</p>
+                    <ul style="margin:20px 0; color:#64748b; line-height:2;">
+                        <li>AI‑kategoryzacja + detekcja anomalii</li>
+                        <li>Pełny tryb Offline24 + samonaprawa kolejek</li>
+                        <li>Compliance Center (logi, raporty błędów)</li>
+                        <li>Alerty email/SMS, asystent AI KSeF</li>
+                        <li>Wyższy limit faktur / wielu klientów</li>
                     </ul>
-                    <a href="https://app.punchlineroi.com/buy?plan=pro" class="cta-button">Wybierz Pro</a>
+                    <button class="cta-button" onclick="openModal('pricing_cta_pro')">Otrzymaj demo na maila</button>
                 </div>
 
                 <!-- Enterprise -->
@@ -1226,14 +1570,15 @@
                     box-shadow:0 10px 30px rgba(0,0,0,0.06);
                 ">
                     <h3 style="font-size:1.6rem; margin-bottom:10px;">Enterprise</h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#F97316;">799+ PLN / mies.</p>
-                    <ul style="margin:20px 0; color:#64748b; line-height:1.7;">
-                        <li>500+ faktur dziennie</li>
-                        <li>SLA 99.9%</li>
-                        <li>White‑label</li>
-                        <li>Dedykowany account manager</li>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#F97316;">1 490+ PLN / mies.</p>
+                    <ul style="margin:20px 0; color:#64748b; line-height:2;">
+                        <li>Pełny Compliance Center (eksporty audytowe)</li>
+                        <li>Rule Engine per klient / branża</li>
+                        <li>Nielimitowana liczba klientów (fair use)</li>
+                        <li>Integracje szyte na miarę</li>
+                        <li>SLA, priorytetowy support, account manager</li>
                     </ul>
-                    <a href="https://app.punchlineroi.com/buy?plan=enterprise" class="cta-button">Wybierz Enterprise</a>
+                    <button class="cta-button" onclick="openModal('pricing_cta_enterprise')">Otrzymaj demo na maila</button>
                 </div>
 
             </div>
@@ -1243,16 +1588,14 @@
     <!-- === FINAL CTA === -->
     <section class="final-cta">
         <div class="container">
-            <h2>Nie czekaj na ostatni dzwonek w 2026 roku.<br>Bądź gotowy już dziś.</h2>
-            <p>Dołącz do elitarnego grona biur rachunkowych, które zamieniły stres związany z KSeF na przewagę
-                konkurencyjną. Przetestuj Robota w swoim środowisku, na realnych danych, bez ryzyka.</p>
+            <h2>Nie czekaj na ostatni dzwonek.<br>Bądź gotowy na KSeF 2.0 już dziś.</h2>
+            <p>Dołącz do biur rachunkowych, które zamieniły stres związany z KSeF na przewagę konkurencyjną. Przetestuj Robota na realnych danych, bez ryzyka.</p>
 
             <div class="cta-buttons">
-                <a href="/ksef-email/" class="cta-button">Zgłoś się do pilotażu</a>
+                <button class="cta-button" onclick="openModal('final_cta_click')">Otrzymaj demo na maila</button>
             </div>
 
-            <p class="microcopy">Wdrożenie zajmuje mniej niż 15 minut • Nie wymagamy karty kredytowej • Rezygnacja w
-                dowolnym momencie</p>
+            <p class="microcopy">14 dni za darmo, bez karty • Wdrożenie w 15 minut • Rezygnacja w dowolnym momencie</p>
         </div>
     </section>
 
@@ -1269,57 +1612,32 @@
                 <div class="faq-column">
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>🛡️ Czy Robot działa, gdy KSeF ma awarię?</span>
+                            <span>🔌 Czy muszę zmieniać ERP, żeby korzystać z Robot‑KSeF?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Tak. Tryb Offline24 buforuje faktury lokalnie i automatycznie wysyła je
-                            po powrocie bramki MF.</div>
+                        <div class="faq-answer">Nie. Robot‑KSeF integruje się z Comarch, Symfonią, enova365, InsERT i SaldeoSMART przez API. Twoje systemy pozostają bez zmian – Robot działa obok nich w tle, automatycznie pobierając i wysyłając dane.</div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>⚙️ Czy PunchlineROI obsługuje FA(3)?</span>
+                            <span>🛡️ Co się dzieje, gdy KSeF nie działa (awaria)?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Tak. Walidujemy ponad 140 reguł FA(3), w tym pola obowiązkowe, daty, NIP
-                            i stawki VAT.</div>
+                        <div class="faq-answer">Aktywuje się Tryb Offline24. Robot automatycznie buforuje faktury w bezpiecznym środowisku lokalnym i wysyła je w momencie powrotu bramki MF, z zachowaniem wymaganego okna czasowego 24h. Twoi klienci nie odczują awarii.</div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>🔐 Czy muszę zmieniać mój system ERP?</span>
+                            <span>🔒 Jak chronione są dane moich klientów?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Nie. Integrujemy się z Symfonią, Optimą, Enovą i innymi ERP przez API.
-                            Robot działa w tle.</div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>📄 Jak działa UPO w Robocie?</span>
-                            <svg class="faq-arrow" viewBox="0 0 24 24">
-                                <path d="M7 10l5 5 5-5z" />
-                            </svg>
-                        </button>
-                        <div class="faq-answer">Robot automatycznie pobiera UPO, przypisuje je do faktury i archiwizuje
-                            na 10 lat.</div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>🌍 Czy Robot obsługuje faktury zagraniczne?</span>
-                            <svg class="faq-arrow" viewBox="0 0 24 24">
-                                <path d="M7 10l5 5 5-5z" />
-                            </svg>
-                        </button>
-                        <div class="faq-answer">Tak. Generujemy PDF z kodem QR i wysyłamy go kontrahentom spoza KSeF.
-                        </div>
+                        <div class="faq-answer">Dane są szyfrowane AES‑256 w spoczynku i TLS 1.3 w transmisji. Klucze KSeF przechowywane są poza kodem źródłowym w izolowanym vault. System działa na kontenerach Docker jako non-root user. Spełniamy pełne wymogi RODO – mamy gotową dokumentację DPA.</div>
                     </div>
                 </div>
 
@@ -1327,56 +1645,32 @@
                 <div class="faq-column">
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>📊 Czy mogę zobaczyć ROI mojego biura?</span>
+                            <span>📤 Czy mogę eksportować dane do Comarch/enova/Symfonii/InsERT?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Tak. Dashboard ROI pokazuje oszczędność czasu, liczbę faktur
-                            bezdotykowych i efektywność zespołu.</div>
+                        <div class="faq-answer">Tak. Robot‑KSeF obsługuje dwukierunkową synchronizację danych z najpopularniejszymi systemami ERP. Faktury, UPO i raporty Compliance trafiają automatycznie do Twojego systemu w uzgodnionym formacie.</div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>🧩 Czy PunchlineROI obsługuje wielu klientów?</span>
+                            <span>📅 Kiedy KSeF 2.0 staje się obowiązkowy i dlaczego warto przygotować się teraz?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Tak. Robot obsługuje wielu podatników i certyfikaty w jednym panelu MCU.
-                        </div>
+                        <div class="faq-answer">Obowiązkowy KSeF wchodzi etapami w 2026 roku. Biura, które wdrożą automatyzację teraz, zyskują czas na testy na realnych danych, eliminują błędy przed terminem i mogą zaoferować klientom pewność zgodności od pierwszego dnia obowiązku.</div>
                     </div>
 
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>🕒 Jak wygląda wdrożenie?</span>
+                            <span>🧪 Czy mogę przetestować Robota przed decyzją?</span>
                             <svg class="faq-arrow" viewBox="0 0 24 24">
                                 <path d="M7 10l5 5 5-5z" />
                             </svg>
                         </button>
-                        <div class="faq-answer">Wdrożenie trwa około 15 minut. Wystarczy podać dane dostępowe i wskazać
-                            ERP.</div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>🧪 Czy mogę przetestować Robota?</span>
-                            <svg class="faq-arrow" viewBox="0 0 24 24">
-                                <path d="M7 10l5 5 5-5z" />
-                            </svg>
-                        </button>
-                        <div class="faq-answer">Tak — 14 dni za darmo, bez karty płatniczej.</div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            <span>🔒 Czy PunchlineROI spełnia RODO?</span>
-                            <svg class="faq-arrow" viewBox="0 0 24 24">
-                                <path d="M7 10l5 5 5-5z" />
-                            </svg>
-                        </button>
-                        <div class="faq-answer">Tak. Dane są szyfrowane AES‑256, dostęp mają tylko uprawnieni
-                            pracownicy.</div>
+                        <div class="faq-answer">Tak – 14 dni za darmo, bez karty płatniczej i bez zobowiązań. Po rejestracji dostajesz dostęp do pełnego środowiska testowego na swoich danych. Wdrożenie zajmuje mniej niż 15 minut. Rezygnacja w dowolnym momencie.</div>
                     </div>
                 </div>
             </div>
@@ -1398,7 +1692,7 @@
                 <div class="contact-info">
                     <p><strong>Email:</strong> <a href="mailto:impact@punchlineroi.com">impact@punchlineroi.com</a></p>
                     <p><strong>Founder:</strong> Lachezar Mihaylov</p>
-                    <p><strong>Adres:</strong> Rivierdijk 3372BV, Hardinxveld-Giessendam, Holandia</p>
+                    <p>Obsługujemy biura rachunkowe i firmy z całej Polski (100% remote).</p>
                 </div>
 
                 <a href="mailto:impact@punchlineroi.com" class="contact-button">Napisz do nas →</a>
@@ -1412,7 +1706,6 @@
             <!-- Dashboard -->
             <a href="#dashboard" data-tooltip="Dashboard ROI">
                 <svg class="floating-icon" viewBox="0 0 24 24">
-                    <!-- Heroicons outline: chart-bar -->
                     <path d="M3 19.5h18" />
                     <path d="M9 8.25v7.5" />
                     <path d="M15 4.5v11.25" />
@@ -1424,7 +1717,6 @@
             <!-- Cennik -->
             <a href="#ceny" data-tooltip="Cennik">
                 <svg class="floating-icon" viewBox="0 0 24 24">
-                    <!-- Heroicons outline: banknotes -->
                     <rect x="3" y="5.25" width="18" height="9.5" rx="1.5" ry="1.5" />
                     <path d="M6 9.25a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0z" />
                     <path d="M17.25 8.25h.008v.008h-.008zM17.25 11.75h.008v.008h-.008z" />
@@ -1435,7 +1727,6 @@
             <!-- Kontakt -->
             <a href="#kontakt" data-tooltip="Kontakt">
                 <svg class="floating-icon" viewBox="0 0 24 24">
-                    <!-- Heroicons outline: envelope -->
                     <path
                         d="M3 7.5A2.25 2.25 0 015.25 5.25h13.5A2.25 2.25 0 0121 7.5v9a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 16.5v-9z" />
                     <path d="M4.5 8.25l7.07 4.42a1.5 1.5 0 001.56 0L20.2 8.25" />
@@ -1444,13 +1735,10 @@
 
             <!-- THEME TOGGLE -->
             <button id="themeToggle" type="button" data-tooltip="Motyw">
-                <!-- default: moon, JS podmienia na sun w light mode/dark mode -->
                 <svg id="themeIconMoon" class="theme-toggle-icon" viewBox="0 0 24 24">
-                    <!-- Heroicons outline: moon -->
                     <path d="M21 12.79A9.004 9.004 0 0112.79 3 7.5 7.5 0 1019.5 15.71 9.05 9.05 0 0121 12.79z" />
                 </svg>
                 <svg id="themeIconSun" class="theme-toggle-icon" viewBox="0 0 24 24" style="display:none;">
-                    <!-- Heroicons outline: sun -->
                     <circle cx="12" cy="12" r="3.5" />
                     <path
                         d="M12 2v2.5M12 19.5V22M4.22 4.22L5.9 5.9M18.1 18.1l1.68 1.68M2 12h2.5M19.5 12H22M4.22 19.78L5.9 18.1M18.1 5.9l1.68-1.68" />
@@ -1463,6 +1751,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 PunchlineROI – Lachezar Mihaylov, NIP: 7011287658</p>
+            <p style="margin-top: 8px; font-size: 0.9rem; opacity: 0.7;">Obsługujemy biura rachunkowe i firmy z całej Polski (100% remote).</p>
             <p style="margin-top: 10px;">
                 <a href="regulamin.html">Regulamin</a> ·
                 <a href="polityka-prywatnosci.html">Polityka Prywatności</a> ·
@@ -1479,9 +1768,118 @@
         </svg>
     </div>
 
+    <!-- === MODAL: FORMULARZ DEMO === -->
+    <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()" aria-label="Zamknij">&times;</button>
+
+            <div id="modalFormWrapper">
+                <h3 id="modalTitle">Otrzymaj demo na maila</h3>
+                <p class="modal-sub">Wyślemy nagranie demo + dostęp do środowiska testowego. Bez karty. Bez zobowiązań.</p>
+
+                <form class="modal-form" id="demoForm" onsubmit="handleFormSubmit(event)">
+                    <label for="fname">Imię i nazwisko</label>
+                    <input type="text" id="fname" name="name" placeholder="Jan Kowalski" required autocomplete="name" />
+
+                    <label for="femail">Email służbowy</label>
+                    <input type="email" id="femail" name="email" placeholder="jan@biuro.pl" required autocomplete="email" />
+
+                    <label for="fcompany">Nazwa biura / firmy</label>
+                    <input type="text" id="fcompany" name="company" placeholder="Biuro Rachunkowe XYZ" required />
+
+                    <label for="fvolume">Szacowany wolumen faktur / miesiąc</label>
+                    <select id="fvolume" name="volume" required>
+                        <option value="" disabled selected>Wybierz zakres</option>
+                        <option value="do50">Do 50 faktur</option>
+                        <option value="50-200">50–200 faktur</option>
+                        <option value="200-500">200–500 faktur</option>
+                        <option value="500+">500+ faktur</option>
+                    </select>
+
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="fbeta" name="beta" />
+                        <span><label for="fbeta">Chcę dołączyć do programu beta (podpiszemy NDA)</label></span>
+                    </div>
+
+                    <input type="hidden" id="formSource" name="source" value="" />
+
+                    <button type="submit" class="modal-submit">Wyślij – chcę demo →</button>
+                </form>
+            </div>
+
+            <div class="modal-success" id="modalSuccess">
+                <div class="success-icon">✅</div>
+                <h4>Dziękujemy!</h4>
+                <p>Link do demo wysłaliśmy na Twój email. Sprawdź skrzynkę (i folder spam na wszelki wypadek).</p>
+            </div>
+        </div>
+    </div>
+
     <!-- === SCRIPTS === -->
     <script>
-        // HERO VIDEO SAFE LOOP
+        // === GA4 + PIXEL PLACEHOLDER ===
+        // Podłącz swoje ID GA4 i pixel LinkedIn/Meta poniżej:
+        // window.dataLayer = window.dataLayer || [];
+        // function gtag(){dataLayer.push(arguments);}
+        // gtag('js', new Date());
+        // gtag('config', 'G-XXXXXXXXXX');
+
+        function trackEvent(eventName, params) {
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, params || {});
+            }
+        }
+
+        // === MODAL ===
+        const modal = document.getElementById('demoModal');
+        const formWrapper = document.getElementById('modalFormWrapper');
+        const successBox = document.getElementById('modalSuccess');
+        const formSourceInput = document.getElementById('formSource');
+
+        function openModal(source) {
+            formSourceInput.value = source || '';
+            formWrapper.style.display = 'block';
+            successBox.style.display = 'none';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            trackEvent('hero_cta_click', { source: source });
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Zamknij kliknięciem tła
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+
+        // Zamknij Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const source = formSourceInput.value;
+
+            // Zbierz dane i wyślij (podłącz swój backend/autoresponder)
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Form submitted:', data);
+
+            // Opcjonalnie: fetch('/api/demo', { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type':'application/json'} });
+
+            // GA4 event
+            trackEvent('form_submit', { source: source, plan: source });
+
+            // Pokaż sukces
+            formWrapper.style.display = 'none';
+            successBox.style.display = 'block';
+        }
+
+        // === HERO VIDEO SAFE LOOP ===
         const video = document.getElementById('heroVideo');
         if (video) {
             video.load();
@@ -1499,7 +1897,7 @@
             });
         }
 
-        // SCROLL ANIMATIONS
+        // === SCROLL ANIMATIONS ===
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1518,7 +1916,7 @@
             observer.observe(el);
         });
 
-        // BACK TO TOP BUTTON
+        // === BACK TO TOP BUTTON ===
         const backToTopButton = document.getElementById('backToTop');
 
         window.addEventListener('scroll', () => {
@@ -1536,7 +1934,7 @@
             });
         });
 
-        // FAQ ACCORDION
+        // === FAQ ACCORDION ===
         document.querySelectorAll(".faq-item").forEach(item => {
             const btn = item.querySelector(".faq-question");
             const answer = item.querySelector(".faq-answer");
@@ -1559,7 +1957,7 @@
             });
         });
 
-        // THEME HANDLING (AUTO + SWITCH)
+        // === THEME HANDLING (AUTO + SWITCH) ===
         const root = document.documentElement;
         const themeToggle = document.getElementById('themeToggle');
         const iconMoon = document.getElementById('themeIconMoon');
@@ -1576,7 +1974,6 @@
             }
         }
 
-        // initial theme: localStorage > system
         (function initTheme() {
             const stored = localStorage.getItem('punchline-theme');
             if (stored === 'light' || stored === 'dark') {
@@ -1597,7 +1994,7 @@
             });
         }
 
-        // Poprawiony kod JS do floating-panel
+        // === FLOATING PANEL ===
         const floatingPanel = document.querySelector('.floating-panel');
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
@@ -1611,6 +2008,18 @@
                 floatingPanel.classList.remove('visible');
             }
         });
+
+        // === GA4 PRICING CLICK EVENTS ===
+        document.querySelectorAll('.pricing-card .cta-button').forEach((btn) => {
+            btn.addEventListener('click', function () {
+                const source = this.getAttribute('onclick') || '';
+                const plan = source.includes('pro') ? 'pro' : source.includes('enterprise') ? 'enterprise' : 'starter';
+                trackEvent('pricing_cta_click', { plan: plan });
+            });
+        });
+
+        // === DEMO VIDEO PLAY EVENT (jeśli podłączysz Loom/YouTube) ===
+        // Użyj: trackEvent('demo_video_play', { source: 'email_link' });
     </script>
 </body>
 
