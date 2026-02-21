@@ -8,8 +8,14 @@
     <meta name="description"
         content="Autonomiczny Robot‑KSeF dla biur rachunkowych. AI‑kategoryzacja, detekcja anomalii, Compliance Center, tryb Offline24. Automatyzacja KSeF bez zmiany ERP Twoich klientów." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Google Analytics GA4 -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PX7E644QM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3PX7E644QM');
+    </script>
     <!-- Open Graph -->
     <meta property="og:title" content="Robot‑KSeF – autonomiczna automatyzacja KSeF z AI, Offline24 i Compliance Center dla biur rachunkowych" />
     <meta property="og:description"
@@ -1826,12 +1832,7 @@
 
     <!-- === SCRIPTS === -->
     <script>
-        // === GA4 + PIXEL PLACEHOLDER ===
-        // Podłącz swoje ID GA4 i pixel LinkedIn/Meta poniżej:
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3PX7E644QM');
+        // === GA4 – zainicjalizowany w <head> ===
 
         function trackEvent(eventName, params) {
             if (typeof gtag === 'function') {
