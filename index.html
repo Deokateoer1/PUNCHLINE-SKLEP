@@ -8,6 +8,8 @@
     <meta name="description"
         content="Autonomiczny Robot‑KSeF dla biur rachunkowych. AI‑kategoryzacja, detekcja anomalii, Compliance Center, tryb Offline24. Automatyzacja KSeF bez zmiany ERP Twoich klientów." />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PX7E644QM"></script>
     <!-- Open Graph -->
     <meta property="og:title" content="Robot‑KSeF – autonomiczna automatyzacja KSeF z AI, Offline24 i Compliance Center dla biur rachunkowych" />
     <meta property="og:description"
@@ -1237,7 +1239,7 @@
                 <a href="#ceny">Cennik</a>
                 <a href="kalkulator.html">Kalkulator ROI</a>
                 <a href="#kontakt">Kontakt</a>
-                <a href="https://app.punchlineroi.com" class="cta-button" id="dashboard-link">
+                <a href="https://app.punchlineroi.com/login" class="cta-button" id="dashboard-link">
                     🔐 Panel Klienta
                 </a>
             </div>
@@ -1430,11 +1432,16 @@
             </div>
 
             <div style="text-align: center; margin-top: 50px;">
-                <blockquote
-                    style="font-size: 1.2rem; font-style: italic; max-width: 700px; margin: 0 auto; padding: 30px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--green-primary); border-radius: 10px;">
-                    "Dzięki automatyzacji KSeF z PunchlineROI zredukowaliśmy czas obsługi faktur o 60%, co pozwoliło nam
-                    przyjąć 20 nowych klientów bez zwiększania zatrudnienia."
-                </blockquote>
+                <div style="max-width: 700px; margin: 0 auto; padding: 36px 40px; background: rgba(255,255,255,0.06); border: 1px solid rgba(16,185,129,0.4); border-radius: 16px; backdrop-filter: blur(8px);">
+                    <div style="font-size: 1.6rem; margin-bottom: 14px;">🚀</div>
+                    <p style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">
+                        Szukamy 5 biur rachunkowych<br>do programu beta 2026
+                    </p>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.72); margin-bottom: 28px; line-height: 1.6;">
+                        Pełne wsparcie wdrożeniowe, priorytetowy dostęp do nowych funkcji i bezpośredni kontakt z zespołem. Zostały 3 miejsca.
+                    </p>
+                    <button class="cta-button" onclick="openModal('roi_beta_click')">Dołącz do bety →</button>
+                </div>
             </div>
         </div>
     </section>
@@ -1821,10 +1828,10 @@
     <script>
         // === GA4 + PIXEL PLACEHOLDER ===
         // Podłącz swoje ID GA4 i pixel LinkedIn/Meta poniżej:
-        // window.dataLayer = window.dataLayer || [];
-        // function gtag(){dataLayer.push(arguments);}
-        // gtag('js', new Date());
-        // gtag('config', 'G-XXXXXXXXXX');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3PX7E644QM');
 
         function trackEvent(eventName, params) {
             if (typeof gtag === 'function') {
