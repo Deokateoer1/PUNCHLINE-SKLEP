@@ -2027,6 +2027,31 @@
                 trackEvent('pricing_cta_click', { plan: plan });
             });
         });
+            // === FORM SUBMIT TRACKING ===
+    // Track any form submissions on the page
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', () => {
+            gtag('event', 'form_submit', {
+                'form_location': form.id || 'unknown',
+                'event_category': 'engagement',
+                'event_label': 'lead_form'
+            });
+        });
+    });
+            // === DEMO/CTA BUTTON TRACKING ===
+    // Track clicks on demo/CTA buttons
+    document.querySelectorAll('.cta-button, [href*="demo"], [href*="kontakt"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const location = btn.closest('section')?.className || 'unknown';
+            gtag('event', 'demo_cta_click', {
+                'button_location': location,
+                'button_text': btn.textContent?.trim() || 'unknown',
+                'event_category': 'engagement'
+            });
+        });
+    });
+
+
 
         // === DEMO VIDEO PLAY EVENT (jeśli podłączysz Loom/YouTube) ===
         // Użyj: trackEvent('demo_video_play', { source: 'email_link' });
