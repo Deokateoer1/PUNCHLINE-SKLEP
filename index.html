@@ -1792,7 +1792,18 @@
                 <h3 id="modalTitle">Otrzymaj demo na maila</h3>
                 <p class="modal-sub">Wyślemy nagranie demo + dostęp do środowiska testowego. Bez karty. Bez zobowiązań.</p>
 
-                <form class="modal-form" id="demoForm" onsubmit="handleFormSubmit(event)">
+                <form class="modal-form" id="demoForm"
+                    name="demo-modal"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                    onsubmit="handleFormSubmit(event)">
+
+                    <!-- Netlify: ukryte pola wymagane do fetch-based submission -->
+                    <input type="hidden" name="form-name" value="demo-modal" />
+                    <p style="display:none;">
+                        <label>Nie wypełniaj: <input name="bot-field" /></label>
+                    </p>
+
                     <label for="fname">Imię i nazwisko</label>
                     <input type="text" id="fname" name="name" placeholder="Jan Kowalski" required autocomplete="name" />
 
@@ -1812,13 +1823,13 @@
                     </select>
 
                     <div class="checkbox-row">
-                        <input type="checkbox" id="fbeta" name="beta" />
+                        <input type="checkbox" id="fbeta" name="beta" value="tak" />
                         <span><label for="fbeta">Chcę dołączyć do programu beta (podpiszemy NDA)</label></span>
                     </div>
 
                     <input type="hidden" id="formSource" name="source" value="" />
 
-                    <button type="submit" class="modal-submit">Wyślij – chcę demo →</button>
+                    <button type="submit" class="modal-submit" id="modalSubmitBtn">Wyślij – chcę demo →</button>
                 </form>
             </div>
 
@@ -1870,23 +1881,45 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        function handleFormSubmit(e) {
+        async function handleFormSubmit(e) {
             e.preventDefault();
             const source = formSourceInput.value;
+            const submitBtn = document.getElementById('modalSubmitBtn');
 
-            // Zbierz dane i wyślij (podłącz swój backend/autoresponder)
+            // Zablokuj przycisk podczas wysyłki
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wysyłanie…';
+
             const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            console.log('Form submitted:', data);
 
-            // Opcjonalnie: fetch('/api/demo', { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type':'application/json'} });
+            try {
+                // Wyślij do Netlify Forms (wymaga data-netlify="true" + form-name)
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
 
-            // GA4 event
-            trackEvent('form_submit', { source: source, plan: source });
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
 
-            // Pokaż sukces
-            formWrapper.style.display = 'none';
-            successBox.style.display = 'block';
+                // GA4 event – sukces
+                trackEvent('form_submit', { source: source, plan: source });
+
+                // Pokaż ekran potwierdzenia
+                formWrapper.style.display = 'none';
+                successBox.style.display = 'block';
+
+            } catch (err) {
+                console.error('Błąd wysyłki formularza:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Wyślij – chcę demo →';
+                alert('Coś poszło nie tak. Napisz do nas bezpośrednio:\nimpact@punchlineroi.com');
+
+                // GA4 event – błąd
+                trackEvent('form_error', { source: source, error: String(err) });
+            }
         }
 
         // === HERO VIDEO SAFE LOOP ===
