@@ -71,10 +71,13 @@ PUNCHLINE-SKLEP/
 ## 🌐 Architektura Domen
 
 ```
-punchlineroi.com          → Landing Page (Netlify)
-app.punchlineroi.com      → Dashboard (Cloud Run)
-api.punchlineroi.com      → Backend API (FastAPI)
+punchlineroi.com          → Landing Page (Netlify, auto-deploy z GitHub)
+app.punchlineroi.com      → Dashboard React (Hetzner VPS 78.47.99.111, Docker + nginx + SSL)
+78.47.99.111:8000         → Backend API (FastAPI, Docker)
+78.47.99.111:3000         → Checklist Builder (React, Docker)
 ```
+
+> **DNS** skonfigurowane na Netlify: `app` A → `78.47.99.111`
 
 ## 🚀 Deployment
 
@@ -82,6 +85,16 @@ api.punchlineroi.com      → Backend API (FastAPI)
 # Netlify CLI
 netlify deploy --prod
 ```
+
+## ✏️ Historia zmian index.html
+
+### v2.0 — Aktualizacja marketingowa (2026-02)
+- **Hero**: nowy H1 "Automatyczna kontrola KSeF dla biur rachunkowych i działów finansowych", nowy CTA "Umów demo systemu Punchline" + "Oblicz swoje oszczędności"
+- **#funkcje**: przemianowane na "Dla kogo jest Punchline" — 4 bullet points segmentów + opisy 3 modułów (Punchline OS / Punchline Zgodność / Punchline Platform)
+- **value-props**: przemianowane na "Co zyskujesz w praktyce" — 4 konkretne korzyści (zero ręcznej pracy, scoring anomalii, Offline24, audit trail)
+- **how-section**: przemianowane na "Jak wygląda wdrożenie" — 4 kroki z Trybem obserwatora jako krok 1
+- **Nowa sekcja**: "Dlaczego działać teraz" (KSeF 2.0, FA(3), tryb obserwatora = zero ryzyka)
+- **Final CTA**: przemianowane na "Kolejny krok" + dodany link do kalkulator.html
 
 ## 📞 Kontakt
 

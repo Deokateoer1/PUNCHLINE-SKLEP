@@ -1244,10 +1244,11 @@
                 <a href="#funkcje">Funkcje</a>
                 <a href="#ceny">Cennik</a>
                 <a href="kalkulator.html">Kalkulator ROI</a>
+                <a href="checklist.html">✅ Checklista KSeF</a>
                 <a href="#kontakt">Kontakt</a>
-                <a href="https://app.punchlineroi.com/login" class="cta-button" id="dashboard-link">
-                    🔐 Panel Klienta
-                </a>
+                <button class="cta-button" id="dashboard-link" onclick="openModal('panel_click')">
+                    🎯 Otrzymaj demo
+                </button>
             </div>
         </nav>
 
@@ -1259,12 +1260,12 @@
 
         <!-- Hero Content -->
         <div class="hero-content">
-            <h1>Autonomiczny Robot‑KSeF<br>dla biur rachunkowych</h1>
-            <p>Pełna automatyzacja obiegu faktur bez zmiany systemów ERP Twoich klientów. Nasze AI pobiera, kategoryzuje i monitoruje dokumenty 24/7. Wbudowany Compliance Center i inteligentny tryb Offline24 chronią Cię przed błędami i awariami bramki MF.</p>
+            <h1>Automatyczna kontrola KSeF<br>dla biur rachunkowych i działów finansowych</h1>
+            <p>Punchline pobiera faktury z KSeF, wykrywa błędy, pilnuje terminów i przygotowuje Cię na kontrolę – 24/7, bez dokładania ludzi.</p>
 
             <div>
-                <button class="cta-button" id="heroCta" onclick="openModal('hero_cta_click')">Otrzymaj demo na maila</button>
-                <button class="cta-button cta-button-secondary" onclick="openModal('hero_beta_click')">Dołącz do programu beta <span style="font-size:0.85em; opacity:0.85;">(zostały 3 miejsca)</span></button>
+                <button class="cta-button" id="heroCta" onclick="openModal('hero_cta_click')">Umów demo systemu Punchline</button>
+                <a class="cta-button cta-button-secondary" href="kalkulator.html">Oblicz swoje oszczędności</a>
             </div>
 
             <p class="subtitle">14 dni za darmo, bez karty.</p>
@@ -1285,107 +1286,124 @@
         </div>
     </div>
 
-    <!-- === DLACZEGO ROBOT-KSEF, A NIE MODUŁ ERP === -->
+    <!-- === DLA KOGO JEST PUNCHLINE === -->
     <section class="why-section" id="funkcje">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2>Dlaczego Robot‑KSeF,<br>a nie kolejny moduł ERP?</h2>
-                <p>To nie jest nakładka na Excel ani plugin do Twojego programu. Robot‑KSeF bierze pełną odpowiedzialność za proces, bezpieczeństwo i zgodność z ciągle zmieniającym się prawem.</p>
+                <h2>Dla kogo jest Punchline</h2>
+                <p>System zaprojektowany dla organizacji, które obsługują faktury codziennie i nie mogą sobie pozwolić na błąd.</p>
+            </div>
+
+            <div class="animate-on-scroll" style="max-width:700px; margin: 0 auto 60px; background: var(--section-alt-bg); border-radius: 16px; padding: 36px 40px; border: 1px solid var(--card-border);">
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px;">
+                    <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem;"><span style="color: #10B981; font-size: 1.2rem; flex-shrink: 0;">✔</span><span><strong>Biura rachunkowe (5–50 osób)</strong> — automatyzacja kategoryzacji, Compliance Center, Health Score dla portfela klientów</span></li>
+                    <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem;"><span style="color: #10B981; font-size: 1.2rem; flex-shrink: 0;">✔</span><span><strong>Działy finansowe firm</strong> — wysoki wolumen faktur, wymóg archiwizacji 10-letniej, gotowość na kontrolę skarbową</span></li>
+                    <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem;"><span style="color: #10B981; font-size: 1.2rem; flex-shrink: 0;">✔</span><span><strong>Integratorzy ERP / FK</strong> — gotowe API i WebSocket pod KSeF 2.0 (Comarch, enova365, Symfonia, InsERT)</span></li>
+                    <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem;"><span style="color: #10B981; font-size: 1.2rem; flex-shrink: 0;">✔</span><span><strong>Firmy przed wdrożeniem KSeF</strong> — wchodzimy w tryb obserwatora obok istniejącego procesu, zero ryzyka zmiany</span></li>
+                </ul>
             </div>
 
             <div class="why-grid">
-                <!-- 1. RPA -->
+                <!-- Punchline OS -->
                 <div class="why-item animate-on-scroll">
-                    <h3>1. Robotic Process Automation (RPA) – zero ręcznej pracy</h3>
-                    <p>Robot automatycznie pobiera faktury ze skrzynek mailowych, folderów sieciowych i systemów ERP. Klasyfikuje je, weryfikuje i wysyła do KSeF bez udziału człowieka. <strong>Twój zespół skupia się na klientach, nie na klikaniu.</strong></p>
+                    <h3>🧠 Punchline OS — Silnik decyzyjny AI</h3>
+                    <p>3-stopniowy pipeline kategoryzacji (historia NIP → model Gemini → fallback), scoring ryzyka per faktura (zmiana IBAN +40 pkt, nowy kontrahent +20 pkt), Health Score biura, Smart Alerts i Task Manager. <strong>System myśli zamiast Twojego zespołu.</strong></p>
                 </div>
 
-                <!-- 2. AI ds. ryzyka -->
+                <!-- Punchline Zgodność -->
                 <div class="why-item animate-on-scroll">
-                    <h3>2. AI ds. ryzyka – detekcja anomalii przed wysyłką</h3>
-                    <p>Silnik AI analizuje wzorce w danych i wyłapuje anomalie: duplikaty, podejrzane kwoty, niezgodności kontrahenta z bazą VIES/GUS. Dostajesz alert, zanim błąd trafi do systemu KSeF i zanim wygeneruje karę.</p>
+                    <h3>🛡️ Punchline Zgodność — Compliance Center</h3>
+                    <p>Pełny audit trail każdej operacji, archiwizacja dokumentów przez wymagane 10 lat, eksport do ERP w standardowych formatach (XML/CSV/JSON), raporty PDF gotowe na kontrolę skarbową. <strong>Dokumentujesz wszystko automatycznie.</strong></p>
                 </div>
 
-                <!-- 3. Compliance Center -->
+                <!-- Punchline Platform -->
                 <div class="why-item animate-on-scroll">
-                    <h3>3. Compliance Center – pełna ścieżka audytowa</h3>
-                    <p>Każda operacja jest logowana. Compliance Center generuje raporty należytej staranności, logi błędów i eksporty audytowe gotowe na kontrolę skarbową. <strong>Dokumentujesz wszystko automatycznie.</strong></p>
+                    <h3>⚙️ Punchline Platform — Infrastruktura multi-tenant</h3>
+                    <p>REST API + WebSocket real-time, asynchroniczny klient KSeF z circuit breakerem i retry, Tryb Offline24, integracje ERP plug-and-play. <strong>Infrastruktura gotowa na KSeF 2.0 i standard FA(3).</strong></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- === VALUE PROPOSITION (3 Kafle) === -->
+    <!-- === CO ZYSKUJESZ W PRAKTYCE === -->
     <section class="value-props">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2>Ciągłość pracy. Zawsze.</h2>
-                <p>Robot‑KSeF eliminuje 3 największe obawy biur rachunkowych: awarie systemu, błędy w fakturach i utratę czasu na ręczne procesy.</p>
+                <h2>Co zyskujesz w praktyce</h2>
+                <p>Cztery konkretne efekty, które widać już w pierwszym miesiącu działania systemu.</p>
             </div>
 
-            <div class="props-grid">
-                <!-- 1. Offline24 -->
+            <div class="props-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr));">
+                <!-- 1. Zero ręcznej pracy -->
+                <div class="prop-card animate-on-scroll">
+                    <div class="prop-icon green">⚡</div>
+                    <h3>Zero ręcznej pracy przy fakturach</h3>
+                    <h4>Touchless Invoice Processing</h4>
+                    <p>Punchline automatycznie pobiera, kategoryzuje i wysyła faktury bez udziału człowieka. Twój zespół skupia się na klientach i doradztwie, nie na klikaniu.</p>
+                </div>
+
+                <!-- 2. Anomalie zanim trafią do urzędu -->
+                <div class="prop-card animate-on-scroll">
+                    <div class="prop-icon blue">🔎</div>
+                    <h3>Anomalie wykryte zanim dotrą do urzędu</h3>
+                    <h4>Scoring ryzyka przed wysyłką</h4>
+                    <p>Zmiana numeru IBAN +40 pkt ryzyka, nowy kontrahent +20 pkt. System blokuje podejrzane faktury i wysyła alert — zanim błąd wygeneruje karę finansową.</p>
+                </div>
+
+                <!-- 3. KSeF nie działa = Ty dalej pracujesz -->
                 <div class="prop-card animate-on-scroll">
                     <div class="prop-icon green">🛡️</div>
-                    <h3>Inteligentny Tryb Offline24</h3>
-                    <h4>Fakturowanie mimo awarii bramki MF</h4>
-                    <p>Gdy system ministerialny milczy, Robot działa dalej. Automatycznie buforuje faktury lokalnie i wysyła je w momencie powrotu połączenia – z zachowaniem ustawowego okna 24h. <strong>Twoi klienci nawet nie zauważą awarii.</strong></p>
+                    <h3>KSeF leży — Ty dalej pracujesz</h3>
+                    <h4>Tryb Offline24 z auto-retry</h4>
+                    <p>Circuit breaker wykrywa awarię bramki MF i automatycznie przełącza w tryb buforowania. Faktury czekają w kolejce i są wysyłane natychmiast po powrocie systemu.</p>
                 </div>
 
-                <!-- 2. Walidacja -->
+                <!-- 4. Audit trail na kontrolę -->
                 <div class="prop-card animate-on-scroll">
-                    <div class="prop-icon blue">⚙️</div>
-                    <h3>Walidacja FA(3) w Czasie Rzeczywistym</h3>
-                    <h4>Eliminacja błędów przed wysyłką</h4>
-                    <p>Silnik AI analizuje strukturę każdego pliku XML pod kątem <strong>140+ reguł walidacyjnych</strong>. Błędne pola, pomyłki w NIP czy złe stawki VAT są blokowane zanim trafią do KSeF – chroniąc Cię przed karami finansowymi.</p>
-                </div>
-
-                <!-- 3. Dashboard ROI -->
-                <div class="prop-card animate-on-scroll">
-                    <div class="prop-icon orange">📊</div>
-                    <h3>Analityczny Dashboard ROI</h3>
-                    <h4>Widoczny zwrot z inwestycji</h4>
-                    <p>Dashboard pokazuje ile godzin zaoszczędził Robot, ile faktur przetworzył automatycznie i jaki jest status zwrotów VAT (skrócony termin 40 dni). Zamień koszty wdrożenia na mierzalną oszczędność.</p>
+                    <div class="prop-icon orange">📋</div>
+                    <h3>Audit trail gotowy na każdą kontrolę</h3>
+                    <h4>Compliance Center + 10-letnia archiwizacja</h4>
+                    <p>Każda operacja jest logowana z timestampem. Eksport CSV i raport PDF jednym kliknięciem. Archiwizacja przez ustawowe 10 lat bez dodatkowej konfiguracji.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- === JAK DZIAŁA ROBOT === -->
+    <!-- === JAK WYGLĄDA WDROŻENIE === -->
     <section class="how-section">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <h2>Jak to działa? Zero magii. Czysta inżynieria.</h2>
-                <p>Cztery kroki od podłączenia do pełnej automatyzacji KSeF.</p>
+                <h2>Jak wygląda wdrożenie</h2>
+                <p>Od pierwszego połączenia do pełnej automatyzacji — bez przestojów i bez zamieszania w istniejącym procesie.</p>
             </div>
 
             <div class="steps-grid">
                 <!-- Krok 1 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">1</div>
-                    <h3>Bezpieczna Integracja (API)</h3>
-                    <p>Robot łączy się z Twoim obecnym systemem ERP (Comarch, Symfonia, enova365, InsERT) przez bezpieczny most API. <strong>Nie musisz zmieniać oprogramowania księgowego</strong> – Robot działa w tle, niewidoczny dla użytkownika.</p>
+                    <h3>Tryb obserwatora</h3>
+                    <p>Wchodzimy <strong>obok istniejącego procesu</strong> — niczego nie psujemy. Punchline analizuje Twoje faktury w tle i pokazuje ryzyka na realnych danych. Zero lęku przed zmianą. Zero przestojów.</p>
                 </div>
 
                 <!-- Krok 2 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">2</div>
-                    <h3>AI‑kategoryzacja i detekcja anomalii</h3>
-                    <p>Surowe dane są automatycznie kategoryzowane, a silnik AI weryfikuje spójność danych kontrahenta z bazą VIES/GUS, wykrywa duplikaty i sprawdza poprawność obliczeń matematycznych. Błędy są flagowane przed wysyłką.</p>
+                    <h3>Mapowanie i kalibracja</h3>
+                    <p>System uczy się historii Twoich kontrahentów (NIP, kategorie kosztów), kalibruje progi ryzyka i weryfikuje integrację z ERP. <strong>Po 2 tygodniach obserwacji dokładność kategoryzacji przekracza 90%.</strong></p>
                 </div>
 
                 <!-- Krok 3 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">3</div>
-                    <h3>Transmisja do KSeF i UPO</h3>
-                    <p>Zweryfikowana paczka trafia na bramkę KSeF. Po nadaniu numeru referencyjnego Robot natychmiast pobiera <strong>Urzędowe Poświadczenie Odbioru (UPO)</strong> i łączy je z fakturą. Dokumenty są archiwizowane przez wymagane 10 lat.</p>
+                    <h3>Aktywacja automatyzacji</h3>
+                    <p>AI przejmuje powtarzalne operacje: kategoryzacja, walidacja FA(3), wysyłka do KSeF, pobieranie UPO i archiwizacja. Twój zespół dostaje alerty tylko wtedy, gdy naprawdę potrzebna jest decyzja człowieka.</p>
                 </div>
 
                 <!-- Krok 4 -->
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">4</div>
-                    <h3>Dystrybucja i Compliance</h3>
-                    <p>Dla kontrahentów spoza KSeF Robot generuje PDF z kodem QR i wysyła uzgodnionym kanałem. Compliance Center loguje każdą operację i tworzy gotowe raporty audytowe. <strong>Twoja odpowiedzialność jest udokumentowana.</strong></p>
+                    <h3>Monitoring i Health Score</h3>
+                    <p>Dashboard pokazuje kondycję portfela klientów w czasie rzeczywistym: Health Score biura, aktywne zadania, kolejkę Offline24, status bramki KSeF i gotowe raporty na kontrolę. <strong>Masz pełny obraz — bez wchodzenia w każdą fakturę.</strong></p>
                 </div>
             </div>
         </div>
@@ -1512,6 +1530,36 @@
         </div>
     </section>
 
+    <!-- === DLACZEGO TERAZ === -->
+    <section style="padding: 80px 0; background: var(--dark-bg); color: white;">
+        <div class="container">
+            <div class="section-header animate-on-scroll" style="margin-bottom: 50px;">
+                <h2 style="color: white;">Dlaczego działać teraz, a nie „jak KSeF stanie się obowiązkowy"</h2>
+                <p style="color: rgba(255,255,255,0.75);">KSeF 2.0 i nowy standard FA(3) to nie plany na przyszłość — to zmiany, na które trzeba być gotowym już dziś.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 28px;">
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; backdrop-filter: blur(6px);" class="animate-on-scroll">
+                    <div style="font-size: 2rem; margin-bottom: 14px;">📅</div>
+                    <h3 style="color: white; font-size: 1.2rem; margin-bottom: 10px;">KSeF obowiązkowy od 2026</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.7;">Firmy, które zaczną przygotowania za późno, wdrożą system pod presją czasu — z ryzykiem błędów i kar. Biura, które działają teraz, będą miały 6–12 miesięcy realnych danych i dopracowany proces.</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(16,185,129,0.35); border-radius: 16px; padding: 32px; backdrop-filter: blur(6px);" class="animate-on-scroll">
+                    <div style="font-size: 2rem; margin-bottom: 14px;">🔧</div>
+                    <h3 style="color: white; font-size: 1.2rem; margin-bottom: 10px;">Nowy standard FA(3) już aktywny</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.7;">Ministerstwo Finansów wdraża FA(3) — nową wersję schematu faktur z rozszerzonymi polami i zmienioną walidacją. Punchline obsługuje FA(2) i FA(3) równolegle, bez dodatkowej konfiguracji z Twojej strony.</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; backdrop-filter: blur(6px);" class="animate-on-scroll">
+                    <div style="font-size: 2rem; margin-bottom: 14px;">⚡</div>
+                    <h3 style="color: white; font-size: 1.2rem; margin-bottom: 10px;">Tryb obserwatora = zero ryzyka startu</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.7;">Nie musisz rezygnować z obecnego systemu od razu. Punchline uruchamiamy w trybie obserwatora — system uczy się Twoich danych przez 2–4 tygodnie, zanim przejmie operacje. Zmiana jest niewidoczna dla Twoich klientów.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- === CENNIK === -->
     <section class="pricing-section" id="ceny">
         <div class="container">
@@ -1603,14 +1651,15 @@
     <!-- === FINAL CTA === -->
     <section class="final-cta">
         <div class="container">
-            <h2>Nie czekaj na ostatni dzwonek.<br>Bądź gotowy na KSeF 2.0 już dziś.</h2>
-            <p>Dołącz do biur rachunkowych, które zamieniły stres związany z KSeF na przewagę konkurencyjną. Przetestuj Robota na realnych danych, bez ryzyka.</p>
+            <h2>Kolejny krok</h2>
+            <p>Umów 30-minutowe demo na realnych danych Twojego biura. Pokażemy, ile faktur zostałoby zakwalifikowanych jako ryzykowne, jak działa tryb Offline24 i jak wygląda Health Score dla Twojego portfela klientów.</p>
 
             <div class="cta-buttons">
-                <button class="cta-button" onclick="openModal('final_cta_click')">Otrzymaj demo na maila</button>
+                <button class="cta-button" onclick="openModal('final_cta_click')">Umów demo systemu Punchline</button>
+                <a class="cta-button cta-button-secondary" href="kalkulator.html" style="text-decoration:none; display:inline-block;">Oblicz swoje oszczędności</a>
             </div>
 
-            <p class="microcopy">14 dni za darmo, bez karty • Wdrożenie w 15 minut • Rezygnacja w dowolnym momencie</p>
+            <p class="microcopy">14 dni za darmo, bez karty • Tryb obserwatora bez ryzyka • Rezygnacja w dowolnym momencie</p>
         </div>
     </section>
 
@@ -1692,6 +1741,21 @@
         </div>
     </section>
 
+    <!-- === CHECKLISTA KSEF === -->
+    <section style="background: var(--section-alt-bg, #f1f5f9); padding: 80px 20px;" id="checklista">
+        <div class="container" style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <div class="animate-on-scroll" style="background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(59,130,246,0.06)); border: 2px solid var(--green-primary, #10b981); border-radius: 20px; padding: 56px 40px;">
+                <div style="display: inline-block; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; margin-bottom: 20px;">Bezpłatne narzędzie</div>
+                <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 16px; color: var(--body-text, #1e293b);">Checklista Wdrożeniowa KSeF 2026</h2>
+                <p style="font-size: 1.1rem; color: var(--text-light, #64748b); max-width: 600px; margin: 0 auto 32px; line-height: 1.6;">Sprawdź, czy Twoje biuro jest gotowe na obowiązkowy KSeF. Interaktywna lista kontrolna z priorytetami, kategoryzacją i instrukcjami krok po kroku.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="checklist.html" style="display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; border-radius: 50px; text-decoration: none; font-size: 1rem; box-shadow: 0 4px 20px rgba(16,185,129,0.35);">Otwórz checklistę →</a>
+                    <a href="#kontakt" style="display: inline-block; padding: 16px 36px; border: 2px solid var(--green-primary, #10b981); color: var(--green-primary, #10b981); font-weight: 700; border-radius: 50px; text-decoration: none; font-size: 1rem;">Potrzebuję pomocy z wdrożeniem</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- === KONTAKT PRO === -->
     <section class="contact-pro" id="kontakt">
         <div class="container">
@@ -1699,8 +1763,8 @@
                 <h2>Skontaktuj się z nami</h2>
 
                 <div class="contact-stats">
-                    <div class="stat"><span class="icon">💬</span> 98% odpowiedzi w mniej niż 3 godziny</div>
-                    <div class="stat"><span class="icon">⭐</span> 5/5 od pierwszych klientów testowych</div>
+                    <div class="stat"><span class="icon">💬</span> Odpowiadamy w ciągu 24 godzin</div>
+                    <div class="stat"><span class="icon">⭐</span> Program beta otwarty dla biur rachunkowych</div>
                     <div class="stat"><span class="icon">🔒</span> Bezpieczna komunikacja (AES‑256)</div>
                 </div>
 
