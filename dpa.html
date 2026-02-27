@@ -95,7 +95,7 @@
     <main>
         <h1>Umowa Powierzenia Przetwarzania Danych (DPA)</h1>
 
-        <p><strong>Wersja:</strong> 1.0 • <strong>Data obowiązywania:</strong> 1 stycznia 2026 r.</p>
+        <p><strong>Wersja:</strong> 2.0 • <strong>Data obowiązywania:</strong> 1 marca 2026 r.</p>
 
         <h2>1. Strony umowy</h2>
         <p>
@@ -144,39 +144,103 @@
 
         <h2>5. Środki bezpieczeństwa</h2>
         <ul>
-            <li>szyfrowanie transmisji danych (HTTPS),</li>
-            <li>kontrola dostępu,</li>
-            <li>logowanie zdarzeń,</li>
-            <li>regularne kopie zapasowe,</li>
-            <li>separacja środowisk (produkcyjne / testowe).</li>
+            <li>szyfrowanie transmisji danych (TLS 1.2/1.3),</li>
+            <li>szyfrowanie danych w spoczynku (AES-256 at-rest) dla wrażliwych danych,</li>
+            <li>uwierzytelnianie wieloskładnikowe (MFA) dla dostępu administracyjnego,</li>
+            <li>kontrola dostępu oparta na rolach (RBAC),</li>
+            <li>logowanie zdarzeń i audyt (logi niemodyfikowalne),</li>
+            <li>regularne kopie zapasowe z testem odtworzenia,</li>
+            <li>separacja środowisk (produkcyjne / testowe / staging),</li>
+            <li>monitoring ciągłości działania i alerty bezpieczeństwa.</li>
         </ul>
 
-        <h2>6. Podpowierzenie danych</h2>
+        <h2>6. Zakaz trenowania modeli AI</h2>
         <p>
-            Podpowierzenie danych innym podmiotom może nastąpić wyłącznie za zgodą Administratora
-            lub w ramach jasno określonej listy podwykonawców (np. dostawca hostingu).
+            6.1. Podmiot przetwarzający (PunchlineROI) zobowiązuje podprocesorów świadczących usługi AI —
+            w szczególności <strong>Google LLC (Gemini AI API)</strong> — do
+            <strong>nieużywania danych osobowych i danych faktur przekazanych przez Administratora
+            do trenowania, dostrajania (fine-tuning) ani ulepszania publicznych lub ogólnodostępnych
+            modeli AI</strong>.
+        </p>
+        <p>
+            6.2. Dane przekazywane do API Gemini są przetwarzane wyłącznie w celu realizacji
+            bieżącego zapytania (inference/completion) i nie są przechowywane przez Google LLC
+            dłużej niż jest to niezbędne do realizacji tego zapytania, zgodnie z
+            Google Cloud Data Processing Addendum (CDPA).
+        </p>
+        <p>
+            6.3. Administrator może zażądać od Podmiotu przetwarzającego potwierdzenia aktualności
+            zobowiązania, o którym mowa w ust. 6.1, w terminie 14 dni roboczych od złożenia żądania.
         </p>
 
-        <h2>7. Czas trwania umowy</h2>
+        <h2>7. Szyfrowanie tokenów KSeF i kluczy prywatnych</h2>
+        <p>
+            7.1. <strong>Tokeny sesyjne KSeF</strong> (wydawane przez Ministerstwo Finansów) są
+            szyfrowane w spoczynku (at-rest) algorytmem <strong>AES-256</strong>. Klucze szyfrujące
+            przechowywane są oddzielnie od zaszyfrowanych danych, z dostępem ograniczonym do procesu
+            robota.
+        </p>
+        <p>
+            7.2. <strong>Klucze prywatne RSA</strong> (używane do komunikacji z KSeF) przechowywane
+            są w dedykowanym katalogu <code>.keys/</code>, montowanym do kontenera Docker jako
+            wolumin <strong>tylko do odczytu (read-only)</strong>. Katalog nie jest dostępny z
+            zewnątrz — brak ekspozycji przez żaden punkt końcowy API.
+        </p>
+        <p>
+            7.3. Podmiot przetwarzający zobowiązuje się do niezwłocznej rotacji kluczy i tokenów
+            w przypadku podejrzenia ich kompromitacji, nie później niż w ciągu 4 godzin od
+            wykrycia incydentu.
+        </p>
+
+        <h2>8. Podpowierzenie danych</h2>
+        <p>
+            8.1. Administrator wyraża ogólną zgodę na podpowierzenie danych podprocesorom wskazanym
+            w <a href="/polityka-prywatnosci.html">Polityce Prywatności</a> (sekcja 7 — Podprocesorzy).
+        </p>
+        <p>
+            8.2. O każdej zmianie listy podprocesorów (dodaniu lub zastąpieniu) Podmiot przetwarzający
+            poinformuje Administratora z co najmniej <strong>14-dniowym wyprzedzeniem</strong>, co umożliwi
+            Administratorowi wyrażenie sprzeciwu. Brak sprzeciwu w tym terminie uznaje się za zgodę.
+        </p>
+        <p>
+            8.3. Podmiot przetwarzający nakłada na podprocesorów co najmniej takie same obowiązki
+            w zakresie ochrony danych jak wynikające z niniejszej Umowy (art. 28 ust. 4 RODO).
+        </p>
+
+        <h2>9. Czas trwania umowy</h2>
         <p>
             Umowa obowiązuje przez cały okres świadczenia usługi PunchlineROI – Robot KSeF.
         </p>
 
-        <h2>8. Zakończenie przetwarzania</h2>
+        <h2>10. Zakończenie przetwarzania</h2>
         <p>
             Po zakończeniu świadczenia Usługi Podmiot przetwarzający:
         </p>
         <ul>
-            <li>usuwa dane osobowe lub</li>
-            <li>zwraca je Administratorowi – na jego żądanie,</li>
+            <li>usuwa dane osobowe w terminie 30 dni od zakończenia umowy, lub</li>
+            <li>zwraca je Administratorowi w formacie JSON/CSV – na jego pisemne żądanie,</li>
         </ul>
         <p>
-            z wyjątkiem danych, które muszą być przechowywane zgodnie z przepisami prawa.
+            z wyjątkiem danych, których dalsze przechowywanie wymagane jest przez przepisy prawa
+            (np. dane podatkowe przez 5 lat). Podmiot przetwarzający potwierdza usunięcie danych
+            stosownym oświadczeniem.
         </p>
 
-        <h2>9. Postanowienia końcowe</h2>
+        <h2>11. Naruszenia ochrony danych</h2>
         <p>
-            Niniejsza Umowa stanowi załącznik do Regulaminu lub odrębnej umowy głównej.
+            W przypadku stwierdzenia naruszenia ochrony danych osobowych Podmiot przetwarzający
+            zobowiązuje się do <strong>niezwłocznego powiadomienia Administratora</strong>,
+            nie później niż w ciągu <strong>24 godzin</strong> od wykrycia naruszenia
+            (art. 33 ust. 2 RODO). Powiadomienie zawiera co najmniej: opis zdarzenia, kategorie
+            i przybliżoną liczbę osób i rekordów, prawdopodobne konsekwencje oraz podjęte środki zaradcze.
+        </p>
+
+        <h2>12. Postanowienia końcowe</h2>
+        <p>
+            Niniejsza Umowa stanowi załącznik do Regulaminu lub odrębnej umowy głównej
+            zawartej z Administratorem. W sprawach nieuregulowanych stosuje się przepisy RODO
+            oraz prawo holenderskie. Wszelkie zmiany Umowy wymagają formy pisemnej lub elektronicznej
+            pod rygorem nieważności.
         </p>
 
         <footer>

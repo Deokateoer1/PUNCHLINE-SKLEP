@@ -77,7 +77,7 @@
     <main>
         <h1>Polityka Prywatności PunchlineROI</h1>
 
-        <p><strong>Wersja:</strong> 1.0 • <strong>Data obowiązywania:</strong> 1 stycznia 2026 r.</p>
+        <p><strong>Wersja:</strong> 2.0 • <strong>Data obowiązywania:</strong> 1 marca 2026 r.</p>
 
         <h2>1. Administrator danych</h2>
         <p>
@@ -127,18 +127,106 @@
             <li>sprzeciw.</li>
         </ul>
 
-        <h2>7. Udostępnianie danych</h2>
-        <p>Dane mogą być przekazywane podmiotom przetwarzającym, takim jak:</p>
-        <ul>
-            <li>dostawcy hostingu,</li>
-            <li>dostawcy systemów powiadomień,</li>
-            <li>usługi księgowe i prawne.</li>
-        </ul>
+        <h2>7. Podprocesorzy i przekazywanie danych</h2>
+        <p>
+            Dane osobowe mogą być przekazywane następującym podmiotom przetwarzającym (podprocesorom),
+            działającym wyłącznie na udokumentowane polecenie Administratora:
+        </p>
 
-        <h2>8. Cookies</h2>
+        <style>
+            .processors-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+            .processors-table th { background: #1E3A8A; color: white; padding: 10px 14px; text-align: left; }
+            .processors-table td { padding: 10px 14px; border-bottom: 1px solid #E2E8F0; vertical-align: top; }
+            .processors-table tr:nth-child(even) td { background: #F8FAFC; }
+        </style>
+
+        <table class="processors-table">
+            <thead>
+                <tr>
+                    <th>Podprocesor</th>
+                    <th>Cel przetwarzania</th>
+                    <th>Kraj</th>
+                    <th>Podstawa transferu (jeśli spoza UE)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Google LLC</strong> (Gemini AI API)</td>
+                    <td>Klasyfikacja faktur i generowanie treści AI</td>
+                    <td>USA</td>
+                    <td>EU-US Data Privacy Framework (DPF) + SCC</td>
+                </tr>
+                <tr>
+                    <td><strong>Hetzner Online GmbH</strong></td>
+                    <td>Hosting infrastruktury serwerowej</td>
+                    <td>DE (UE)</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><strong>Netlify Inc.</strong></td>
+                    <td>Hosting strony landing page / frontend</td>
+                    <td>USA</td>
+                    <td>EU-US Data Privacy Framework (DPF)</td>
+                </tr>
+                <tr>
+                    <td><strong>Stripe Inc.</strong></td>
+                    <td>Obsługa płatności i subskrypcji</td>
+                    <td>USA</td>
+                    <td>EU-US Data Privacy Framework (DPF) + SCC</td>
+                </tr>
+                <tr>
+                    <td><strong>Twilio Inc. / SendGrid</strong></td>
+                    <td>Wysyłka powiadomień email i SMS</td>
+                    <td>USA</td>
+                    <td>EU-US Data Privacy Framework (DPF) + SCC</td>
+                </tr>
+                <tr>
+                    <td><strong>NIP24 Sp. z o.o.</strong></td>
+                    <td>Weryfikacja numerów NIP</td>
+                    <td>PL (UE)</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Transfery danych do USA — EU-US Data Privacy Framework (DPF)</h3>
+        <p>
+            Przekazywanie danych do podmiotów w Stanach Zjednoczonych odbywa się na podstawie decyzji
+            Komisji Europejskiej z dnia 10 lipca 2023 r. w sprawie adekwatności ochrony zapewnianej przez
+            <strong>EU-US Data Privacy Framework (DPF)</strong> (decyzja 2023/1795). Podprocesorzy
+            Google LLC, Netlify Inc., Stripe Inc. oraz Twilio Inc. są certyfikowani w ramach DPF.
+            W przypadku gdy podprocesor nie jest certyfikowany w DPF, transfer odbywa się na podstawie
+            <strong>Standardowych Klauzul Umownych (SCC)</strong> zatwierdzonych przez Komisję Europejską
+            (decyzja 2021/914).
+        </p>
+
+        <h2>8. Przetwarzanie danych z wykorzystaniem sztucznej inteligencji</h2>
+        <p>
+            8.1. W ramach usługi Robot KSeF oraz Checklist Builder Administrator korzysta z modeli AI
+            dostarczanych przez Google LLC (Gemini AI) do przetwarzania danych faktur, klasyfikacji kosztów
+            oraz generowania checklist wdrożeniowych.
+        </p>
+        <p>
+            8.2. Przetwarzanie z użyciem AI ma charakter <strong>wyłącznie pomocniczy</strong>.
+            Żadna decyzja wywołująca skutki prawne lub istotnie wpływająca na Użytkownika
+            nie jest podejmowana wyłącznie na podstawie zautomatyzowanego przetwarzania
+            (art. 22 RODO — brak profilowania automatycznego w rozumieniu art. 22 ust. 1 RODO).
+        </p>
+        <p>
+            8.3. Dane faktur przesyłane do API Gemini AI przetwarzane są wyłącznie w celu realizacji
+            zapytania (inference). Na podstawie umowy powierzenia z Google LLC dane te
+            <strong>nie są wykorzystywane do trenowania publicznych modeli AI</strong>
+            (zgodnie z Google Cloud Data Processing Addendum, sekcja dotycząca zakazu trenowania).
+        </p>
+        <p>
+            8.4. Szczegółowe warunki powierzenia danych podprocesorom AI określa
+            <a href="/dpa.html">Umowa Powierzenia Przetwarzania Danych (DPA)</a>.
+        </p>
+
+        <h2>9. Cookies</h2>
         <p>Strona wykorzystuje pliki cookies w celu zapewnienia działania, analityki i personalizacji.</p>
 
-        <h2>9. Bezpieczeństwo danych</h2>
+        <h2>10. Bezpieczeństwo danych</h2>
         <ul>
             <li>szyfrowanie HTTPS,</li>
             <li>kontrola dostępu,</li>
@@ -146,7 +234,7 @@
             <li>regularne kopie zapasowe.</li>
         </ul>
 
-        <h2>10. Kontakt</h2>
+        <h2>11. Kontakt</h2>
         <p>Email: <a href="mailto:impact@punchlineroi.com">impact@punchlineroi.com</a></p>
 
         <footer>
