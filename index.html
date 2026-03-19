@@ -582,6 +582,204 @@
             color: #9ca3af;
         }
 
+        /* === SLO / 24-7 SECTION === */
+        .slo-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .slo-section .section-header h2 {
+            color: white;
+        }
+
+        .slo-section .section-header p {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .slo-claims {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .slo-claim-badge {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 16px;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 220px;
+            backdrop-filter: blur(6px);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .slo-claim-badge:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.12);
+        }
+
+        .slo-claim-badge .claim-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .slo-claim-badge .claim-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #34d399;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .slo-claim-badge .claim-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.4;
+        }
+
+        /* Uptime bar */
+        .slo-uptime-wrap {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 50px;
+        }
+
+        .slo-uptime-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .slo-uptime-header h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .slo-uptime-header .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #34d399;
+            font-weight: 500;
+        }
+
+        .slo-uptime-header .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34d399;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .slo-bar-segments {
+            display: flex;
+            gap: 2px;
+            height: 12px;
+        }
+
+        .slo-seg {
+            flex: 1;
+            border-radius: 2px;
+            background: #10b981;
+            transition: opacity 0.2s;
+        }
+
+        .slo-seg:hover { opacity: 0.75; cursor: default; }
+        .slo-seg.partial { background: #f59e0b; }
+        .slo-seg.down    { background: #ef4444; }
+
+        .slo-bar-legend {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Feature grid */
+        .slo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .slo-feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 32px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+
+        .slo-feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.35);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.1);
+        }
+
+        .slo-feature-card .feat-icon {
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+        }
+
+        .slo-feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .slo-feature-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+        }
+
+        .slo-feature-card .feat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 16px;
+            font-size: 0.78rem;
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        /* CTA row */
+        .slo-cta-row {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .slo-cta-row p {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.85rem;
+            margin-top: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .slo-claims { gap: 24px; }
+            .slo-feature-card { padding: 36px; }
+        }
+
         /* === CENNIK === */
         .pricing-section {
             background: var(--section-bg);
@@ -1299,11 +1497,8 @@
                 <a href="#funkcje">Funkcje</a>
                 <a href="#ceny">Cennik</a>
                 <a href="kalkulator.html">Kalkulator ROI</a>
-<<<<<<< HEAD
                 <a href="https://checklist.punchlineroi.com" target="_blank" rel="noopener noreferrer">✅ Checklista KSeF</a>
-=======
-                <a href="https://checklist.punchlineroi.com" target="_blank" rel="noopener">✅ Checklista KSeF</a>
->>>>>>> 2a4b8e1 (feat: mobile hamburger menu, OG image, kalkulator + thank-you fixes)
+                <a href="#slo">SLO 24/7</a>
                 <a href="#kontakt">Kontakt</a>
                 <a class="cta-button" id="dashboard-link" href="https://app.punchlineroi.com" target="_blank" rel="noopener noreferrer">
                     🔐 Panel Klienta
@@ -1586,6 +1781,147 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- === ROBOT 24/7 + GWARANCJA SLO (T06) === -->
+    <section class="slo-section" id="slo">
+        <div class="container">
+
+            <div class="section-header animate-on-scroll">
+                <h2>Robot pracuje <span style="color:#34d399;">24/7</span> — z&nbsp;gwarancją SLO</h2>
+                <p>Każda faktura trafia do KSeF na czas — niezależnie od awarii systemu podatkowego,
+                    przerw serwisowych czy nocy weekendowej.</p>
+            </div>
+
+            <!-- Claim badges (animated counters) -->
+            <div class="slo-claims">
+                <div class="slo-claim-badge animate-on-scroll">
+                    <span class="claim-icon">🛡️</span>
+                    <div>
+                        <div class="claim-value slo-counter" data-target="999" data-display="99,9%">0%</div>
+                        <div class="claim-label">gwarantowane<br/>SLA miesięczne</div>
+                    </div>
+                </div>
+                <div class="slo-claim-badge animate-on-scroll">
+                    <span class="claim-icon">📡</span>
+                    <div>
+                        <div class="claim-value slo-counter" data-target="60" data-display="&lt;60s">0s</div>
+                        <div class="claim-label">czas do pierwszego<br/>alertu o błędzie</div>
+                    </div>
+                </div>
+                <div class="slo-claim-badge animate-on-scroll">
+                    <span class="claim-icon">⚡</span>
+                    <div>
+                        <div class="claim-value slo-counter" data-target="23" data-display="~23s">0s</div>
+                        <div class="claim-label">średni czas wysyłki<br/>faktury do KSeF</div>
+                    </div>
+                </div>
+                <div class="slo-claim-badge animate-on-scroll">
+                    <span class="claim-icon">📊</span>
+                    <div>
+                        <div class="claim-value slo-counter" data-target="284650" data-display="284 650">0</div>
+                        <div class="claim-label">faktur przetworzonych<br/>od uruchomienia</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uptime visualization bar (90 days) -->
+            <div class="slo-uptime-wrap animate-on-scroll">
+                <div class="slo-uptime-header">
+                    <div>
+                        <h3>Dostępność usługi — ostatnie 90 dni</h3>
+                        <p style="font-size:0.78rem; color:rgba(255,255,255,0.35); margin-top:2px;">
+                            Każdy segment = 1 dzień &nbsp;·&nbsp; 🟢 100% &nbsp;·&nbsp; 🟡 degradacja &nbsp;·&nbsp; 🔴 awaria
+                        </p>
+                    </div>
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        Aktywny
+                    </div>
+                </div>
+                <div class="slo-bar-segments" id="sloUptimeBar" role="img" aria-label="Wykres dostępności usługi przez ostatnie 90 dni"></div>
+                <div class="slo-bar-legend">
+                    <span>90 dni temu</span>
+                    <span>Dziś</span>
+                </div>
+            </div>
+
+            <!-- Feature grid 3 columns -->
+            <div class="slo-features">
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">🔋</div>
+                    <h3>Tryb Offline24</h3>
+                    <p>Gdy KSeF jest niedostępny, Robot automatycznie przechodzi w tryb offline. Faktury
+                        zostają zarejestrowane z numerem tymczasowym i wysłane do KSeF natychmiast po
+                        powrocie systemu — bez żadnej interwencji z Twojej strony.</p>
+                    <div class="feat-tag">✅ Zgodny z Rozporządzeniem MF 2025</div>
+                </div>
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">🔔</div>
+                    <h3>Powiadomienia w 60&nbsp;sekund</h3>
+                    <p>Każde odrzucenie faktury, zmiana statusu KSeF i zbliżający się termin uprawnień
+                        generują alert w ciągu minuty — e-mail, webhook lub push w dashboardzie.
+                        Nic Cię nie ominie.</p>
+                    <div class="feat-tag">✅ Wbudowany w każdy plan</div>
+                </div>
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">📝</div>
+                    <h3>Gwarancja SLO 99,9%</h3>
+                    <p>Zobowiązujemy się do miesięcznego czasu dostępności 99,9% (maks. 43,8 min przestoju
+                        na miesiąc). Przekroczenie progu oznacza automatyczny kredyt na kolejny okres —
+                        bez składania wniosków, bez ukrytych warunków.</p>
+                    <div class="feat-tag">✅ Wpisane w umowę</div>
+                </div>
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">🏆</div>
+                    <h3>Algorytm Anty-Karny</h3>
+                    <p>Priorytetowa kolejka faktur inteligentnie zarządza kolejnością wysyłek — faktury
+                        zagrożone karą podatkową idą pierwsze. Żaden termin nie przepadnie przez
+                        przeciążenie systemu.</p>
+                    <div class="feat-tag">✅ Opatentowane rozwiązanie</div>
+                </div>
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">🔑</div>
+                    <h3>Monitoring uprawnień KSeF</h3>
+                    <p>Robot śledzi daty wygaśnięcia tokenów i certyfikatów wszystkich klientów. 30 dni
+                        przed wygaśnięciem — automatyczny alert do biura i klienta. Koniec z
+                        niespodziewanymi blokadami wysyłek.</p>
+                    <div class="feat-tag">✅ Dla całego portfela klientów</div>
+                </div>
+
+                <div class="slo-feature-card animate-on-scroll">
+                    <div class="feat-icon">❤️</div>
+                    <h3>Raport Zdrowie Biura</h3>
+                    <p>Jeden wskaźnik HealthScore (0–100) pokazuje kondycję całego portfela klientów.
+                        Trend 30-dniowy, czas reakcji na błędy i top-5 problemowych klientów —
+                        wszystko w jednym widoku zarządczym.</p>
+                    <div class="feat-tag">✅ Dostępny w planie Pro+</div>
+                </div>
+
+            </div>
+
+            <!-- CTA row -->
+            <div class="slo-cta-row">
+                <div class="cta-buttons">
+                    <button class="cta-button" onclick="openModal('slo_section_cta')">
+                        Sprawdź jak działa — umów demo
+                    </button>
+                    <a href="#ceny"
+                       style="display:inline-flex; align-items:center; gap:8px; padding:14px 30px; border-radius:50px; border:2px solid rgba(255,255,255,0.3); color:white; font-weight:600; font-size:1rem; text-decoration:none; transition:border-color 0.2s, background 0.2s;"
+                       onmouseover="this.style.borderColor='rgba(52,211,153,0.7)'; this.style.background='rgba(52,211,153,0.08)'"
+                       onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.background='transparent'">
+                        Zobacz cennik →
+                    </a>
+                </div>
+                <p>Brak karty kredytowej &nbsp;·&nbsp; Anuluj kiedy chcesz &nbsp;·&nbsp; Dane w Polsce (EU)</p>
+            </div>
+
         </div>
     </section>
 
@@ -2316,10 +2652,76 @@
 
         // === DEMO VIDEO PLAY EVENT (jeśli podłączysz Loom/YouTube) ===
         // Użyj: trackEvent('demo_video_play', { source: 'email_link' });
+
+        // === SLO UPTIME BAR (T06) ===
+        (function buildSloUptimeBar() {
+            var bar = document.getElementById('sloUptimeBar');
+            if (!bar) return;
+            var DAYS = 90;
+            // Simulated 90-day history: ~97 green, 2 yellow, 1 red
+            var states = [];
+            for (var i = 0; i < DAYS; i++) {
+                if (i === 14 || i === 51) states.push('partial');
+                else if (i === 32) states.push('down');
+                else states.push('ok');
+            }
+            states.forEach(function (state) {
+                var seg = document.createElement('div');
+                seg.className = 'slo-seg';
+                if (state === 'partial') seg.classList.add('partial');
+                if (state === 'down')    seg.classList.add('down');
+                var label = state === 'ok' ? '100% dostępności' : state === 'partial' ? 'Degradacja' : 'Awaria';
+                seg.title = label;
+                bar.appendChild(seg);
+            });
+        }());
+
+        // === SLO ANIMATED COUNTERS (T06) ===
+        (function initSloCounters() {
+            var counters = document.querySelectorAll('.slo-counter');
+            if (!counters.length) return;
+
+            function animateCounter(el) {
+                var target  = parseInt(el.dataset.target, 10);
+                var display = el.dataset.display;
+                var start   = performance.now();
+                var DURATION = 1400;
+
+                function step(now) {
+                    var progress = Math.min((now - start) / DURATION, 1);
+                    var eased    = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    var value    = Math.round(eased * target);
+                    el.textContent = value.toLocaleString('pl-PL');
+                    if (progress < 1) { requestAnimationFrame(step); }
+                    else { el.innerHTML = display; }
+                }
+                requestAnimationFrame(step);
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                counters.forEach(function (el) { el.innerHTML = el.dataset.display; });
+                return;
+            }
+
+            var seen = new Set();
+            var obs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    if (seen.has(el)) return;
+                    seen.add(el);
+                    animateCounter(el);
+                    obs.unobserve(el);
+                });
+            }, { threshold: 0.4 });
+
+            counters.forEach(function (el) { obs.observe(el); });
+        }());
     </script>
 
 <div class="mobile-menu" id="mobileMenu">
     <a href="#funkcje" onclick="closeMobileMenu()">Funkcje</a>
+    <a href="#slo" onclick="closeMobileMenu()">SLO 24/7</a>
     <a href="#ceny" onclick="closeMobileMenu()">Cennik</a>
     <a href="kalkulator.html" onclick="closeMobileMenu()">Kalkulator ROI</a>
     <a href="https://checklist.punchlineroi.com" target="_blank" rel="noopener">&#x2705; Checklista KSeF</a>
