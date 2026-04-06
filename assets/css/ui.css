@@ -1,0 +1,51 @@
+/* ================================
+   LANDING UI SYSTEM
+================================ */
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.surface {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.heading {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.cta {
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary),
+    var(--brand-secondary)
+  );
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.cta:hover {
+  opacity: 0.9;
+}

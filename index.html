@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pl" data-theme="light">
 
 <head>
@@ -1478,6 +1478,8 @@
             .hamburger { display: flex; }
         }
     </style>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/ui.css">
 </head>
 
 <body>
@@ -1960,7 +1962,7 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <h2>Prosty i przewidywalny cennik</h2>
-                <p>Wybierz plan dopasowany do liczby faktur i wielkości Twojego biura. Przy każdym planie – zacznij od bezpłatnego demo.</p>
+                <p>Płacisz za aktywne NIP-y klientów — nie za liczbę faktur z sufitu. Przy każdym planie – zacznij od bezpłatnego demo.</p>
             </div>
 
             <div class="pricing-grid" style="
@@ -1979,12 +1981,13 @@
                     box-shadow:0 10px 30px rgba(0,0,0,0.06);
                 ">
                     <h3 style="font-size:1.6rem; margin-bottom:10px;">Starter</h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#1D4ED8;">199 PLN / mies.</p>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#1D4ED8;">290 PLN / mies.</p>
+                    <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">Do 5 aktywnych NIP-ów klientów</p>
                     <ul style="margin:20px 0; color:#64748b; line-height:2;">
-                        <li>Podstawowa AI‑kategoryzacja faktur</li>
-                        <li>Wysyłka i odbiór faktur z KSeF</li>
+                        <li>50 faktur/mies. per NIP</li>
+                        <li>AI‑kategoryzacja + KSeF + JPK_V7M(3)</li>
                         <li>Podstawowy tryb Offline24</li>
-                        <li>Dashboard z podstawowymi statystykami</li>
+                        <li>Dashboard + alerty e-mail</li>
                     </ul>
                     <button class="cta-button" onclick="openModal('pricing_cta_starter')">Otrzymaj demo na maila</button>
                 </div>
@@ -2008,13 +2011,14 @@
                             margin-left:5px;
                         ">Najczęściej wybierany</span>
                     </h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#10B981;">490 PLN / mies.</p>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#10B981;">690 PLN / mies.</p>
+                    <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">Do 20 aktywnych NIP-ów klientów</p>
                     <ul style="margin:20px 0; color:#64748b; line-height:2;">
+                        <li>200 faktur/mies. per NIP</li>
                         <li>AI‑kategoryzacja + detekcja anomalii</li>
-                        <li>Pełny tryb Offline24 + samonaprawa kolejek</li>
-                        <li>Compliance Center (logi, raporty błędów)</li>
-                        <li>Alerty email/SMS, asystent AI KSeF</li>
-                        <li>Wyższy limit faktur / wielu klientów</li>
+                        <li>Pełny Offline24 + Workflow engine</li>
+                        <li>Compliance Center + AI Asystent KSeF</li>
+                        <li>Alerty email/SMS, priorytetowy support</li>
                     </ul>
                     <button class="cta-button" onclick="openModal('pricing_cta_pro')">Otrzymaj demo na maila</button>
                 </div>
@@ -2028,13 +2032,14 @@
                     box-shadow:0 10px 30px rgba(0,0,0,0.06);
                 ">
                     <h3 style="font-size:1.6rem; margin-bottom:10px;">Enterprise</h3>
-                    <p class="price" style="font-size:2rem; font-weight:800; color:#F97316;">1 490+ PLN / mies.</p>
+                    <p class="price" style="font-size:2rem; font-weight:800; color:#F97316;">1 490 PLN / mies.</p>
+                    <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">Nielimitowane NIP-y klientów</p>
                     <ul style="margin:20px 0; color:#64748b; line-height:2;">
+                        <li>Nielimitowane faktury + NIP-y</li>
                         <li>Pełny Compliance Center (eksporty audytowe)</li>
-                        <li>Rule Engine per klient / branża</li>
-                        <li>Nielimitowana liczba klientów (fair use)</li>
-                        <li>Integracje szyte na miarę</li>
-                        <li>SLA, priorytetowy support, account manager</li>
+                        <li>Rule Engine + Workflow per klient/branża</li>
+                        <li>Integracje na miarę, SLA 99.9%</li>
+                        <li>Dedykowany account manager KSeF</li>
                     </ul>
                     <button class="cta-button" onclick="openModal('pricing_cta_enterprise')">Otrzymaj demo na maila</button>
                 </div>
